@@ -12,8 +12,8 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var importedData = ""
+    var hasBeenConfigured = false
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
                 
@@ -24,8 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //url contains a URL to the file your app shall open
         
         //In my EXAMPLE I would want to read the file as a dictionary
-        //let dictionary = NSDictionary(contentsOfURL: url)
-        print("Opened from extension!")
+        do {
+                importedData = try String(contentsOfURL: url)
+        } catch {
+            print(error)
+        }
+        
+        
+        print("Data imported!")
+        var theBrain = HallPassBrain()
+        theBrain.importData()
+        
         return true
     }
 

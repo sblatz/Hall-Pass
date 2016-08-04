@@ -127,21 +127,30 @@
             </objects>
             <point key="canvasLocation" x="1038" y="969"/>
         </scene>
-        <!--Students-->
+        <!--ManageStudentsVC-->
         <scene sceneID="36Z-Ur-xLU">
             <objects>
-                <tableViewController id="EvZ-F3-ygI" customClass="ManageStudentsVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="manageStudentsVC" title="ManageStudentsVC" id="EvZ-F3-ygI" customClass="ManageStudentsVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mk8-7R-cDV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QDw-lI-kJE">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="ysd-7R-785" style="IBUITableViewCellStyleDefault" id="QDw-lI-kJE">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QDw-lI-kJE" id="VQl-Ii-Jqw">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ysd-7R-785">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -162,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKW-rM-m7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2497" y="1136"/>
+            <point key="canvasLocation" x="2401" y="1612"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uMl-dh-nfL">
@@ -180,7 +189,7 @@
                                 <rect key="frame" x="240" y="285" width="121" height="30"/>
                                 <state key="normal" title="Manage Students"/>
                                 <connections>
-                                    <segue destination="EvZ-F3-ygI" kind="show" id="sNj-F4-sn6"/>
+                                    <segue destination="EvZ-F3-ygI" kind="show" identifier="toManageStudents" id="sNj-F4-sn6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCB-Bv-XHG">
@@ -198,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e2i-Pa-6KX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3168" y="963"/>
+            <point key="canvasLocation" x="3040" y="950"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KQ3-Y8-8Az">
@@ -242,7 +251,7 @@
         <!--Settings-->
         <scene sceneID="iDH-H8-eTp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CX6-p9-hai" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settings" automaticallyAdjustsScrollViewInsets="NO" id="CX6-p9-hai" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="xoy-dK-GSe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sSw-y1-hEP">

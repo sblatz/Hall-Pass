@@ -31,55 +31,108 @@ class Student {
 
 class HallPassBrain {
     var dbRef: FIRDatabaseReference
-
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    var theData: String {
+        return delegate.importedData
+    }
+    
+    
     init() {
-        FIRApp.configure()
-        print("here I am!")
-        FIRAuth.auth()?.signInWithEmail("sdblatz@gmail.com", password: "family13", completion: { (user:FIRUser?, error: NSError?) in
-            if error == nil {
-                print(user?.email)
-            } else {
-                print(error?.description)
-            }
-        })
-
-        dbRef = FIRDatabase.database().reference().child("students")
+        if (!delegate.hasBeenConfigured) {
+            delegate.hasBeenConfigured = true
+            FIRApp.configure()
+            print("configuring")
+            FIRAuth.auth()?.signInWithEmail("sdblatz@gmail.com", password: "family13", completion: { (user:FIRUser?, error: NSError?) in
+                if error == nil {
+                    print(user?.email)
+                } else {
+                    print(error?.description)
+                }
+            })
+        }
+       
+        dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
     }
     
     
     
 
     func addStudent (name: String) {
-        // 2
         
-        //get the count of students in the database, increment by 1 and give this student that ID when GENERATING
-        let id = 0
-        
-        let theSudent = Student()
-        theSudent.name = name
-       // theSudent.id = id
-        theSudent.flagged = false
+        //get the current number of students from the database
         
         
-        // 3
-        let studentRef = dbRef.childByAppendingPath("1")
+        loadShows() {
+            self.dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+                
+                print(name)
+                
+                var numOfStudents = snapshot.value!["numStudents"] as! Int
+                
+                print(numOfStudents)
+                
+                self.dbRef.child("\(numOfStudents)").child("name").setValue(name)
+                
+                numOfStudents += 1
+                
+                self.dbRef.child("numStudents").setValue(numOfStudents)
+                
+                
+            })
+
+            print("Background Fetch Complete")
+        }
         
-        dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
-            print(snapshot.value!.objectForKey("name")!)
-        })
         
-        let nextRef = studentRef.childByAppendingPath("name")
-        // 4
+       //print(dbRef.child("numStudents").value
+        
+        //retreiveAllStudents()
+        
+        /*
+        let studentRef = self.dbRef.child("\(numOfStudents)")
+        let nextRef = studentRef.child("name")
         nextRef.setValue(name)
+        dbRef.child("numStudents").setValue(numOfStudents)
+        numOfStudents += 1
+        */
+        
     }
     
     func getStudent (id: Int) {
-    
         
     }
     
-    func importData (){
+    func retreiveAllStudents() {
+        
+        
+        dbRef.observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
+            print(snapshot.value!.objectForKey("name")!)
+        })
 
+    }
+    
+    func loadShows(completionHandler: (() -> Void)!) {
+        //....
+        //DO IT
+        //....
+        completionHandler()
+    }
+    
+    func importData(){
+            //parse the data, upload it to firebase.
+        let lineOfText = delegate.importedData.componentsSeparatedByString("\n")
+        
+        for i in 0..<lineOfText.count-1 {
+            let parsedData = lineOfText[i].componentsSeparatedByString("\t")
+            
+            var fullName = parsedData[0] + " " + parsedData[1]
+            
+            fullName = fullName.stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            fullName = fullName.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            print(fullName)
+            addStudent(fullName)
+        }
     }
 }
 
