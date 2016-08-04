@@ -1,0 +1,6 @@
+framework module Pods_Hall_PassUITests {
+  umbrella header "Pods-Hall PassUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

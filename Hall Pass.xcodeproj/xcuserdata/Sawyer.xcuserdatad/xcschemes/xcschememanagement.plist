@@ -4,6 +4,21 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Hall Pass Extension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Hall Pass Import.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Hall Pass ImportFileProvider.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>Hall Pass.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +38,21 @@
 			<true/>
 		</dict>
 		<key>241988071D5287F700F661B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>246D6C9D1D52D46200CC60C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>246D6CB11D52D86F00CC60C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>246D6CBF1D52D86F00CC60C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

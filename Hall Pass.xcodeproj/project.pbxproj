@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		241987ED1D5287F700F661B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241987EC1D5287F700F661B6 /* AppDelegate.swift */; };
-		241987EF1D5287F700F661B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241987EE1D5287F700F661B6 /* ViewController.swift */; };
+		241987EF1D5287F700F661B6 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241987EE1D5287F700F661B6 /* ScanViewController.swift */; };
 		241987F21D5287F700F661B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241987F01D5287F700F661B6 /* Main.storyboard */; };
 		241987F41D5287F700F661B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 241987F31D5287F700F661B6 /* Assets.xcassets */; };
 		241987F71D5287F700F661B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241987F51D5287F700F661B6 /* LaunchScreen.storyboard */; };
 		241988021D5287F700F661B6 /* Hall_PassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241988011D5287F700F661B6 /* Hall_PassTests.swift */; };
 		2419880D1D5287F700F661B6 /* Hall_PassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2419880C1D5287F700F661B6 /* Hall_PassUITests.swift */; };
+		2419881F1D528E9B00F661B6 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2419881E1D528E9B00F661B6 /* ReportViewController.swift */; };
+		241988211D52936200F661B6 /* ScannedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241988201D52936200F661B6 /* ScannedViewController.swift */; };
+		241988231D52983B00F661B6 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241988221D52983B00F661B6 /* CustomNavigationController.swift */; };
+		241988251D529DE000F661B6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241988241D529DE000F661B6 /* SettingsViewController.swift */; };
+		241988271D52A16000F661B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 241988261D52A16000F661B6 /* GoogleService-Info.plist */; };
+		24AE1C2E1D52DA6B00C6077B /* ManageStudentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */; };
+		24CD573F1D52AC6D00B795DE /* HallPassBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */; };
+		6611FE1D86C9197CBF0740A8 /* Pods_Hall_Pass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1838344127669EE26AA90 /* Pods_Hall_Pass.framework */; };
+		B68A19E0175C80012B99ECB1 /* Pods_Hall_PassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F43CBB18A2E13C9F645C6A1F /* Pods_Hall_PassTests.framework */; };
+		EBECAADBB759C09071BA41AB /* Pods_Hall_PassUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC8EA46586B0F09FC95B56C /* Pods_Hall_PassUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,10 +43,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		246D6CAC1D52D46300CC60C3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		072F20DA8DF9761C2045520A /* Pods-Hall PassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall PassUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hall PassUITests/Pods-Hall PassUITests.release.xcconfig"; sourceTree = "<group>"; };
+		0F496A22F1893F7AC2A45546 /* Pods-Hall PassTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall PassTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hall PassTests/Pods-Hall PassTests.debug.xcconfig"; sourceTree = "<group>"; };
 		241987E91D5287F700F661B6 /* Hall Pass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hall Pass.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		241987EC1D5287F700F661B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		241987EE1D5287F700F661B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		241987EE1D5287F700F661B6 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		241987F11D5287F700F661B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		241987F31D5287F700F661B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		241987F61D5287F700F661B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +72,20 @@
 		241988081D5287F700F661B6 /* Hall PassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hall PassUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2419880C1D5287F700F661B6 /* Hall_PassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hall_PassUITests.swift; sourceTree = "<group>"; };
 		2419880E1D5287F700F661B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2419881E1D528E9B00F661B6 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		241988201D52936200F661B6 /* ScannedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannedViewController.swift; sourceTree = "<group>"; };
+		241988221D52983B00F661B6 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		241988241D529DE000F661B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		241988261D52A16000F661B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageStudentsVC.swift; sourceTree = "<group>"; };
+		24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HallPassBrain.swift; sourceTree = "<group>"; };
+		2B04BDB92851E3235B43C948 /* Pods-Hall Pass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall Pass.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hall Pass/Pods-Hall Pass.release.xcconfig"; sourceTree = "<group>"; };
+		3CB1838344127669EE26AA90 /* Pods_Hall_Pass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_Pass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EC8EA46586B0F09FC95B56C /* Pods_Hall_PassUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_PassUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE3AC20A0525CD87D104E3B /* Pods-Hall PassUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall PassUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hall PassUITests/Pods-Hall PassUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D72B5CF3D8ADC5E4C70C1751 /* Pods-Hall Pass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall Pass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hall Pass/Pods-Hall Pass.debug.xcconfig"; sourceTree = "<group>"; };
+		F1CC99A5F0845C16054126C6 /* Pods-Hall PassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall PassTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hall PassTests/Pods-Hall PassTests.release.xcconfig"; sourceTree = "<group>"; };
+		F43CBB18A2E13C9F645C6A1F /* Pods_Hall_PassTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_PassTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6611FE1D86C9197CBF0740A8 /* Pods_Hall_Pass.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B68A19E0175C80012B99ECB1 /* Pods_Hall_PassTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBECAADBB759C09071BA41AB /* Pods_Hall_PassUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +123,8 @@
 				241988001D5287F700F661B6 /* Hall PassTests */,
 				2419880B1D5287F700F661B6 /* Hall PassUITests */,
 				241987EA1D5287F700F661B6 /* Products */,
+				F18978ACD4036AEC7C7C11BE /* Pods */,
+				3F6EC39FB8605EA8170B46DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +142,18 @@
 			isa = PBXGroup;
 			children = (
 				241987EC1D5287F700F661B6 /* AppDelegate.swift */,
-				241987EE1D5287F700F661B6 /* ViewController.swift */,
+				24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */,
+				241987EE1D5287F700F661B6 /* ScanViewController.swift */,
+				241988221D52983B00F661B6 /* CustomNavigationController.swift */,
 				241987F01D5287F700F661B6 /* Main.storyboard */,
+				241988241D529DE000F661B6 /* SettingsViewController.swift */,
+				241988201D52936200F661B6 /* ScannedViewController.swift */,
+				2419881E1D528E9B00F661B6 /* ReportViewController.swift */,
 				241987F31D5287F700F661B6 /* Assets.xcassets */,
 				241987F51D5287F700F661B6 /* LaunchScreen.storyboard */,
+				241988261D52A16000F661B6 /* GoogleService-Info.plist */,
 				241987F81D5287F700F661B6 /* Info.plist */,
+				24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */,
 			);
 			path = "Hall Pass";
 			sourceTree = "<group>";
@@ -125,6 +176,29 @@
 			path = "Hall PassUITests";
 			sourceTree = "<group>";
 		};
+		3F6EC39FB8605EA8170B46DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CB1838344127669EE26AA90 /* Pods_Hall_Pass.framework */,
+				F43CBB18A2E13C9F645C6A1F /* Pods_Hall_PassTests.framework */,
+				4EC8EA46586B0F09FC95B56C /* Pods_Hall_PassUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F18978ACD4036AEC7C7C11BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D72B5CF3D8ADC5E4C70C1751 /* Pods-Hall Pass.debug.xcconfig */,
+				2B04BDB92851E3235B43C948 /* Pods-Hall Pass.release.xcconfig */,
+				0F496A22F1893F7AC2A45546 /* Pods-Hall PassTests.debug.xcconfig */,
+				F1CC99A5F0845C16054126C6 /* Pods-Hall PassTests.release.xcconfig */,
+				5AE3AC20A0525CD87D104E3B /* Pods-Hall PassUITests.debug.xcconfig */,
+				072F20DA8DF9761C2045520A /* Pods-Hall PassUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +206,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 241988111D5287F700F661B6 /* Build configuration list for PBXNativeTarget "Hall Pass" */;
 			buildPhases = (
+				4A9E0CBD6085593412C16AAD /* [CP] Check Pods Manifest.lock */,
 				241987E51D5287F700F661B6 /* Sources */,
 				241987E61D5287F700F661B6 /* Frameworks */,
 				241987E71D5287F700F661B6 /* Resources */,
+				0A98BF32363A41B9041B25DC /* [CP] Embed Pods Frameworks */,
+				8BF10B9205DDE748A3C10077 /* [CP] Copy Pods Resources */,
+				246D6CAC1D52D46300CC60C3 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -149,9 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 241988141D5287F700F661B6 /* Build configuration list for PBXNativeTarget "Hall PassTests" */;
 			buildPhases = (
+				E35EB6FA46B8973DBA556844 /* [CP] Check Pods Manifest.lock */,
 				241987F91D5287F700F661B6 /* Sources */,
 				241987FA1D5287F700F661B6 /* Frameworks */,
 				241987FB1D5287F700F661B6 /* Resources */,
+				B33180207BC1103AACED4C05 /* [CP] Embed Pods Frameworks */,
+				D8AC07E89C29ECCEE74D473F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 241988171D5287F700F661B6 /* Build configuration list for PBXNativeTarget "Hall PassUITests" */;
 			buildPhases = (
+				9D52CC8B5686636971D8228A /* [CP] Check Pods Manifest.lock */,
 				241988041D5287F700F661B6 /* Sources */,
 				241988051D5287F700F661B6 /* Frameworks */,
 				241988061D5287F700F661B6 /* Resources */,
+				BFAAC02AA6FFAB2304FB4781 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				241987F71D5287F700F661B6 /* LaunchScreen.storyboard in Resources */,
+				241988271D52A16000F661B6 /* GoogleService-Info.plist in Resources */,
 				241987F41D5287F700F661B6 /* Assets.xcassets in Resources */,
 				241987F21D5287F700F661B6 /* Main.storyboard in Resources */,
 			);
@@ -254,13 +338,142 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A98BF32363A41B9041B25DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hall Pass/Pods-Hall Pass-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A9E0CBD6085593412C16AAD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8BF10B9205DDE748A3C10077 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hall Pass/Pods-Hall Pass-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D52CC8B5686636971D8228A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B33180207BC1103AACED4C05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hall PassTests/Pods-Hall PassTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFAAC02AA6FFAB2304FB4781 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hall PassUITests/Pods-Hall PassUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8AC07E89C29ECCEE74D473F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hall PassTests/Pods-Hall PassTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E35EB6FA46B8973DBA556844 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		241987E51D5287F700F661B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241987EF1D5287F700F661B6 /* ViewController.swift in Sources */,
+				241987EF1D5287F700F661B6 /* ScanViewController.swift in Sources */,
+				241988231D52983B00F661B6 /* CustomNavigationController.swift in Sources */,
+				241988211D52936200F661B6 /* ScannedViewController.swift in Sources */,
 				241987ED1D5287F700F661B6 /* AppDelegate.swift in Sources */,
+				2419881F1D528E9B00F661B6 /* ReportViewController.swift in Sources */,
+				24AE1C2E1D52DA6B00C6077B /* ManageStudentsVC.swift in Sources */,
+				24CD573F1D52AC6D00B795DE /* HallPassBrain.swift in Sources */,
+				241988251D529DE000F661B6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,28 +615,37 @@
 		};
 		241988121D5287F700F661B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D72B5CF3D8ADC5E4C70C1751 /* Pods-Hall Pass.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Hall Pass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.soysauce44.Hall-Pass";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		241988131D5287F700F661B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B04BDB92851E3235B43C948 /* Pods-Hall Pass.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Hall Pass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.soysauce44.Hall-Pass";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		241988151D5287F700F661B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F496A22F1893F7AC2A45546 /* Pods-Hall PassTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Hall PassTests/Info.plist";
@@ -436,6 +658,7 @@
 		};
 		241988161D5287F700F661B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1CC99A5F0845C16054126C6 /* Pods-Hall PassTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Hall PassTests/Info.plist";
@@ -448,6 +671,7 @@
 		};
 		241988181D5287F700F661B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AE3AC20A0525CD87D104E3B /* Pods-Hall PassUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Hall PassUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -459,6 +683,7 @@
 		};
 		241988191D5287F700F661B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 072F20DA8DF9761C2045520A /* Pods-Hall PassUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Hall PassUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -487,6 +712,7 @@
 				241988131D5287F700F661B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		241988141D5287F700F661B6 /* Build configuration list for PBXNativeTarget "Hall PassTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +721,7 @@
 				241988161D5287F700F661B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		241988171D5287F700F661B6 /* Build configuration list for PBXNativeTarget "Hall PassUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +730,7 @@
 				241988191D5287F700F661B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
