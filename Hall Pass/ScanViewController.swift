@@ -20,21 +20,54 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
     var theBrain = HallPassBrain()
-    
+    let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+    var theCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     // Added to support different barcodes
     let supportedBarCodes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode93Code, AVMetadataObjectTypeUPCECode, AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeAztecCode]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        createCameraView()
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
-        let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
+        
+    }
+    
+    
+    
+    @IBAction func swapCamera(sender: AnyObject) {
+        let videoDevices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        if (theCamera.position == AVCaptureDevicePosition.Back) {
+            for device in videoDevices{
+                let device = device as! AVCaptureDevice
+                if device.position == AVCaptureDevicePosition.Front {
+                    theCamera = device
+                    print("changing to front!")
+                    createCameraView()
+                    break
+                }
+            }
+        } else {
+            for device in videoDevices{
+                let device = device as! AVCaptureDevice
+                if device.position == AVCaptureDevicePosition.Back {
+                    theCamera = device
+                    createCameraView()
+                    break
+                }
+            }
+        }
+        
+    }
+
+    
+    
+    func createCameraView() {
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
-            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let input = try AVCaptureDeviceInput(device: theCamera)
             
             // Initialize the captureSession object.
             captureSession = AVCaptureSession()
@@ -61,28 +94,24 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             captureSession?.startRunning()
             
             /*
-            // Initialize QR Code Frame to highlight the QR code
-            qrCodeFrameView = UIView()
-            
-            if let qrCodeFrameView = qrCodeFrameView {
-                qrCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
-                qrCodeFrameView.layer.borderWidth = 2
-                view.addSubview(qrCodeFrameView)
-                view.bringSubviewToFront(qrCodeFrameView)
-            }
- */
+             // Initialize QR Code Frame to highlight the QR code
+             qrCodeFrameView = UIView()
+             
+             if let qrCodeFrameView = qrCodeFrameView {
+             qrCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
+             qrCodeFrameView.layer.borderWidth = 2
+             view.addSubview(qrCodeFrameView)
+             view.bringSubviewToFront(qrCodeFrameView)
+             }
+             */
             
         } catch {
             // If any error occurs, simply print it out and don't continue any more.
             print(error)
             return
         }
-        
-    }
-    
-    
 
-    
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

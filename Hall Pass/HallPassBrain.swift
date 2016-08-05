@@ -21,7 +21,7 @@ class Trip {
 
 class Student {
     var name = ""
-    // var id = -1
+    var id = -1
     var flagged = false
     var Trips = [Trip]()
     
@@ -42,8 +42,11 @@ class HallPassBrain {
     
     init() {
         if (!delegate.hasBeenConfigured) {
+            
             delegate.hasBeenConfigured = true
             FIRApp.configure()
+            let token = FIRInstanceID.instanceID().token()!
+            print(token)
             print("configuring")
             FIRAuth.auth()?.signInWithEmail("sdblatz@gmail.com", password: "family13", completion: { (user:FIRUser?, error: NSError?) in
                 if error == nil {
@@ -78,21 +81,6 @@ class HallPassBrain {
         })
         
         
-        
-        
-        
-        //print(dbRef.child("numStudents").value
-        
-        //retreiveAllStudents()
-        
-        /*
-         let studentRef = self.dbRef.child("\(numOfStudents)")
-         let nextRef = studentRef.child("name")
-         nextRef.setValue(name)
-         dbRef.child("numStudents").setValue(numOfStudents)
-         numOfStudents += 1
-         */
-        
     }
     
     func addStudent (studentArray: [String]) {
@@ -103,6 +91,7 @@ class HallPassBrain {
                 //loop through the array, adding each element into our database.
                 self.dbRef.child("\(numOfStudents)").child("name").setValue(studentArray[i])
                 self.dbRef.child("\(numOfStudents)").child("flagged").setValue(false)
+                self.dbRef.child("\(numOfStudents)").child("id").setValue(numOfStudents)
                 numOfStudents += 1
             }
             
@@ -117,9 +106,8 @@ class HallPassBrain {
         
     }
     
+    
     func retreiveAllStudents() {
-        
-        
         dbRef.observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
             print(snapshot.value!.objectForKey("name")!)
         })

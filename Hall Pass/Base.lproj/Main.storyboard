@@ -21,7 +21,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="ogB-Nf-Y0w">
                         <barButtonItem key="leftBarButtonItem" title="Manual Entry" id="eCo-9p-vd9"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="tGE-aw-7DV"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="tGE-aw-7DV">
+                            <connections>
+                                <action selector="swapCamera:" destination="BYZ-38-t0r" id="6BR-Ru-WuN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -147,11 +151,14 @@
                                             <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nGP-SW-X2S" kind="show" id="kIg-ol-aW5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -172,6 +179,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKW-rM-m7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2401" y="1612"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Gzh-y6-W6n">
+            <objects>
+                <viewController id="nGP-SW-X2S" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HiK-fQ-b1O"/>
+                        <viewControllerLayoutGuide type="bottom" id="q0I-Ka-L5d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rpt-Qs-rWH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WkH-kq-Uq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3235" y="1675"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uMl-dh-nfL">

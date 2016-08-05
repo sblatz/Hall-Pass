@@ -20,6 +20,8 @@
 		241988251D529DE000F661B6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241988241D529DE000F661B6 /* SettingsViewController.swift */; };
 		241988271D52A16000F661B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 241988261D52A16000F661B6 /* GoogleService-Info.plist */; };
 		24AE1C2E1D52DA6B00C6077B /* ManageStudentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */; };
+		24AF16F51D54F0D300B9BE1B /* StudentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */; };
+		24AF16F71D54F0F100B9BE1B /* StudentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */; };
 		24CD573F1D52AC6D00B795DE /* HallPassBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */; };
 		6611FE1D86C9197CBF0740A8 /* Pods_Hall_Pass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1838344127669EE26AA90 /* Pods_Hall_Pass.framework */; };
 		B68A19E0175C80012B99ECB1 /* Pods_Hall_PassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F43CBB18A2E13C9F645C6A1F /* Pods_Hall_PassTests.framework */; };
@@ -78,6 +80,8 @@
 		241988241D529DE000F661B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		241988261D52A16000F661B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageStudentsVC.swift; sourceTree = "<group>"; };
+		24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNavigationController.swift; sourceTree = "<group>"; };
+		24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetailVC.swift; sourceTree = "<group>"; };
 		24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HallPassBrain.swift; sourceTree = "<group>"; };
 		2B04BDB92851E3235B43C948 /* Pods-Hall Pass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hall Pass.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hall Pass/Pods-Hall Pass.release.xcconfig"; sourceTree = "<group>"; };
 		3CB1838344127669EE26AA90 /* Pods_Hall_Pass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_Pass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,8 @@
 				24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */,
 				241987EE1D5287F700F661B6 /* ScanViewController.swift */,
 				241988221D52983B00F661B6 /* CustomNavigationController.swift */,
+				24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */,
+				24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */,
 				241987F01D5287F700F661B6 /* Main.storyboard */,
 				241988241D529DE000F661B6 /* SettingsViewController.swift */,
 				241988201D52936200F661B6 /* ScannedViewController.swift */,
@@ -471,9 +477,11 @@
 				241988211D52936200F661B6 /* ScannedViewController.swift in Sources */,
 				241987ED1D5287F700F661B6 /* AppDelegate.swift in Sources */,
 				2419881F1D528E9B00F661B6 /* ReportViewController.swift in Sources */,
+				24AF16F71D54F0F100B9BE1B /* StudentDetailVC.swift in Sources */,
 				24AE1C2E1D52DA6B00C6077B /* ManageStudentsVC.swift in Sources */,
 				24CD573F1D52AC6D00B795DE /* HallPassBrain.swift in Sources */,
 				241988251D529DE000F661B6 /* SettingsViewController.swift in Sources */,
+				24AF16F51D54F0D300B9BE1B /* StudentNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
