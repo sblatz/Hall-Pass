@@ -21,7 +21,7 @@ class Trip {
 
 class Student {
     var name = ""
-   // var id = -1
+    // var id = -1
     var flagged = false
     var Trips = [Trip]()
     
@@ -37,6 +37,8 @@ class HallPassBrain {
         return delegate.importedData
     }
     
+    var otherRef: FIRDatabaseReference
+    
     
     init() {
         if (!delegate.hasBeenConfigured) {
@@ -50,52 +52,64 @@ class HallPassBrain {
                     print(error?.description)
                 }
             })
+            
+            
         }
-       
+        
         dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
+        otherRef = FIRDatabase.database().reference().child("schools").child("0")
+        
     }
     
     
     
-
+    
     func addStudent (name: String) {
         
         //get the current number of students from the database
         
-        
-        loadShows() {
-            self.dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
-                
-                print(name)
-                
-                var numOfStudents = snapshot.value!["numStudents"] as! Int
-                
-                print(numOfStudents)
-                
-                self.dbRef.child("\(numOfStudents)").child("name").setValue(name)
-                
-                numOfStudents += 1
-                
-                self.dbRef.child("numStudents").setValue(numOfStudents)
-                
-                
-            })
-
-            print("Background Fetch Complete")
-        }
+        self.dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            //print("Inside closure...")
+            //print(self.numStudents)
+           // self.dbRef.child("\(self.numStudents)").child("name").setValue(name)
+            
+            
+            
+        })
         
         
-       //print(dbRef.child("numStudents").value
+        
+        
+        
+        //print(dbRef.child("numStudents").value
         
         //retreiveAllStudents()
         
         /*
-        let studentRef = self.dbRef.child("\(numOfStudents)")
-        let nextRef = studentRef.child("name")
-        nextRef.setValue(name)
-        dbRef.child("numStudents").setValue(numOfStudents)
-        numOfStudents += 1
-        */
+         let studentRef = self.dbRef.child("\(numOfStudents)")
+         let nextRef = studentRef.child("name")
+         nextRef.setValue(name)
+         dbRef.child("numStudents").setValue(numOfStudents)
+         numOfStudents += 1
+         */
+        
+    }
+    
+    func addStudent (studentArray: [String]) {
+        self.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            var numOfStudents = snapshot.value!["numStudents"] as! Int
+            
+            for i in 0..<studentArray.count {
+                //loop through the array, adding each element into our database.
+                self.dbRef.child("\(numOfStudents)").child("name").setValue(studentArray[i])
+                self.dbRef.child("\(numOfStudents)").child("flagged").setValue(false)
+                numOfStudents += 1
+            }
+            
+            //when we're done looping, now update the database to store the correct number of students.
+            
+            self.otherRef.child("numStudents").setValue(numOfStudents)
+        })
         
     }
     
@@ -109,30 +123,46 @@ class HallPassBrain {
         dbRef.observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
             print(snapshot.value!.objectForKey("name")!)
         })
-
+        
     }
     
-    func loadShows(completionHandler: (() -> Void)!) {
-        //....
-        //DO IT
-        //....
-        completionHandler()
+    
+    func getNumberOfStudents(completionHandler: (Int) -> ()) {
+        dbRef.observeSingleEventOfType(.Value, withBlock: { (snapShot) in
+            print("incrementing")
+            self.dbRef.child("numStudents").setValue((snapShot.value!["numStudents"] as! Int) + 1)
+        })
+        
+        dbRef.observeSingleEventOfType(.Value, withBlock: { (snapShot) in
+            print("returning")
+            completionHandler(snapShot.value!["numStudents"] as! Int)
+            
+        })
+        
     }
+    
+    
     
     func importData(){
-            //parse the data, upload it to firebase.
+        //parse the data, upload it to firebase.
         let lineOfText = delegate.importedData.componentsSeparatedByString("\n")
+        var studentArray = [String]()
         
-        for i in 0..<lineOfText.count-1 {
+        for i in 0..<lineOfText.count {
             let parsedData = lineOfText[i].componentsSeparatedByString("\t")
             
             var fullName = parsedData[0] + " " + parsedData[1]
             
             fullName = fullName.stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             fullName = fullName.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            print(fullName)
-            addStudent(fullName)
+            
+            studentArray.append(fullName)
+            
         }
+        
+        addStudent(studentArray)
+        
+        
     }
 }
 
