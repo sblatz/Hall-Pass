@@ -89,12 +89,22 @@ class ManageStudentsVC: UITableViewController {
             cell?.textLabel?.text = studentArray[indexPath.row].name
         }
         
+
         return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //grab the student they selected, and let's push to a new view where they can edit information about that student
-        
+        var studentToSend = Student()
+        if searchController.active && searchController.searchBar.text != "" {
+            studentToSend = filteredStudents[indexPath.row]
+        } else {
+            studentToSend = studentArray[indexPath.row]
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        self.navigationController?.performSegueWithIdentifier("toStudentDetail", sender: studentToSend)
+
     }
 
 

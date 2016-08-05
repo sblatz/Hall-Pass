@@ -155,11 +155,11 @@
 				241988241D529DE000F661B6 /* SettingsViewController.swift */,
 				241988201D52936200F661B6 /* ScannedViewController.swift */,
 				2419881E1D528E9B00F661B6 /* ReportViewController.swift */,
+				24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */,
 				241987F31D5287F700F661B6 /* Assets.xcassets */,
 				241987F51D5287F700F661B6 /* LaunchScreen.storyboard */,
 				241988261D52A16000F661B6 /* GoogleService-Info.plist */,
 				241987F81D5287F700F661B6 /* Info.plist */,
-				24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */,
 			);
 			path = "Hall Pass";
 			sourceTree = "<group>";

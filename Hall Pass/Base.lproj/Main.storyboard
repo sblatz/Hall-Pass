@@ -50,7 +50,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Leaving:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbV-jP-fdm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaving:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbV-jP-fdm">
                                 <rect key="frame" x="40" y="222" width="76" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,8 +78,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Submit"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Mr. Blatz's Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGy-Ii-FzE">
-                                <rect key="frame" x="157" y="225" width="403" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr. Blatz's Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGy-Ii-FzE">
+                                <rect key="frame" x="157" y="225" width="150" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -87,7 +87,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="KGy-Ii-FzE" secondAttribute="trailing" constant="20" id="7te-3O-ndV"/>
                             <constraint firstItem="KGy-Ii-FzE" firstAttribute="top" secondItem="56V-2g-Rsh" secondAttribute="bottom" constant="83" id="D2c-jw-5Hw"/>
                             <constraint firstItem="56V-2g-Rsh" firstAttribute="top" secondItem="6Dn-JF-yqR" secondAttribute="top" constant="100" id="Hfa-kg-OZA"/>
                             <constraint firstItem="KGy-Ii-FzE" firstAttribute="leading" secondItem="KbV-jP-fdm" secondAttribute="trailing" constant="41" id="Rjj-Ei-e2T"/>
@@ -156,9 +155,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="nGP-SW-X2S" kind="show" id="kIg-ol-aW5"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -180,10 +176,10 @@
             </objects>
             <point key="canvasLocation" x="2401" y="1612"/>
         </scene>
-        <!--View Controller-->
+        <!--Student DetailVC-->
         <scene sceneID="Gzh-y6-W6n">
             <objects>
-                <viewController id="nGP-SW-X2S" sceneMemberID="viewController">
+                <viewController id="nGP-SW-X2S" customClass="StudentDetailVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HiK-fQ-b1O"/>
                         <viewControllerLayoutGuide type="bottom" id="q0I-Ka-L5d"/>
@@ -191,12 +187,72 @@
                     <view key="view" contentMode="scaleToFill" id="Rpt-Qs-rWH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84h-J3-xqv">
+                                <rect key="frame" x="-0.5" y="84" width="600.5" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flagged:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5V-n6-8N7">
+                                <rect key="frame" x="40" y="166" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1a-QU-W7Y">
+                                <rect key="frame" x="147" y="166" width="51" height="31"/>
+                                <connections>
+                                    <action selector="flaggedSwitchChanged:" destination="nGP-SW-X2S" eventType="valueChanged" id="Idz-3J-J3d"/>
+                                </connections>
+                            </switch>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YpO-kN-bkH">
+                                <rect key="frame" x="0.0" y="287" width="600" height="264"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="gip-2Q-LOS">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gip-2Q-LOS" id="CJ4-wi-jQF">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnG-UB-SEW">
+                                <rect key="frame" x="40" y="236" width="54" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YpO-kN-bkH" firstAttribute="centerX" secondItem="Rpt-Qs-rWH" secondAttribute="centerX" id="4Kp-7R-1jc"/>
+                            <constraint firstItem="NnG-UB-SEW" firstAttribute="top" secondItem="84h-J3-xqv" secondAttribute="bottom" constant="110" id="E6H-nI-vHQ"/>
+                            <constraint firstItem="84h-J3-xqv" firstAttribute="top" secondItem="HiK-fQ-b1O" secondAttribute="bottom" constant="20" id="Oxq-aI-YLs"/>
+                            <constraint firstItem="q0I-Ka-L5d" firstAttribute="top" secondItem="YpO-kN-bkH" secondAttribute="bottom" id="cBp-AP-gBk"/>
+                            <constraint firstItem="84h-J3-xqv" firstAttribute="centerX" secondItem="Rpt-Qs-rWH" secondAttribute="centerX" id="fUo-VE-S4A"/>
+                            <constraint firstItem="YpO-kN-bkH" firstAttribute="top" secondItem="g1a-QU-W7Y" secondAttribute="bottom" constant="90" id="gDr-HP-VkF"/>
+                            <constraint firstItem="YpO-kN-bkH" firstAttribute="width" secondItem="Rpt-Qs-rWH" secondAttribute="width" id="hMm-ub-JRv"/>
+                            <constraint firstItem="g1a-QU-W7Y" firstAttribute="top" secondItem="84h-J3-xqv" secondAttribute="bottom" constant="40" id="len-44-uIL"/>
+                            <constraint firstItem="Z5V-n6-8N7" firstAttribute="leading" secondItem="Rpt-Qs-rWH" secondAttribute="leadingMargin" constant="20" id="lhI-Fk-QhN"/>
+                            <constraint firstItem="Z5V-n6-8N7" firstAttribute="top" secondItem="84h-J3-xqv" secondAttribute="bottom" constant="40" id="loZ-Qz-ALl"/>
+                            <constraint firstItem="g1a-QU-W7Y" firstAttribute="leading" secondItem="Z5V-n6-8N7" secondAttribute="trailing" constant="10" id="wbZ-4U-Gsb"/>
+                            <constraint firstItem="NnG-UB-SEW" firstAttribute="leading" secondItem="Rpt-Qs-rWH" secondAttribute="leadingMargin" constant="20" id="yt6-rH-dUl"/>
+                            <constraint firstItem="84h-J3-xqv" firstAttribute="width" secondItem="Rpt-Qs-rWH" secondAttribute="width" id="zcD-gP-HKU"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="flaggedSwitch" destination="g1a-QU-W7Y" id="c2v-HN-uFO"/>
+                        <outlet property="studentNameLabel" destination="84h-J3-xqv" id="aP9-D8-jpt"/>
+                        <outlet property="tableView" destination="YpO-kN-bkH" id="qMO-IC-lBd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WkH-kq-Uq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3235" y="1675"/>
+            <point key="canvasLocation" x="3146" y="1697"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uMl-dh-nfL">
@@ -276,7 +332,7 @@
         <!--Settings-->
         <scene sceneID="iDH-H8-eTp">
             <objects>
-                <navigationController storyboardIdentifier="settings" automaticallyAdjustsScrollViewInsets="NO" id="CX6-p9-hai" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settings" automaticallyAdjustsScrollViewInsets="NO" id="CX6-p9-hai" customClass="StudentNavigationController" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="xoy-dK-GSe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sSw-y1-hEP">
@@ -286,6 +342,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="4cD-AM-rta" kind="relationship" relationship="rootViewController" id="tvH-A4-KcR"/>
+                        <segue destination="nGP-SW-X2S" kind="show" identifier="toStudentDetail" id="L4X-1V-22y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4g-HV-Dq1" userLabel="First Responder" sceneMemberID="firstResponder"/>

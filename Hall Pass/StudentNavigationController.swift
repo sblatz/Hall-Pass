@@ -14,10 +14,10 @@ class StudentNavigationController: UINavigationController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // get a reference to the second view controller
-        let secondViewController = segue.destinationViewController as! ScannedViewController
+        let secondViewController = segue.destinationViewController as! StudentDetailVC
         
         // set a variable in the second view controller with the String to pass
-        secondViewController.receivedString = sender as! String
+        secondViewController.receivedStudent = sender as! Student
     }
     
     

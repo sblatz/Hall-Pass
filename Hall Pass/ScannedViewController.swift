@@ -45,13 +45,6 @@ class ScannedViewController: UIViewController {
         })
         
         
-        //get the student from the database
-        
-        
-        //studentNameLabel.text = receivedString
-
-       // imageView.image = qr!.image!
-     
         //ask for desintation information, then "submit"
     }
     
