@@ -79,6 +79,7 @@
 		241988221D52983B00F661B6 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		241988241D529DE000F661B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		241988261D52A16000F661B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2434736B1D563FBD0049CE7A /* [Hall Pass]-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "[Hall Pass]-Bridging-Header.h"; sourceTree = "<group>"; };
 		24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageStudentsVC.swift; sourceTree = "<group>"; };
 		24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNavigationController.swift; sourceTree = "<group>"; };
 		24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetailVC.swift; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 				241987F51D5287F700F661B6 /* LaunchScreen.storyboard */,
 				241988261D52A16000F661B6 /* GoogleService-Info.plist */,
 				241987F81D5287F700F661B6 /* Info.plist */,
+				2434736B1D563FBD0049CE7A /* [Hall Pass]-Bridging-Header.h */,
 			);
 			path = "Hall Pass";
 			sourceTree = "<group>";
@@ -283,6 +285,11 @@
 					241987E81D5287F700F661B6 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = Q72GMFLLR4;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					241987FC1D5287F700F661B6 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -633,6 +640,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.soysauce44.Hall-Pass";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hall Pass/[Hall Pass]-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -648,6 +656,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.soysauce44.Hall-Pass";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hall Pass/[Hall Pass]-Bridging-Header.h";
 			};
 			name = Release;
 		};

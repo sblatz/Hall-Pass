@@ -12,14 +12,14 @@
 		0BF8E3540183E457BC07B914EFFCF5B2 /* Pods-Hall PassUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 89CA2019FDE777EB785D9DEDD06C539A /* Pods-Hall PassUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		259F6EADBDEDCE4AC37690899EC8894B /* Pods-Hall PassTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9162B19408E6D40F42E061C0B2F88AF /* Pods-Hall PassTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EE5760A72D219AD1148BBE39A2478FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		57953E3E231E06655F08F1DEF774C01B /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40571A79DDF9B444DE5D4C4F20FF8188 /* CIColorExtension.swift */; };
+		57953E3E231E06655F08F1DEF774C01B /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8560FE70469CB63509D43DB98AC0BC /* CIColorExtension.swift */; };
 		6CC0DB564DF622C34A5A441D0F2A7042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		B836DEC10345730C170F9B6DE5D51496 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350636517141906C59528CBA831E4889 /* QRCode.swift */; };
-		C31900F41E71455CCC464B94EC504C93 /* QRCode-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BEA5818A2C03DCDB9EFAD032095A5381 /* QRCode-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C351FE12CA2C83C6021748503F32BC8A /* QRCode-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FF9A634102F45E8DED62D406DF4C63 /* QRCode-dummy.m */; };
+		B836DEC10345730C170F9B6DE5D51496 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C1ED21717E7A012DCC37710DE0932 /* QRCode.swift */; };
+		C31900F41E71455CCC464B94EC504C93 /* QRCode-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F83FF241E8A97816613DA3968CEB57F /* QRCode-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C351FE12CA2C83C6021748503F32BC8A /* QRCode-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9BF663E1E5E960543E84B0926FE7B /* QRCode-dummy.m */; };
 		C8F8904E006DE6F471CF0A2C9B71E69E /* Pods-Hall Pass-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B2049D1EFCFC1E2DF7789A7003B61DAE /* Pods-Hall Pass-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE348E1CBF2D7171AEA5AD21D2C52AD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		ED2A0D314F2F8B66E494CF003C4F019F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82742BC36F52BA9D05C9FA9026AC612 /* UIImageViewExtension.swift */; };
+		ED2A0D314F2F8B66E494CF003C4F019F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946E845925767457DD12FB7D9C8010B /* UIImageViewExtension.swift */; };
 		ED487E984DBBEBBB4A66B25A306FCAAA /* Pods-Hall PassTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0556D7E12092F252B521D483B9F995 /* Pods-Hall PassTests-dummy.m */; };
 		EDD2A192DA18EBF52F8A73878DC15E36 /* Pods-Hall Pass-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F981088D58FD2A0099DFC5FE1A66B /* Pods-Hall Pass-dummy.m */; };
 /* End PBXBuildFile section */
@@ -35,60 +35,64 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0085D393105D2C94D82B7AFDA2376B07 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Analytics/Sources/Firebase.h; sourceTree = "<group>"; };
 		052E910292FCD428F6A4B7D342D50C08 /* Pods-Hall PassUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall PassUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		088027EA0A3ED450315891016AEE8FB1 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		08FBCFA301307AA0EFA124B7F6911908 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = iOS_SDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
+		0B91E4B5E8FEDADF10673BEC741287E3 /* QRCode.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = QRCode.modulemap; sourceTree = "<group>"; };
+		0BAFB73E0BFBEE0B3562E32ADCF35B1B /* FIRMessaging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRMessaging.h; path = Sources/FIRMessaging.h; sourceTree = "<group>"; };
+		0F916B1B92FA5778D5726ACDDD427753 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		11A11D22D465DF8E1497A0E1B70569ED /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Sources/FIRInstanceID.h; sourceTree = "<group>"; };
 		1B258B29704AB10AF4CCB381D35F67EA /* QRCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C2FE53F414D0CF145C6C07A79CCFAB7 /* Pods-Hall PassTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall PassTests.debug.xcconfig"; sourceTree = "<group>"; };
-		209F4E274B0695A85597626B9DA3021E /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		24F89E24D5008960A2BBF32EE59EFFA2 /* Pods-Hall PassUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall PassUITests-frameworks.sh"; sourceTree = "<group>"; };
+		27C5A822DD92DDC02C30752B22F282AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
+		2A8560FE70469CB63509D43DB98AC0BC /* CIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CIColorExtension.swift; path = QRCode/CIColorExtension.swift; sourceTree = "<group>"; };
 		2D847967BF6BA589531ACE040C1BA009 /* Pods-Hall Pass.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Hall Pass.modulemap"; sourceTree = "<group>"; };
 		2F8E2817CAEE38938CE2877BD27D4D05 /* Pods_Hall_PassUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_PassUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3297FB73E286538F09BC341BB745A255 /* Pods-Hall Pass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall Pass.debug.xcconfig"; sourceTree = "<group>"; };
 		34E73EA094B5BBDF268F8212546AE363 /* Pods-Hall PassTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall PassTests-resources.sh"; sourceTree = "<group>"; };
-		350636517141906C59528CBA831E4889 /* QRCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCode.swift; path = QRCode/QRCode.swift; sourceTree = "<group>"; };
-		3C555E0FF68CB8EA851F1625B5E6E49B /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Sources/FIRInstanceID.h; sourceTree = "<group>"; };
-		40571A79DDF9B444DE5D4C4F20FF8188 /* CIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CIColorExtension.swift; path = QRCode/CIColorExtension.swift; sourceTree = "<group>"; };
+		34F327F7D5CEB8A269941C5E9A3B8152 /* QRCode.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCode.xcconfig; sourceTree = "<group>"; };
 		431F981088D58FD2A0099DFC5FE1A66B /* Pods-Hall Pass-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Hall Pass-dummy.m"; sourceTree = "<group>"; };
 		449FD8860FF0C01371DB69C7770CFC58 /* Pods-Hall PassUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Hall PassUITests.modulemap"; sourceTree = "<group>"; };
+		4F83FF241E8A97816613DA3968CEB57F /* QRCode-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCode-umbrella.h"; sourceTree = "<group>"; };
 		5AC78DD842ADC42825D171DFF9149F2C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DC90442A42C9451D086A41D5A9DE928 /* GoogleParsingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleParsingUtilities.framework; path = Frameworks/GoogleParsingUtilities.framework; sourceTree = "<group>"; };
 		61D5FE57553DE03B2CA45D1B43F1FEC4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A49817848A16B106C312E6BA9EB32EE /* GoogleParsingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleParsingUtilities.framework; path = Frameworks/GoogleParsingUtilities.framework; sourceTree = "<group>"; };
+		6946E845925767457DD12FB7D9C8010B /* UIImageViewExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIImageViewExtension.swift; path = QRCode/UIImageViewExtension.swift; sourceTree = "<group>"; };
 		6E0556D7E12092F252B521D483B9F995 /* Pods-Hall PassTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Hall PassTests-dummy.m"; sourceTree = "<group>"; };
-		7DF98007173BE2EBC44B0DAA3BFFDB18 /* QRCode.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = QRCode.modulemap; sourceTree = "<group>"; };
-		7F63FAE31AEB6023C202D45FDF0B9671 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		83740A80D29AF21E92B44B2CCB4A1281 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		8538F2BA32AB46B6FBC43A1A5D5ED4DE /* Pods-Hall PassUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Hall PassUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		89CA2019FDE777EB785D9DEDD06C539A /* Pods-Hall PassUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Hall PassUITests-umbrella.h"; sourceTree = "<group>"; };
 		8A1B418C25EEB03A2BFF7C3C8B40961D /* Pods-Hall PassTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Hall PassTests.modulemap"; sourceTree = "<group>"; };
 		8ACDBDC8164204DB42554F55FA0EBA1B /* Pods_Hall_PassTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_PassTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B5512A7710E6A788DEC3FACA7459052 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A2F40FB5AC369260F58ED1E7C27864 /* Pods-Hall Pass-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Hall Pass-acknowledgements.markdown"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9CA72B973D114B760311C32C19902E74 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A991CE03A8EC2758E0D911EC67F928 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
+		983C86A69129856B3CCDF3C8E873147A /* QRCode-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCode-prefix.pch"; sourceTree = "<group>"; };
 		9E727E5EC656EFEF77B949810ACB9E46 /* Pods-Hall Pass-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall Pass-frameworks.sh"; sourceTree = "<group>"; };
+		A04150C5398A3D536F9446199375529E /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
 		A10ED76E3DC9B91C899E14F7B9B091F9 /* Pods-Hall PassTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall PassTests-frameworks.sh"; sourceTree = "<group>"; };
 		A2CA86707B57065E5580115C66CD32F6 /* Pods-Hall Pass-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Hall Pass-acknowledgements.plist"; sourceTree = "<group>"; };
-		AA06F2E91A688C15BD4C0D354277057E /* QRCode.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCode.xcconfig; sourceTree = "<group>"; };
-		AB3C390F49301A93831E56E714262698 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 		AF3B3C48B24D05086A60A7F775C86989 /* Pods_Hall_Pass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hall_Pass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C47FB61D704E79333A9BC659BD7554 /* Pods-Hall Pass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall Pass.release.xcconfig"; sourceTree = "<group>"; };
 		B2049D1EFCFC1E2DF7789A7003B61DAE /* Pods-Hall Pass-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Hall Pass-umbrella.h"; sourceTree = "<group>"; };
-		B2593A344DB31F9A9B95A426D8A6EA43 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		B4FF9A634102F45E8DED62D406DF4C63 /* QRCode-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QRCode-dummy.m"; sourceTree = "<group>"; };
-		B82742BC36F52BA9D05C9FA9026AC612 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIImageViewExtension.swift; path = QRCode/UIImageViewExtension.swift; sourceTree = "<group>"; };
-		BAA57B3D76F660A458DBE0424E783D57 /* QRCode-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCode-prefix.pch"; sourceTree = "<group>"; };
+		BA212069A33545984E9A1DC6B4FE5A40 /* GoogleIPhoneUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleIPhoneUtilities.framework; path = Frameworks/GoogleIPhoneUtilities.framework; sourceTree = "<group>"; };
 		BBEFEA21E3623C96071D8BAB62F1FAC8 /* Pods-Hall PassUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall PassUITests-resources.sh"; sourceTree = "<group>"; };
-		BD48B870943E3A2A2D1B7B829047EE49 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		BEA5818A2C03DCDB9EFAD032095A5381 /* QRCode-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCode-umbrella.h"; sourceTree = "<group>"; };
+		BDF9BF663E1E5E960543E84B0926FE7B /* QRCode-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QRCode-dummy.m"; sourceTree = "<group>"; };
 		C57803D60BF84F06957D278CA0FBDA77 /* Pods-Hall PassUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Hall PassUITests-dummy.m"; sourceTree = "<group>"; };
+		C58F7BD863BF70C0BCE27B098C671108 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		CA19F8F83875E18E2710CF88CAF398B1 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D1175776A052E1812AF43EA8E311105A /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
 		D9162B19408E6D40F42E061C0B2F88AF /* Pods-Hall PassTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Hall PassTests-umbrella.h"; sourceTree = "<group>"; };
+		DA1FBA432437A0BEE0C62876BD15E506 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
+		DA26F00AA8BEF9C7E449FA811CE24C5E /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Analytics/Sources/Firebase.h; sourceTree = "<group>"; };
 		DDD33808367046F6A2D590F85F7FCF4E /* Pods-Hall PassTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Hall PassTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E57C1ED21717E7A012DCC37710DE0932 /* QRCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCode.swift; path = QRCode/QRCode.swift; sourceTree = "<group>"; };
+		E93109059AD0E4AABD5738B73C978D27 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		E945F80AB649D980A3C3814B8995142B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF58D678357F840F13812F854D6582F2 /* Pods-Hall PassUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Hall PassUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		EF80A63DEB8A61D3A665F423918A1D36 /* Pods-Hall Pass-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hall Pass-resources.sh"; sourceTree = "<group>"; };
 		F3301622C181BD9483ABC394F2C824B5 /* Pods-Hall PassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall PassUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F6C103C32F37C4BFE3381DFAB95FCB04 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
 		F9AF3D87A4D7E5CB774621A4D1CFA4F7 /* Pods-Hall PassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hall PassTests.release.xcconfig"; sourceTree = "<group>"; };
 		FBA0FFB2E53E0ACAF18C8C52F6FC2176 /* Pods-Hall PassTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Hall PassTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,51 +133,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D10D85B95B3F0E4670B104CDEE6DA5D /* FirebaseInstanceID */ = {
+		03C9576D483FD2AEE5B3EF514421524B /* FirebaseAuth */ = {
 			isa = PBXGroup;
 			children = (
-				3C555E0FF68CB8EA851F1625B5E6E49B /* FIRInstanceID.h */,
-				F3C3AADC31C334D03039768CE632B3CD /* Frameworks */,
-			);
-			path = FirebaseInstanceID;
-			sourceTree = "<group>";
-		};
-		0F1C90C201EF726194E1048B418549E7 /* FirebaseAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				E1A573604FC54258A80FF49D24472822 /* Frameworks */,
-			);
-			path = FirebaseAnalytics;
-			sourceTree = "<group>";
-		};
-		0FB77FF082F0E3A4F988FA4F3DC02C9A /* FirebaseAuth */ = {
-			isa = PBXGroup;
-			children = (
-				C7367B8F71F805BEF65D9AC0D60E00C6 /* Frameworks */,
+				9C355142A8ABCF1BBED6F39B406BEF7A /* Frameworks */,
 			);
 			path = FirebaseAuth;
 			sourceTree = "<group>";
 		};
-		120AD006DA3D1438F7A12207D109E369 /* GoogleUtilities */ = {
+		104E2F1DF887195C8E5FF6DF1921696E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F7924E6B19FA207F6BF9659CF853E49 /* Frameworks */,
+				5DC90442A42C9451D086A41D5A9DE928 /* GoogleParsingUtilities.framework */,
 			);
-			path = GoogleUtilities;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1EC38163866DD6F4ADC0B0396C222F60 /* GoogleParsingUtilities */ = {
+		1F8DDC98E2E97EE762CB4321C5782C2C /* OneSignal */ = {
 			isa = PBXGroup;
 			children = (
-				D00AC1BCF1529D008BE2503C5E1996C9 /* Frameworks */,
+				20562ADAC1348B12FCE8022877C64E4B /* Frameworks */,
 			);
-			path = GoogleParsingUtilities;
+			path = OneSignal;
 			sourceTree = "<group>";
 		};
-		1F7924E6B19FA207F6BF9659CF853E49 /* Frameworks */ = {
+		20562ADAC1348B12FCE8022877C64E4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AB3C390F49301A93831E56E714262698 /* GoogleUtilities.framework */,
+				08FBCFA301307AA0EFA124B7F6911908 /* OneSignal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		289E5ADA0E60F5C55E9CB4EA4137524F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E93109059AD0E4AABD5738B73C978D27 /* FirebaseAnalytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -189,10 +184,35 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		36A62FEBD1EDA059B22C690905F751B3 /* Frameworks */ = {
+		29DC15AD03909750E083D83BED50CECE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D1175776A052E1812AF43EA8E311105A /* FirebaseDatabase.framework */,
+				C58F7BD863BF70C0BCE27B098C671108 /* FirebaseInstanceID.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30F152A5438F5098767F592308BF4157 /* FirebaseMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				0BAFB73E0BFBEE0B3562E32ADCF35B1B /* FIRMessaging.h */,
+				65BBE6F727613F53CE04DFD75E7D2087 /* Frameworks */,
+			);
+			path = FirebaseMessaging;
+			sourceTree = "<group>";
+		};
+		322DF04F84D024AB14AD2B100D43674E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				B907CD5596A4FCD8FC6E89B902767F16 /* Analytics */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		363BE2CE96BD960CD7ED0E4405DA827C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA19F8F83875E18E2710CF88CAF398B1 /* GoogleNetworkingUtilities.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,38 +261,36 @@
 			path = "Target Support Files/Pods-Hall PassTests";
 			sourceTree = "<group>";
 		};
-		5281802E7FA604E86E29B54B9E4C3F87 /* Pods */ = {
+		550E88414F3FB4B5168C2901976C7C9A /* GoogleIPhoneUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				8EA5840EDDDB87A6A36ACEDE83E581A5 /* Firebase */,
-				0F1C90C201EF726194E1048B418549E7 /* FirebaseAnalytics */,
-				0FB77FF082F0E3A4F988FA4F3DC02C9A /* FirebaseAuth */,
-				691F7E600C2954B64A3DFD835336B543 /* FirebaseDatabase */,
-				0D10D85B95B3F0E4670B104CDEE6DA5D /* FirebaseInstanceID */,
-				5D6C7D95C1E8499D2A863EBADAFD34A8 /* GoogleInterchangeUtilities */,
-				6D1680D0AE9258859D59B32CDB5075A2 /* GoogleNetworkingUtilities */,
-				1EC38163866DD6F4ADC0B0396C222F60 /* GoogleParsingUtilities */,
-				DA7D2D086D696837AD211FD0BA1F15D6 /* GoogleSymbolUtilities */,
-				120AD006DA3D1438F7A12207D109E369 /* GoogleUtilities */,
-				C8C7465AB0B0E8F80D1596B2895E52BC /* QRCode */,
+				81CE2A607AFAD4F369F0CA4AF96D8020 /* Frameworks */,
 			);
-			name = Pods;
+			path = GoogleIPhoneUtilities;
 			sourceTree = "<group>";
 		};
-		5D6C7D95C1E8499D2A863EBADAFD34A8 /* GoogleInterchangeUtilities */ = {
+		5607051B9C1A9D79E0BD033ED1D0D020 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7A4F8957243F74332C87B77540538720 /* Frameworks */,
+				A04150C5398A3D536F9446199375529E /* FirebaseDatabase.framework */,
 			);
-			path = GoogleInterchangeUtilities;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		691F7E600C2954B64A3DFD835336B543 /* FirebaseDatabase */ = {
+		645379FC66C1375684679900938F9D0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				36A62FEBD1EDA059B22C690905F751B3 /* Frameworks */,
+				83740A80D29AF21E92B44B2CCB4A1281 /* GoogleSymbolUtilities.framework */,
 			);
-			path = FirebaseDatabase;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65BBE6F727613F53CE04DFD75E7D2087 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27C5A822DD92DDC02C30752B22F282AD /* FirebaseMessaging.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6C7022B7DB90736FB315195E5C2105FE /* Pods-Hall PassUITests */ = {
@@ -293,20 +311,12 @@
 			path = "Target Support Files/Pods-Hall PassUITests";
 			sourceTree = "<group>";
 		};
-		6D1680D0AE9258859D59B32CDB5075A2 /* GoogleNetworkingUtilities */ = {
+		7B312C00ECC9197A9E171EB2187362E4 /* GoogleNetworkingUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				C61490FB1833C6AC589A1FE9DC247EF2 /* Frameworks */,
+				363BE2CE96BD960CD7ED0E4405DA827C /* Frameworks */,
 			);
 			path = GoogleNetworkingUtilities;
-			sourceTree = "<group>";
-		};
-		7A4F8957243F74332C87B77540538720 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7F63FAE31AEB6023C202D45FDF0B9671 /* GoogleInterchangeUtilities.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -314,24 +324,81 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				5281802E7FA604E86E29B54B9E4C3F87 /* Pods */,
+				D5A0ACB8CB22F368DD17BA86F32A9303 /* Pods */,
 				28BDF5ECDC076DA4A7807B27D4A81413 /* Products */,
 				A461C294CC8A2CCC663BA03F38FC946B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8EA5840EDDDB87A6A36ACEDE83E581A5 /* Firebase */ = {
+		81CE2A607AFAD4F369F0CA4AF96D8020 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ABC5DDDD16D10AC3F55007124A10E19B /* Analytics */,
+				BA212069A33545984E9A1DC6B4FE5A40 /* GoogleIPhoneUtilities.framework */,
 			);
-			path = Firebase;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		91FE74D684397390932E4C94F695A813 /* Frameworks */ = {
+		84D28651403FE81535B5D9EA26D0901A /* FirebaseAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				209F4E274B0695A85597626B9DA3021E /* GoogleSymbolUtilities.framework */,
+				289E5ADA0E60F5C55E9CB4EA4137524F /* Frameworks */,
+			);
+			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
+		85CD5E5B33F9612E8374ABD390CD6B11 /* FirebaseInstanceID */ = {
+			isa = PBXGroup;
+			children = (
+				11A11D22D465DF8E1497A0E1B70569ED /* FIRInstanceID.h */,
+				29DC15AD03909750E083D83BED50CECE /* Frameworks */,
+			);
+			path = FirebaseInstanceID;
+			sourceTree = "<group>";
+		};
+		876604775B3EE16588722EA47604F088 /* FirebaseDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				5607051B9C1A9D79E0BD033ED1D0D020 /* Frameworks */,
+			);
+			path = FirebaseDatabase;
+			sourceTree = "<group>";
+		};
+		878DCD04D7EBFA49F8F41D385004AE93 /* GoogleParsingUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				104E2F1DF887195C8E5FF6DF1921696E /* Frameworks */,
+			);
+			path = GoogleParsingUtilities;
+			sourceTree = "<group>";
+		};
+		8E1FFC1ECE3BC2203A96511A1119A71B /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				92BDDFA2875EBFAA5A88396D8481B89B /* Frameworks */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		92BDDFA2875EBFAA5A88396D8481B89B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F916B1B92FA5778D5726ACDDD427753 /* GoogleInterchangeUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C355142A8ABCF1BBED6F39B406BEF7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93A991CE03A8EC2758E0D911EC67F928 /* FirebaseAuth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A12137D8C0D71E3C837A5251F9AD6438 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA1FBA432437A0BEE0C62876BD15E506 /* GoogleUtilities.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -346,12 +413,34 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		ABC5DDDD16D10AC3F55007124A10E19B /* Analytics */ = {
+		A92F913F539E733D8DCC77CE4021252D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0085D393105D2C94D82B7AFDA2376B07 /* Firebase.h */,
+				8B5512A7710E6A788DEC3FACA7459052 /* Info.plist */,
+				0B91E4B5E8FEDADF10673BEC741287E3 /* QRCode.modulemap */,
+				34F327F7D5CEB8A269941C5E9A3B8152 /* QRCode.xcconfig */,
+				BDF9BF663E1E5E960543E84B0926FE7B /* QRCode-dummy.m */,
+				983C86A69129856B3CCDF3C8E873147A /* QRCode-prefix.pch */,
+				4F83FF241E8A97816613DA3968CEB57F /* QRCode-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/QRCode";
+			sourceTree = "<group>";
+		};
+		B907CD5596A4FCD8FC6E89B902767F16 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				DA26F00AA8BEF9C7E449FA811CE24C5E /* Firebase.h */,
 			);
 			name = Analytics;
+			sourceTree = "<group>";
+		};
+		B90929EF466F1B1B1D142025771107ED /* GoogleSymbolUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				645379FC66C1375684679900938F9D0A /* Frameworks */,
+			);
+			path = GoogleSymbolUtilities;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -362,77 +451,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C61490FB1833C6AC589A1FE9DC247EF2 /* Frameworks */ = {
+		D5A0ACB8CB22F368DD17BA86F32A9303 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				088027EA0A3ED450315891016AEE8FB1 /* GoogleNetworkingUtilities.framework */,
+				322DF04F84D024AB14AD2B100D43674E /* Firebase */,
+				84D28651403FE81535B5D9EA26D0901A /* FirebaseAnalytics */,
+				03C9576D483FD2AEE5B3EF514421524B /* FirebaseAuth */,
+				876604775B3EE16588722EA47604F088 /* FirebaseDatabase */,
+				85CD5E5B33F9612E8374ABD390CD6B11 /* FirebaseInstanceID */,
+				30F152A5438F5098767F592308BF4157 /* FirebaseMessaging */,
+				8E1FFC1ECE3BC2203A96511A1119A71B /* GoogleInterchangeUtilities */,
+				550E88414F3FB4B5168C2901976C7C9A /* GoogleIPhoneUtilities */,
+				7B312C00ECC9197A9E171EB2187362E4 /* GoogleNetworkingUtilities */,
+				878DCD04D7EBFA49F8F41D385004AE93 /* GoogleParsingUtilities */,
+				B90929EF466F1B1B1D142025771107ED /* GoogleSymbolUtilities */,
+				E142A2F961CC8F7BE9D0D4923AC356AE /* GoogleUtilities */,
+				1F8DDC98E2E97EE762CB4321C5782C2C /* OneSignal */,
+				EACECD1EF79D5A81AE8CB4576C4A11F9 /* QRCode */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		C7367B8F71F805BEF65D9AC0D60E00C6 /* Frameworks */ = {
+		E142A2F961CC8F7BE9D0D4923AC356AE /* GoogleUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				F6C103C32F37C4BFE3381DFAB95FCB04 /* FirebaseAuth.framework */,
+				A12137D8C0D71E3C837A5251F9AD6438 /* Frameworks */,
 			);
-			name = Frameworks;
+			path = GoogleUtilities;
 			sourceTree = "<group>";
 		};
-		C8C7465AB0B0E8F80D1596B2895E52BC /* QRCode */ = {
+		EACECD1EF79D5A81AE8CB4576C4A11F9 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				40571A79DDF9B444DE5D4C4F20FF8188 /* CIColorExtension.swift */,
-				350636517141906C59528CBA831E4889 /* QRCode.swift */,
-				B82742BC36F52BA9D05C9FA9026AC612 /* UIImageViewExtension.swift */,
-				F8FE61A0CB6C0771A7882FA023C8224F /* Support Files */,
+				2A8560FE70469CB63509D43DB98AC0BC /* CIColorExtension.swift */,
+				E57C1ED21717E7A012DCC37710DE0932 /* QRCode.swift */,
+				6946E845925767457DD12FB7D9C8010B /* UIImageViewExtension.swift */,
+				A92F913F539E733D8DCC77CE4021252D /* Support Files */,
 			);
 			path = QRCode;
-			sourceTree = "<group>";
-		};
-		D00AC1BCF1529D008BE2503C5E1996C9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6A49817848A16B106C312E6BA9EB32EE /* GoogleParsingUtilities.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DA7D2D086D696837AD211FD0BA1F15D6 /* GoogleSymbolUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				91FE74D684397390932E4C94F695A813 /* Frameworks */,
-			);
-			path = GoogleSymbolUtilities;
-			sourceTree = "<group>";
-		};
-		E1A573604FC54258A80FF49D24472822 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BD48B870943E3A2A2D1B7B829047EE49 /* FirebaseAnalytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F3C3AADC31C334D03039768CE632B3CD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B2593A344DB31F9A9B95A426D8A6EA43 /* FirebaseInstanceID.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F8FE61A0CB6C0771A7882FA023C8224F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9CA72B973D114B760311C32C19902E74 /* Info.plist */,
-				7DF98007173BE2EBC44B0DAA3BFFDB18 /* QRCode.modulemap */,
-				AA06F2E91A688C15BD4C0D354277057E /* QRCode.xcconfig */,
-				B4FF9A634102F45E8DED62D406DF4C63 /* QRCode-dummy.m */,
-				BAA57B3D76F660A458DBE0424E783D57 /* QRCode-prefix.pch */,
-				BEA5818A2C03DCDB9EFAD032095A5381 /* QRCode-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/QRCode";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -725,7 +781,7 @@
 		};
 		42AEEE9640275299C208D2E53B996A3E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA06F2E91A688C15BD4C0D354277057E /* QRCode.xcconfig */;
+			baseConfigurationReference = 34F327F7D5CEB8A269941C5E9A3B8152 /* QRCode.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -895,7 +951,7 @@
 		};
 		B235AB6351B34C66A182B441DE0ACC1E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA06F2E91A688C15BD4C0D354277057E /* QRCode.xcconfig */;
+			baseConfigurationReference = 34F327F7D5CEB8A269941C5E9A3B8152 /* QRCode.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;

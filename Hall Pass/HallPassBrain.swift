@@ -39,6 +39,7 @@ class HallPassBrain {
     
     var otherRef: FIRDatabaseReference
     
+    var mySignal = OneSignal.init()
     
     init() {
         if (!delegate.hasBeenConfigured) {
@@ -62,6 +63,8 @@ class HallPassBrain {
         dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
         otherRef = FIRDatabase.database().reference().child("schools").child("0")
         
+        
+        
     }
     
     
@@ -80,6 +83,16 @@ class HallPassBrain {
             
         })
         
+        
+    }
+    
+    func addUserId (userID: String) {
+        
+        //add the key to the database with an "unassigned" room corresponding to it.
+    
+        print("in here")
+        self.otherRef.child("roomKeys").child(userID).setValue("Unassigned")
+    
         
     }
     

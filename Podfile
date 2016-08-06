@@ -10,6 +10,9 @@ pod 'Firebase'
 pod 'QRCode'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+pod 'Firebase/Messaging'
+pod 'OneSignal'
+
   target 'Hall PassTests' do
     inherit! :search_paths
     # Pods for testing

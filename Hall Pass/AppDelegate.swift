@@ -8,35 +8,70 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var importedData = ""
     var hasBeenConfigured = false
+
+    // create a sound ID, in this case its the tweet sound.
+    
+   
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+//        let settings: UIUserNotificationSettings =
+//            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+//        application.registerUserNotificationSettings(settings)
+//        application.registerForRemoteNotifications()
+
+        var theBrain = HallPassBrain()
+
+        
+        
+        var mySignal = OneSignal.init(launchOptions: launchOptions, appId: "d9dac52b-78d3-49a4-93d6-42a47c591536", handleNotification: { (result) in
+            
+            // This block gets called when the user reacts to a notification received
+            let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        })
+        
+        mySignal.IdsAvailable({(userId, pushToken) in
+            NSLog("UserId:%@", userId)
+            theBrain.addUserId(userId)
+            if (pushToken != nil) {
+                NSLog("pushToken:%@", pushToken)
+            }
+        })
+
+        
+        
+        
+        
+        
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         //url contains a URL to the file your app shall open
         
-        //In my EXAMPLE I would want to read the file as a dictionary
         do {
                 importedData = try String(contentsOfURL: url)
+                let alert = UIAlertController(title: "Data Imported!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Sweet!", style: UIAlertActionStyle.Default, handler: nil))
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         } catch {
             print(error)
         }
         
-        
-        print("Data imported!")
         var theBrain = HallPassBrain()
+
+        print("Data imported!")
         theBrain.importData()
         
         return true
@@ -48,11 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
         
-        // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
         
-        // Print full message.
-        print("%@", userInfo)
+        
+        
+        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
 
 
