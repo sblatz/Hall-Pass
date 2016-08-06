@@ -18,13 +18,24 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let name = defaults.stringForKey("myRoom") {
+            roomNameInput.text = name
+        }
         
+        
+        
+        setUpButtons()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         theBrain.otherRef.child("rooms").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             var theCount = 0
             let mySnapshot = snapshot.value! as! NSArray
             
-            print(mySnapshot[0])
-            
+            self.pickerData.removeAll()
             while (mySnapshot[theCount] as? String) != nil {
                 self.pickerData.append(mySnapshot[theCount] as! String)
                 theCount += 1
@@ -33,13 +44,12 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 }
             }
             
-           
+            
             
         })
-        
-        setUpButtons()
     }
     
+   
     func setUpButtons() {
         var picker: UIPickerView
         picker = UIPickerView(frame: CGRectMake(0, 200, view.frame.width, 300))
@@ -93,9 +103,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             textField.text = pickerData[pickView.selectedRowInComponent(0)]
             //send this TO THE CLOUD! assign us to this room 😂
             
-            theBrain.mySignal.IdsAvailable({(userId, pushToken) in
+            theBrain.delegate.mySignal.IdsAvailable({(userId, pushToken) in
                  //print(userId)
                 self.theBrain.otherRef.child("roomKeys").child(userId).setValue(textField.text)
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(textField.text, forKey: "myRoom")
             })
         }
         

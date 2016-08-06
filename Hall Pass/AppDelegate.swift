@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var importedData = ""
     var hasBeenConfigured = false
-
+    var mySignal = OneSignal()
     // create a sound ID, in this case its the tweet sound.
     
    
@@ -24,17 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-//        let settings: UIUserNotificationSettings =
-//            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-//        application.registerUserNotificationSettings(settings)
-//        application.registerForRemoteNotifications()
-
-        var theBrain = HallPassBrain()
-
+        let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
         
-        var mySignal = OneSignal.init(launchOptions: launchOptions, appId: "d9dac52b-78d3-49a4-93d6-42a47c591536", handleNotification: { (result) in
-            
+        mySignal = OneSignal.init(launchOptions: launchOptions, appId: "d9dac52b-78d3-49a4-93d6-42a47c591536", handleNotification: { (result) in
             // This block gets called when the user reacts to a notification received
             let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -43,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         mySignal.IdsAvailable({(userId, pushToken) in
             NSLog("UserId:%@", userId)
-            theBrain.addUserId(userId)
+            //self.theBrain.addUserId(userId)
             if (pushToken != nil) {
                 NSLog("pushToken:%@", pushToken)
             }
@@ -69,8 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         
-        var theBrain = HallPassBrain()
 
+        var theBrain = HallPassBrain()
         print("Data imported!")
         theBrain.importData()
         

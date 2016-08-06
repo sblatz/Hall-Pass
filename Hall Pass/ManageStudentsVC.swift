@@ -36,7 +36,7 @@ class ManageStudentsVC: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
+
         brain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
             let theStudent = Student()
             theStudent.name = snapshot.value!["name"] as! String
@@ -45,15 +45,64 @@ class ManageStudentsVC: UITableViewController {
             self.studentArray.append(theStudent)
             self.tableView.reloadData()
         })
+        
+        
+      
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-       
     
     }
     
 
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
+            
+            for i in indexPath.row..<studentArray.count-1 {
+                //move the rest of the items up!
+                studentArray[i] = studentArray[i+1]
+            }
+            studentArray.removeLast()
+            
+            brain.otherRef.child("students").child(String(studentArray.count)).removeValue()
+            
+            //update the database....
+
+            //TODO: Deep copy the trips!
+            
+            brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+                var numOfStudents = snapshot.value!["numStudents"] as! Int
+                
+                for i in 0..<self.studentArray.count {
+                    //loop through the array, adding each element into our database.
+                    self.brain.dbRef.child("\(i)").child("name").setValue(self.studentArray[i].name)
+                    self.brain.dbRef.child("\(i)").child("flagged").setValue(self.studentArray[i].flagged)
+                    self.brain.dbRef.child("\(i)").child("id").setValue(i)
+                    //loop through their trips....
+                    
+                    for i in 0..<self.studentArray[i].Trips.count {
+                        print("Don't forget to actually deep copy the trips!")
+                    }
+                }
+                
+                //when we're done looping, now update the database to store the correct number of students.
+                
+                
+                self.brain.otherRef.child("numStudents").setValue(numOfStudents-1)
+            })
+
+            
+            self.tableView.reloadData()
+            
+        }
+    }
     
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
@@ -106,7 +155,9 @@ class ManageStudentsVC: UITableViewController {
         self.navigationController?.performSegueWithIdentifier("toStudentDetail", sender: studentToSend)
 
     }
-
+    
+    
+  
 
 
 

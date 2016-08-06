@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import Firebase
 import FirebaseDatabase
 
@@ -38,17 +37,14 @@ class HallPassBrain {
     }
     
     var otherRef: FIRDatabaseReference
-    
-    var mySignal = OneSignal.init()
-    
+        
     init() {
         if (!delegate.hasBeenConfigured) {
-            
             delegate.hasBeenConfigured = true
             FIRApp.configure()
-            let token = FIRInstanceID.instanceID().token()!
-            print(token)
-            print("configuring")
+            print("configured")
+            //let token = FIRInstanceID.instanceID().token()!
+            //print(token)
             FIRAuth.auth()?.signInWithEmail("sdblatz@gmail.com", password: "family13", completion: { (user:FIRUser?, error: NSError?) in
                 if error == nil {
                     print(user?.email)
@@ -89,11 +85,12 @@ class HallPassBrain {
     func addUserId (userID: String) {
         
         //add the key to the database with an "unassigned" room corresponding to it.
-    
-        print("in here")
-        self.otherRef.child("roomKeys").child(userID).setValue("Unassigned")
-    
-        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let name = defaults.stringForKey("myRoom") {
+            self.otherRef.child("roomKeys").child(userID).setValue(name)
+        } else {
+            self.otherRef.child("roomKeys").child(userID).setValue("Unassigned")
+        }
     }
     
     func addStudent (studentArray: [String]) {

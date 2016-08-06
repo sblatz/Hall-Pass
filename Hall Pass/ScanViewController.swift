@@ -19,14 +19,14 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
-    var theBrain = HallPassBrain()
+    var hasScanned = false
+    //var theBrain = HallPassBrain()
     let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     var theCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     // Added to support different barcodes
     let supportedBarCodes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode93Code, AVMetadataObjectTypeUPCECode, AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeAztecCode]
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         createCameraView()
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
@@ -149,8 +149,11 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             
             if metadataObj.stringValue != nil {
                 //push segue
-                
-                self.navigationController?.performSegueWithIdentifier("toIDView", sender: metadataObj.stringValue)
+                if (!hasScanned) {
+                    self.navigationController?.performSegueWithIdentifier("toIDView", sender: metadataObj.stringValue)
+                }
+
+                hasScanned = true
             }
         }
     }

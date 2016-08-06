@@ -23,30 +23,16 @@ class StudentDetailVC: UIViewController, UITableViewDelegate {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         flaggedSwitch.on = receivedStudent.flagged
         tableView.delegate = self
-        
+
         //get all of their trips here!
-        
-        /*
-        brain.dbRef.child("\(receivedStudent.id)").observeSingleEventOfType(.Value, withBlock: { snapshot in
-            if (snapshot.value!["name"] as? String) != nil {
-                let theStudent = Student()
-                theStudent.name = snapshot.value!["name"] as! String
-                theStudent.id = snapshot.value!["id"] as! Int
-                theStudent.flagged = snapshot.value!["flagged"] as! Bool
-                
-                self.studentNameLabel.text = theStudent.name
-            } else {
-                print("student doesn't exist!")
-            }
-            
-            
-            
-        })
-        */
         
         
         //tableView.dataSource = self
     }
+    
+    
+    
+    
     @IBAction func flaggedSwitchChanged(sender: UISwitch) {
         
         print(flaggedSwitch.on)

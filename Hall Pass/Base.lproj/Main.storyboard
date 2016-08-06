@@ -77,6 +77,9 @@
                                 <rect key="frame" x="261" y="385" width="79" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButton:" destination="mRv-kj-bxl" eventType="touchUpInside" id="33N-vj-rtj"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr. Blatz's Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGy-Ii-FzE">
                                 <rect key="frame" x="157" y="225" width="150" height="24"/>
@@ -104,6 +107,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="destinationLabel" destination="czX-dS-3gA" id="oZI-6j-YKn"/>
+                        <outlet property="myRoomLabel" destination="KGy-Ii-FzE" id="B6E-cf-5zv"/>
                         <outlet property="studentNameLabel" destination="56V-2g-Rsh" id="sZ5-2t-Sht"/>
                     </connections>
                 </viewController>
@@ -174,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKW-rM-m7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2401" y="1612"/>
+            <point key="canvasLocation" x="2605" y="1546"/>
         </scene>
         <!--Student DetailVC-->
         <scene sceneID="Gzh-y6-W6n">
@@ -252,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WkH-kq-Uq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3146" y="1697"/>
+            <point key="canvasLocation" x="3229" y="1702"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uMl-dh-nfL">
@@ -276,22 +281,28 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCB-Bv-XHG">
                                 <rect key="frame" x="244" y="207" width="112" height="30"/>
                                 <state key="normal" title="Manage Classes"/>
+                                <connections>
+                                    <segue destination="MqH-HW-mCX" kind="show" id="uyk-gg-BVG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybf-08-7ki">
                                 <rect key="frame" x="260" y="353" width="81" height="30"/>
                                 <state key="normal" title="Export Data"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-em-uOr">
-                                <rect key="frame" x="249" y="98" width="141" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jfo-fD-lkl">
                                 <rect key="frame" x="150" y="150" width="339" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-em-uOr">
+                                <rect key="frame" x="249" y="98" width="141" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aUe-4h-4zE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -310,6 +321,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e2i-Pa-6KX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3040" y="950"/>
+        </scene>
+        <!--Classes-->
+        <scene sceneID="F7I-yA-xiP">
+            <objects>
+                <tableViewController id="MqH-HW-mCX" customClass="ManageClassesVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="56x-Yw-4pa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="s7E-vZ-ai6">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s7E-vZ-ai6" id="KMb-tr-yKS">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MqH-HW-mCX" id="zN4-Iq-pvp"/>
+                            <outlet property="delegate" destination="MqH-HW-mCX" id="8Bo-dh-ddC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Classes" id="VSY-yN-4Xy">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LHJ-1h-CuQ">
+                            <connections>
+                                <action selector="addButton:" destination="MqH-HW-mCX" id="PAt-ZX-guy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Frf-af-yGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3692" y="1041"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KQ3-Y8-8Az">
