@@ -13,9 +13,9 @@ import FirebaseDatabase
 class Trip {
     var departLocation = ""
     var arrivalLocation = ""
-    var timeElapsed = 0
-    var timeOfDeparture = 0
-    var timeOfArrival = 0
+    var timeElapsed = 0.0
+    var timeOfDeparture = 0.0
+    var timeOfArrival = 0.0
 }
 
 class Student {
@@ -23,7 +23,8 @@ class Student {
     var id = -1
     var flagged = false
     var Trips = [Trip]()
-    
+    var numOfTrips = 0
+    var isScannedOut = false
 }
 
 
@@ -102,6 +103,8 @@ class HallPassBrain {
                 self.dbRef.child("\(numOfStudents)").child("name").setValue(studentArray[i])
                 self.dbRef.child("\(numOfStudents)").child("flagged").setValue(false)
                 self.dbRef.child("\(numOfStudents)").child("id").setValue(numOfStudents)
+                self.dbRef.child("\(numOfStudents)").child("isScannedOut").setValue(false)
+                self.dbRef.child("\(numOfStudents)").child("numOfTrips").setValue(0)
                 numOfStudents += 1
             }
             

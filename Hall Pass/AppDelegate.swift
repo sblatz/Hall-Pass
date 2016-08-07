@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do {
                 importedData = try String(contentsOfURL: url)
-                let alert = UIAlertController(title: "Data Imported!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Data Imported", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Sweet!", style: UIAlertActionStyle.Default, handler: nil))
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         } catch {
@@ -81,10 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        
+        /*
         let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+         */
     }
 
 

@@ -20,7 +20,10 @@ class ManageClassesVC: UITableViewController {
         let longpress = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognized:")
         tableView.addGestureRecognizer(longpress)
         
-        brain.otherRef.child("rooms").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        
+        brain.otherRef.child("rooms").observeEventType(.Value, withBlock: { snapshot in
+            print("retrieving the data!")
+            self.classesArray.removeAll()
             var theCount = 0
             let mySnapshot = snapshot.value! as! NSArray
             while (mySnapshot[theCount] as? String) != nil {
@@ -33,30 +36,37 @@ class ManageClassesVC: UITableViewController {
 
             self.tableView.reloadData()
         })
+        
     }
     
     
     @IBAction func addButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Email?", message: "Please input your email:", preferredStyle: .Alert)
-        
+        let alertController = UIAlertController(title: "New Class", message: "Please enter the classroom's name:", preferredStyle: .Alert)
+
         let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
                 // store your data
-                NSUserDefaults.standardUserDefaults().setObject(field.text, forKey: "userEmail")
-                NSUserDefaults.standardUserDefaults().synchronize()
+                self.brain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                    self.brain.otherRef.child("rooms").child(String((snapshot.value!["numRooms"] as! Int))).setValue(field.text)
+                    self.brain.otherRef.child("numRooms").setValue((snapshot.value!["numRooms"] as! Int)+1)
+                    //self.tableView.reloadData()
+                })
+                //NSUserDefaults.standardUserDefaults().setObject(field.text, forKey: "userEmail")
+                //NSUserDefaults.standardUserDefaults().synchronize()
+                
             } else {
                 // user did not fill field
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (_) in }
         
         alertController.addTextFieldWithConfigurationHandler { (textField) in
-            textField.placeholder = "Email"
+            textField.placeholder = "Classroom"
+            textField.autocapitalizationType = UITextAutocapitalizationType.Words
         }
-        
-        alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -92,15 +102,26 @@ class ManageClassesVC: UITableViewController {
             // handle delete (by removing the data from your array and updating the tableview)
             //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
         
+        
             for i in indexPath.row..<classesArray.count-1 {
                 //move the rest of the items up!
+                print(classesArray[i])
                 classesArray[i] = classesArray[i+1]
             }
-            classesArray.removeLast()
             
-            brain.otherRef.child("rooms").child(String(classesArray.count)).removeValue()
-            self.tableView.reloadData()
-            changeOrderInDatabase()
+            classesArray.removeLast()
+
+            
+            brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            
+                var numOfRooms = snapshot.value!["numRooms"] as! Int
+
+                
+                self.brain.otherRef.child("numRooms").setValue(numOfRooms-1)
+
+                
+                })
+            
         }
     }
     

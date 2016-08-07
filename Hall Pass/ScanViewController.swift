@@ -24,7 +24,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     var theCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     // Added to support different barcodes
-    let supportedBarCodes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode93Code, AVMetadataObjectTypeUPCECode, AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeAztecCode]
+    let supportedBarCodes = [AVMetadataObjectTypeQRCode]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,11 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
         
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        hasScanned = false
         
     }
     
@@ -61,7 +66,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         }
         
     }
-
+    
     
     
     func createCameraView() {
@@ -110,15 +115,15 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             print(error)
             return
         }
-
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func viewWillAppear(animated: Bool) {
-       // qrCodeFrameView?.removeFromSuperview()
+        // qrCodeFrameView?.removeFromSuperview()
         captureSession?.startRunning()
         
     }
@@ -149,11 +154,31 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             
             if metadataObj.stringValue != nil {
                 //push segue
-                if (!hasScanned) {
-                    self.navigationController?.performSegueWithIdentifier("toIDView", sender: metadataObj.stringValue)
-                }
+                if Int(metadataObj.stringValue) != nil {
+                    let theBrain = HallPassBrain()
+                    theBrain.dbRef.child(metadataObj.stringValue).observeSingleEventOfType(.Value, withBlock: { snapshot in
+                        if (snapshot.value!["name"] as? String) != nil {
+                            if (!self.hasScanned) {
+                                self.navigationController?.performSegueWithIdentifier("toIDView", sender: metadataObj.stringValue)
+                            }
+                            self.hasScanned = true
+                        } else {
+                            let alert = UIAlertController(title: "Student not in database.", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                        
+                    })
+                    
+                    
+                    
+                } else {
+                    print("not scanning this because it's not a number...")
+                    let alert = UIAlertController(title: "Invalid QR code", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
 
-                hasScanned = true
+                }
             }
         }
     }

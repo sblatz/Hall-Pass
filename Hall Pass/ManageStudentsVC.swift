@@ -42,6 +42,19 @@ class ManageStudentsVC: UITableViewController {
             theStudent.name = snapshot.value!["name"] as! String
             theStudent.id = snapshot.value!["id"] as! Int
             theStudent.flagged = snapshot.value!["flagged"] as! Bool
+            theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
+            theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
+            for i in 0..<theStudent.numOfTrips {
+                theStudent.Trips.append(Trip())
+                var array = snapshot.value!["Trips"] as! NSArray
+                var element = array[i] as! NSDictionary
+                theStudent.Trips[i].arrivalLocation = element.allValues[0] as! String
+                theStudent.Trips[i].timeOfArrival = element.allValues[1] as! Double
+                theStudent.Trips[i].departLocation = element.allValues[2] as! String
+                theStudent.Trips[i].timeOfDeparture = element.allValues[3] as! Double
+                theStudent.Trips[i].timeElapsed = element.allValues[4] as! Double
+                
+            }
             self.studentArray.append(theStudent)
             self.tableView.reloadData()
         })
@@ -85,9 +98,16 @@ class ManageStudentsVC: UITableViewController {
                     self.brain.dbRef.child("\(i)").child("name").setValue(self.studentArray[i].name)
                     self.brain.dbRef.child("\(i)").child("flagged").setValue(self.studentArray[i].flagged)
                     self.brain.dbRef.child("\(i)").child("id").setValue(i)
+                    self.brain.dbRef.child("\(i)").child("isScannedOut").setValue(self.studentArray[i].isScannedOut)
+                    self.brain.dbRef.child("\(i)").child("numOfTrips").setValue(self.studentArray[i].numOfTrips)
                     //loop through their trips....
                     
-                    for i in 0..<self.studentArray[i].Trips.count {
+                    for j in 0..<self.studentArray[i].Trips.count {
+                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("arriveLocation").setValue(self.studentArray[i].Trips[j].arrivalLocation)
+                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("departLocation").setValue(self.studentArray[i].Trips[j].departLocation)
+                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("arriveTime").setValue(self.studentArray[i].Trips[j].timeOfArrival)
+                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("departTime").setValue(self.studentArray[i].Trips[j].timeOfDeparture)
+                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("timeElapsed").setValue(self.studentArray[i].Trips[j].timeElapsed)
                         print("Don't forget to actually deep copy the trips!")
                     }
                 }
