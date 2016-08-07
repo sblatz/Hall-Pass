@@ -103,12 +103,11 @@ class ManageStudentsVC: UITableViewController {
                     //loop through their trips....
                     
                     for j in 0..<self.studentArray[i].Trips.count {
-                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("arriveLocation").setValue(self.studentArray[i].Trips[j].arrivalLocation)
-                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("departLocation").setValue(self.studentArray[i].Trips[j].departLocation)
-                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("arriveTime").setValue(self.studentArray[i].Trips[j].timeOfArrival)
-                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("departTime").setValue(self.studentArray[i].Trips[j].timeOfDeparture)
-                        self.brain.dbRef.child("\(j)").child("Trips").child(String(i)).child("timeElapsed").setValue(self.studentArray[i].Trips[j].timeElapsed)
-                        print("Don't forget to actually deep copy the trips!")
+                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveLocation").setValue(self.studentArray[i].Trips[j].arrivalLocation)
+                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departLocation").setValue(self.studentArray[i].Trips[j].departLocation)
+                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveTime").setValue(self.studentArray[i].Trips[j].timeOfArrival)
+                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departTime").setValue(self.studentArray[i].Trips[j].timeOfDeparture)
+                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("timeElapsed").setValue(self.studentArray[i].Trips[j].timeElapsed)
                     }
                 }
                 

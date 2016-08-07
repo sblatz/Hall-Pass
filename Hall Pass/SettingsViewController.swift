@@ -13,13 +13,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var roomNameInput: UITextField!
     var pickerData = [String]()
-
+    
     var theBrain = HallPassBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         if let name = defaults.stringForKey("myRoom") {
             roomNameInput.text = name
@@ -33,23 +33,26 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     override func viewDidAppear(animated: Bool) {
         theBrain.otherRef.child("rooms").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             var theCount = 0
-            let mySnapshot = snapshot.value! as! NSArray
             
-            self.pickerData.removeAll()
-            while (mySnapshot[theCount] as? String) != nil {
-                self.pickerData.append(mySnapshot[theCount] as! String)
-                theCount += 1
-                if (theCount >= mySnapshot.count) {
-                    break
+            
+            
+            if snapshot.value! as? NSArray != nil {
+                let mySnapshot = snapshot.value! as! NSArray
+                self.pickerData.removeAll()
+                while (mySnapshot[theCount] as? String) != nil {
+                    self.pickerData.append(mySnapshot[theCount] as! String)
+                    theCount += 1
+                    if (theCount >= mySnapshot.count) {
+                        break
+                    }
                 }
             }
-            
             
             
         })
     }
     
-   
+    
     func setUpButtons() {
         var picker: UIPickerView
         picker = UIPickerView(frame: CGRectMake(0, 200, view.frame.width, 300))
@@ -80,7 +83,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
     }
-
+    
     func cancelPicker() {
         roomNameInput.resignFirstResponder()
     }
@@ -104,7 +107,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             //send this TO THE CLOUD! assign us to this room 😂
             
             theBrain.delegate.mySignal.IdsAvailable({(userId, pushToken) in
-                 //print(userId)
+                //print(userId)
                 self.theBrain.otherRef.child("roomKeys").child(userId).setValue(textField.text)
                 let defaults = NSUserDefaults.standardUserDefaults()
                 defaults.setObject(textField.text, forKey: "myRoom")
@@ -113,7 +116,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
     }
-
+    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -126,6 +129,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-
+    
     
 }

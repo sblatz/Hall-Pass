@@ -25,15 +25,19 @@ class ManageClassesVC: UITableViewController {
             print("retrieving the data!")
             self.classesArray.removeAll()
             var theCount = 0
-            let mySnapshot = snapshot.value! as! NSArray
-            while (mySnapshot[theCount] as? String) != nil {
-                self.classesArray.append(mySnapshot[theCount] as! String)
-                theCount += 1
-                if (theCount >= mySnapshot.count) {
-                    break
+            
+            if (snapshot.value! as? NSArray != nil) {
+                let mySnapshot = snapshot.value! as! NSArray
+                while (mySnapshot[theCount] as? String) != nil {
+                    self.classesArray.append(mySnapshot[theCount] as! String)
+                    theCount += 1
+                    if (theCount >= mySnapshot.count) {
+                        break
+                    }
                 }
-            }
 
+            }
+            
             self.tableView.reloadData()
         })
         
@@ -49,6 +53,7 @@ class ManageClassesVC: UITableViewController {
                 self.brain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                     self.brain.otherRef.child("rooms").child(String((snapshot.value!["numRooms"] as! Int))).setValue(field.text)
                     self.brain.otherRef.child("numRooms").setValue((snapshot.value!["numRooms"] as! Int)+1)
+                    self.classesArray.append(field.text!)
                     //self.tableView.reloadData()
                 })
                 //NSUserDefaults.standardUserDefaults().setObject(field.text, forKey: "userEmail")
@@ -102,24 +107,31 @@ class ManageClassesVC: UITableViewController {
             // handle delete (by removing the data from your array and updating the tableview)
             //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
         
+            print(classesArray)
         
             for i in indexPath.row..<classesArray.count-1 {
                 //move the rest of the items up!
-                print(classesArray[i])
                 classesArray[i] = classesArray[i+1]
             }
             
             classesArray.removeLast()
+            
+            print(classesArray)
+
+            
 
             
             brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             
                 var numOfRooms = snapshot.value!["numRooms"] as! Int
-
+                for i in 0..<self.classesArray.count {
+                    self.brain.otherRef.child("rooms").child(String(i)).setValue(self.classesArray[i])
+                }
                 
                 self.brain.otherRef.child("numRooms").setValue(numOfRooms-1)
 
-                
+                self.brain.otherRef.child("rooms").child(String(self.classesArray.count)).removeValue()
+
                 })
             
         }
