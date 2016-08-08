@@ -167,7 +167,7 @@
                     <navigationItem key="navigationItem" title="Students" id="sIC-L0-0EO">
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="73k-PP-8HS">
                             <connections>
-                                <action selector="addStudent:" destination="EvZ-F3-ygI" id="luv-0d-tnc"/>
+                                <action selector="addStudent:" destination="EvZ-F3-ygI" id="cNt-75-HXh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

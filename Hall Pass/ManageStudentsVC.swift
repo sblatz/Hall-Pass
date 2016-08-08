@@ -25,51 +25,152 @@ extension ManageStudentsVC: UISearchResultsUpdating {
 }
 
 class ManageStudentsVC: UITableViewController {
-
+    
     var brain = HallPassBrain()
     var studentArray = [Student]()
     var filteredStudents = [Student]()
     let searchController = UISearchController(searchResultsController: nil)
-
+    var addingStudent = false
     override func viewDidLoad() {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-
         brain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
-            let theStudent = Student()
-            theStudent.name = snapshot.value!["name"] as! String
-            theStudent.id = snapshot.value!["id"] as! Int
-            theStudent.flagged = snapshot.value!["flagged"] as! Bool
-            theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
-            theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
-            theStudent.gradeLevel = snapshot.value!["grade"] as! Int
-            for i in 0..<theStudent.numOfTrips {
-                theStudent.Trips.append(Trip())
-                var array = snapshot.value!["Trips"] as! NSArray
-                var element = array[i] as! NSDictionary
-                theStudent.Trips[i].arrivalLocation = element.allValues[0] as! String
-                theStudent.Trips[i].timeOfArrival = element.allValues[1] as! Double
-                theStudent.Trips[i].departLocation = element.allValues[2] as! String
-                theStudent.Trips[i].timeOfDeparture = element.allValues[3] as! Double
-                theStudent.Trips[i].timeElapsed = element.allValues[4] as! Double
+            print("in here!")
+            if (self.addingStudent) {
+                //we haven't changed number of students... don't do anything!
+            } else {
+                print("why")
+                let theStudent = Student()
+                theStudent.name = snapshot.value!["name"] as! String
+                theStudent.id = snapshot.value!["id"] as! Int
+                theStudent.flagged = snapshot.value!["flagged"] as! Bool
+                theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
+                theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
+                theStudent.gradeLevel = snapshot.value!["grade"] as! Int
                 
+                for i in 0..<theStudent.numOfTrips {
+                    theStudent.Trips.append(Trip())
+                    var array = snapshot.value!["Trips"] as! NSArray
+                    var element = array[i] as! NSDictionary
+                    theStudent.Trips[i].arrivalLocation = element.allValues[0] as! String
+                    theStudent.Trips[i].timeOfArrival = element.allValues[1] as! Double
+                    theStudent.Trips[i].departLocation = element.allValues[2] as! String
+                    theStudent.Trips[i].timeOfDeparture = element.allValues[3] as! Double
+                    theStudent.Trips[i].timeElapsed = element.allValues[4] as! Double
+                    
+                }
+                self.studentArray.append(theStudent)
+                self.tableView.reloadData()
             }
-            self.studentArray.append(theStudent)
-            self.tableView.reloadData()
         })
         
         
-      
+        
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
     }
     
-
+    @IBAction func addStudent(sender: AnyObject) {
+        let alertController = UIAlertController(title: "New Student", message: "Please enter the student's first and last name:", preferredStyle: .Alert)
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (_) in
+            if let field = alertController.textFields![0] as? UITextField {
+                // present another message asking for the grade level (using the numpad keyboard
+                if field.text == "" {
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                } else {
+                    self.view.endEditing(true)
+                    
+                    let newAlertController = UIAlertController(title: "New Student", message: "Please enter the student's grade level:", preferredStyle: .Alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (_) in }
+                    
+                    newAlertController.addTextFieldWithConfigurationHandler { (textField) in
+                        textField.placeholder = "Grade"
+                        textField.keyboardType = UIKeyboardType.NumberPad
+                    }
+                    newAlertController.addAction(cancelAction)
+                    
+                    let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (_) in
+                        if let otherField = newAlertController.textFields![0] as? UITextField {
+                            
+                            if otherField.text == "" {
+                                self.presentViewController(newAlertController, animated: true, completion: nil)
+                            } else {
+                                
+                                
+                                self.view.endEditing(true)
+                                self.addingStudent = true
+                                
+                                //save the data
+                                
+                                self.brain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                                    var theStudent = Student()
+                                    theStudent.name = field.text!
+                                    print(theStudent.name)
+                                    theStudent.gradeLevel = Int(otherField.text!)!
+                                    print(theStudent.gradeLevel)
+                                    var numStudents = snapshot.value!["numStudents"] as! Int
+                                    print(numStudents)
+                                    theStudent.id = numStudents
+                                    theStudent.flagged = false
+                                    theStudent.isScannedOut = false
+                                    theStudent.numOfTrips = 0
+                                    self.brain.dbRef.child(String(numStudents)).child("name").setValue(theStudent.name)
+                                    self.brain.dbRef.child(String(numStudents)).child("id").setValue(numStudents)
+                                    self.brain.dbRef.child(String(numStudents)).child("flagged").setValue(false)
+                                    self.brain.dbRef.child(String(numStudents)).child("grade").setValue(theStudent.gradeLevel)
+                                    self.brain.dbRef.child(String(numStudents)).child("isScannedOut").setValue(false)
+                                    self.brain.dbRef.child(String(numStudents)).child("numOfTrips").setValue(0)
+                                    self.brain.otherRef.child("numStudents").setValue(numStudents+1)
+                                    self.studentArray.append(theStudent)
+                                    self.tableView.reloadData()
+                                    //self.addingStudent = false
+                                    //self.studentArray.append(theStudent)
+                                })
+                            }
+                        }
+                    }
+                    
+                    newAlertController.addAction(confirmAction)
+                    
+                    self.presentViewController(newAlertController, animated: true, completion: nil)
+                    
+                    
+                    
+                }
+                
+                
+                
+                //self.tableView.reloadData()
+                
+                //NSUserDefaults.standardUserDefaults().setObject(field.text, forKey: "userEmail")
+                //NSUserDefaults.standardUserDefaults().synchronize()
+                
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (_) in }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Name"
+            textField.autocapitalizationType = UITextAutocapitalizationType.Words
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+    }
+    
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -88,7 +189,7 @@ class ManageStudentsVC: UITableViewController {
             brain.otherRef.child("students").child(String(studentArray.count)).removeValue()
             
             //update the database....
-
+            
             //TODO: Deep copy the trips!
             
             brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
@@ -118,7 +219,7 @@ class ManageStudentsVC: UITableViewController {
                 
                 self.brain.otherRef.child("numStudents").setValue(numOfStudents-1)
             })
-
+            
             
             self.tableView.reloadData()
             
@@ -134,12 +235,6 @@ class ManageStudentsVC: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func addStudent(sender: UIBarButtonItem) {
-        
-        //give a dialog box to create a new student
-        
-        //brain.addStudent("Bob")
-    }
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,7 +245,6 @@ class ManageStudentsVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         var cell = tableView.dequeueReusableCellWithIdentifier("cell")
         
         if searchController.active && searchController.searchBar.text != "" {
@@ -159,27 +253,28 @@ class ManageStudentsVC: UITableViewController {
             cell?.textLabel?.text = studentArray[indexPath.row].name
         }
         
-
+        
         return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //grab the student they selected, and let's push to a new view where they can edit information about that student
         var studentToSend = Student()
+        
         if searchController.active && searchController.searchBar.text != "" {
             studentToSend = filteredStudents[indexPath.row]
         } else {
             studentToSend = studentArray[indexPath.row]
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
+        
         self.navigationController?.performSegueWithIdentifier("toStudentDetail", sender: studentToSend)
-
+        
     }
     
     
-  
-
-
-
+    
+    
+    
+    
 }

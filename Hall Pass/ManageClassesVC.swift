@@ -43,6 +43,9 @@ class ManageClassesVC: UITableViewController {
         
     }
     
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
     
     @IBAction func addButton(sender: AnyObject) {
         let alertController = UIAlertController(title: "New Class", message: "Please enter the classroom's name:", preferredStyle: .Alert)
@@ -75,12 +78,6 @@ class ManageClassesVC: UITableViewController {
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-    
-    
-    func addButton() {
-        
-    }
-    
     
     
     
