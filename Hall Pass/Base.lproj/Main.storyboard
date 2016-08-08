@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Scan View Controller-->
+        <!--Scan-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ScanViewController" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ogB-Nf-Y0w">
+                    <navigationItem key="navigationItem" title="Scan" id="ogB-Nf-Y0w">
                         <barButtonItem key="leftBarButtonItem" title="Manual Entry" id="eCo-9p-vd9"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="tGE-aw-7DV">
                             <connections>
@@ -111,25 +111,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mj-8t-PV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-33" y="2530"/>
-        </scene>
-        <!--Reports-->
-        <scene sceneID="Y4p-B7-6TZ">
-            <objects>
-                <viewController id="rRb-62-kBt" customClass="ReportViewController" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HGU-yN-7M4"/>
-                        <viewControllerLayoutGuide type="bottom" id="b4Y-NA-xLe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nCw-gg-NQJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Reports" id="RqQ-hI-gt3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JBI-FG-vSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1038" y="969"/>
         </scene>
         <!--ManageStudentsVC-->
         <scene sceneID="36Z-Ur-xLU">
@@ -381,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e2i-Pa-6KX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3040" y="950"/>
+            <point key="canvasLocation" x="3852" y="950"/>
         </scene>
         <!--Classes-->
         <scene sceneID="F7I-yA-xiP">
@@ -416,7 +397,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Frf-af-yGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3750" y="773"/>
+            <point key="canvasLocation" x="4562" y="773"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KQ3-Y8-8Az">
@@ -429,13 +410,71 @@
                     </tabBar>
                     <connections>
                         <segue destination="iZA-1P-Uw0" kind="relationship" relationship="viewControllers" id="fHv-Db-JwR"/>
-                        <segue destination="rRb-62-kBt" kind="relationship" relationship="viewControllers" id="0F8-8h-a41"/>
-                        <segue destination="CX6-p9-hai" kind="relationship" relationship="viewControllers" id="FiS-39-PGV"/>
+                        <segue destination="8Tp-wQ-u5S" kind="relationship" relationship="viewControllers" id="05M-ay-IRy"/>
+                        <segue destination="CX6-p9-hai" kind="relationship" relationship="viewControllers" id="bNz-0H-0jk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRK-n8-Xsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="785" y="48"/>
+        </scene>
+        <!--Reports-->
+        <scene sceneID="ueV-3C-6eb">
+            <objects>
+                <tableViewController title="Reports" id="apK-LF-FE8" customClass="ReportViewController" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="RlP-PH-weq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="d9s-BY-j7S">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d9s-BY-j7S" id="OrN-jd-buY">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="apK-LF-FE8" id="5D4-1T-OMw"/>
+                            <outlet property="delegate" destination="apK-LF-FE8" id="lAZ-gx-tc7"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reports" id="SWs-JR-5YE"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gzN-kE-j7M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1990" y="888"/>
+        </scene>
+        <!--Report Details-->
+        <scene sceneID="qvI-7U-KJb">
+            <objects>
+                <tableViewController id="2ht-ay-A3N" customClass="DetailReportVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YAD-aN-uRq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="n8z-Z4-lFz">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n8z-Z4-lFz" id="FEO-7X-KsO">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2ht-ay-A3N" id="H0z-M8-XQl"/>
+                            <outlet property="delegate" destination="2ht-ay-A3N" id="CBU-y3-8Gz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Report Details" id="Lpj-NC-Z41"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cHJ-KD-7Mv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1513" y="1717"/>
         </scene>
         <!--Scan-->
         <scene sceneID="OeP-oV-7Dp">
@@ -475,7 +514,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4g-HV-Dq1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008" y="494"/>
+            <point key="canvasLocation" x="2820" y="494"/>
+        </scene>
+        <!--Reports-->
+        <scene sceneID="FTR-cH-VJF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-wQ-u5S" customClass="ReportNavigationController" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reports" id="AfP-fZ-wGw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uij-38-0DC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="apK-LF-FE8" kind="relationship" relationship="rootViewController" id="o2N-Ss-2MM"/>
+                        <segue destination="2ht-ay-A3N" kind="show" identifier="toDetailReport" id="MHr-DE-Q2c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o7t-R4-uNH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1178" y="888"/>
         </scene>
     </scenes>
 </document>

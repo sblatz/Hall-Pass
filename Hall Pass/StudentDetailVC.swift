@@ -31,9 +31,7 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         receivedStudent.Trips.removeAll()
         
         brain.dbRef.child(String(receivedStudent.id)).observeSingleEventOfType(.Value, withBlock: {snapshot in
-            print("yep")
             self.receivedStudent.flagged = snapshot.value!["flagged"] as! Bool
-            print("wut")
             if (self.receivedStudent.flagged) {
                 self.studentNameLabel.textColor = UIColor.redColor()
                 
@@ -45,7 +43,6 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             
         })
         if receivedStudent.Trips.count != 0 {
-            print("why")
             brain.dbRef.child(String(receivedStudent.id)).child("Trips").observeEventType(.ChildAdded, withBlock: { snapshot in
                 var newTrip = Trip()
                 

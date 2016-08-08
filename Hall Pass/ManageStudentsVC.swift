@@ -37,11 +37,9 @@ class ManageStudentsVC: UITableViewController {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         brain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
-            print("in here!")
             if (self.addingStudent) {
                 //we haven't changed number of students... don't do anything!
             } else {
-                print("why")
                 let theStudent = Student()
                 theStudent.name = snapshot.value!["name"] as! String
                 theStudent.id = snapshot.value!["id"] as! Int
@@ -111,11 +109,8 @@ class ManageStudentsVC: UITableViewController {
                                 self.brain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                                     var theStudent = Student()
                                     theStudent.name = field.text!
-                                    print(theStudent.name)
                                     theStudent.gradeLevel = Int(otherField.text!)!
-                                    print(theStudent.gradeLevel)
                                     var numStudents = snapshot.value!["numStudents"] as! Int
-                                    print(numStudents)
                                     theStudent.id = numStudents
                                     theStudent.flagged = false
                                     theStudent.isScannedOut = false

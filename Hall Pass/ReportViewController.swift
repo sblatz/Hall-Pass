@@ -9,6 +9,30 @@
 import UIKit
 import Foundation
 
-class ReportViewController: UIViewController {
+class ReportViewController: UITableViewController {
+    var reports = ["Roaming Students", "Daily Summary"]
+    
+    
+    override func viewDidLoad() {
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        print(reports[indexPath.row])
+        self.navigationController?.performSegueWithIdentifier("toDetailReport", sender: reports[indexPath.row])
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reports.count
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        cell?.textLabel?.text = reports[indexPath.row]
+        return cell!
+    }
     
 }
