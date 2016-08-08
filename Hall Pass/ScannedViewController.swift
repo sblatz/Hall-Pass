@@ -59,6 +59,8 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                 if (self.theStudent.numOfTrips != 0) {
                     self.theBrain.dbRef.child(self.id).child("Trips").child(String(self.theStudent.numOfTrips-1)).observeSingleEventOfType(.Value, withBlock: { secondSnapshot in
                         self.theStudent.Trips[0] = Trip()
+                        self.theStudent.Trips[0].arrivalLocation = secondSnapshot.value!["arriveLocation"] as! String
+                        
                         print(self.theStudent.Trips[0].arrivalLocation)
                         self.theStudent.Trips[0].timeOfDeparture = secondSnapshot.value!["departTime"] as! Double
                         print("got here")
@@ -127,22 +129,26 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                             break
                         }
                     }
-                }
-                for i in 0..<mySnapshot.allValues.count {
-                    if (mySnapshot.allValues[i] as! String) == theText {
-                        //hooray we found our key 🤗
-                        print("key found!")
-                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                        appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to your room."], "include_player_ids": [mySnapshot.allKeys[i]]])
-                        break
+                } else {
+                    for i in 0..<mySnapshot.allValues.count {
+                        if (mySnapshot.allValues[i] as! String) == theText {
+                            //hooray we found our key 🤗
+                            print("key found!")
+                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to your room."], "include_player_ids": [mySnapshot.allKeys[i]]])
+                            break
+                        }
                     }
                 }
-                
                 if (self.theStudent.isScannedOut) {
                     //scan us IN!
                     print("scanning in")
                     if let name = self.defaults.stringForKey("myRoom") {
-                        self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips-1)).child("arriveLocation").setValue(name)
+                        print(self.theStudent.Trips[0].arrivalLocation)
+                        if !(self.theStudent.Trips[0].arrivalLocation == "Restroom") {
+                            self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips-1)).child("arriveLocation").setValue(name)
+                            
+                        }
                     }
                     let currentTime = NSDate().timeIntervalSince1970
                     let timeDiff = currentTime - self.theStudent.Trips[0].timeOfDeparture
@@ -159,7 +165,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                 } else {
                     //increment the number of trips!
                     self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("departLocation").setValue(self.myRoomLabel.text)
-                    self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("arriveLocation").setValue("")
+                    self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("arriveLocation").setValue(self.destinationLabel.text)
                     self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("departTime").setValue((NSDate().timeIntervalSince1970))
                     self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("arriveTime").setValue(0)
                     self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("timeElapsed").setValue(0)
@@ -179,7 +185,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         }
         //mySignal.postNotification(["contents": ["en": "Test Message"], "include_player_ids": ["3009e210-3166-11e5-bc1b-db44eb02b120"]])
     }
-   
+    
     override func viewDidAppear(animated: Bool) {
         theBrain.otherRef.child("rooms").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             var theCount = 0

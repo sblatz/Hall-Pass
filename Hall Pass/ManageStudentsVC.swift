@@ -44,6 +44,7 @@ class ManageStudentsVC: UITableViewController {
             theStudent.flagged = snapshot.value!["flagged"] as! Bool
             theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
             theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
+            theStudent.gradeLevel = snapshot.value!["grade"] as! Int
             for i in 0..<theStudent.numOfTrips {
                 theStudent.Trips.append(Trip())
                 var array = snapshot.value!["Trips"] as! NSArray
@@ -100,6 +101,7 @@ class ManageStudentsVC: UITableViewController {
                     self.brain.dbRef.child("\(i)").child("id").setValue(i)
                     self.brain.dbRef.child("\(i)").child("isScannedOut").setValue(self.studentArray[i].isScannedOut)
                     self.brain.dbRef.child("\(i)").child("numOfTrips").setValue(self.studentArray[i].numOfTrips)
+                    self.brain.dbRef.child("\(i)").child("grade").setValue(self.studentArray[i].gradeLevel)
                     //loop through their trips....
                     
                     for j in 0..<self.studentArray[i].Trips.count {

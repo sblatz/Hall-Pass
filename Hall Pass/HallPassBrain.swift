@@ -25,6 +25,7 @@ class Student {
     var Trips = [Trip]()
     var numOfTrips = 0
     var isScannedOut = false
+    var gradeLevel = 0
 }
 
 
@@ -94,17 +95,18 @@ class HallPassBrain {
         }
     }
     
-    func addStudent (studentArray: [String]) {
+    func addStudent (studentArray: [Student]) {
         self.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             var numOfStudents = snapshot.value!["numStudents"] as! Int
             
             for i in 0..<studentArray.count {
                 //loop through the array, adding each element into our database.
-                self.dbRef.child("\(numOfStudents)").child("name").setValue(studentArray[i])
+                self.dbRef.child("\(numOfStudents)").child("name").setValue(studentArray[i].name)
                 self.dbRef.child("\(numOfStudents)").child("flagged").setValue(false)
                 self.dbRef.child("\(numOfStudents)").child("id").setValue(numOfStudents)
                 self.dbRef.child("\(numOfStudents)").child("isScannedOut").setValue(false)
                 self.dbRef.child("\(numOfStudents)").child("numOfTrips").setValue(0)
+                self.dbRef.child("\(numOfStudents)").child("grade").setValue(studentArray[i].gradeLevel)
                 numOfStudents += 1
             }
             
@@ -147,17 +149,23 @@ class HallPassBrain {
     func importData(){
         //parse the data, upload it to firebase.
         let lineOfText = delegate.importedData.componentsSeparatedByString("\n")
-        var studentArray = [String]()
+        var studentArray = [Student]()
         
         for i in 0..<lineOfText.count {
             let parsedData = lineOfText[i].componentsSeparatedByString("\t")
-            
+            var theStudent = Student()
             var fullName = parsedData[0] + " " + parsedData[1]
+            //print(parsedData[2])
+            var gradeLevel = parsedData[2].stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            gradeLevel = gradeLevel.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
+            var realGrade = Int(gradeLevel)!
+            print(realGrade)
             fullName = fullName.stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             fullName = fullName.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            
-            studentArray.append(fullName)
+            theStudent.name = fullName
+            theStudent.gradeLevel = realGrade
+            studentArray.append(theStudent)
             
         }
         
