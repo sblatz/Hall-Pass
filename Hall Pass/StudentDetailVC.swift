@@ -42,10 +42,10 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             
             
         })
-        if receivedStudent.Trips.count != 0 {
-            brain.dbRef.child(String(receivedStudent.id)).child("Trips").observeEventType(.ChildAdded, withBlock: { snapshot in
+        brain.dbRef.child(String(receivedStudent.id)).child("Trips").observeEventType(.ChildAdded, withBlock: { snapshot in
+            
                 var newTrip = Trip()
-                
+                print("in here")
                 newTrip.arrivalLocation = snapshot.value!["arriveLocation"] as! String
                 newTrip.timeOfArrival = snapshot.value!["arriveTime"] as! Double
                 newTrip.departLocation = snapshot.value!["departLocation"] as! String
@@ -58,9 +58,9 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 
                 
                 self.tableView.reloadData()
-                
-            })
-        }
+            
+        })
+        
         
         //myTable.reloadData()
         
@@ -105,8 +105,13 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         var minutes = Int(floor(receivedStudent.Trips[indexPath.row].timeElapsed/60))
         var seconds = Int((Int((receivedStudent.Trips[indexPath.row].timeElapsed)) - minutes * 60))
+        
         if receivedStudent.Trips[indexPath.row].timeElapsed > 240 {
+            print("cell \(indexPath.row) is red")
             cell.timeElapsedLabel.textColor = UIColor.redColor()
+        } else {
+            cell.timeElapsedLabel.textColor = UIColor.blackColor()
+
         }
         var year = String(components.year)
         year = year.substringFromIndex((year.startIndex.advancedBy(2)))
@@ -130,43 +135,8 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         cell.dateLabel.text = "\(components.month)-\(components.day)-\(year)"
         cell.departRoomLabel.text = receivedStudent.Trips[indexPath.row].departLocation
         cell.departTimeLabel.text = theDate
-        //cell.arriveTimeLabel.text = arrivalString
+ 
         
-        /*
-         
-         if cell == nil {
-         cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
-         }
-         
-         
-         
-         var date = NSDate.init(timeIntervalSince1970: receivedStudent.Trips[indexPath.row].timeOfDeparture)
-         let calendar = NSCalendar.currentCalendar()
-         let components = calendar.components([.Day , .Month , .Year, .Hour, .Minute], fromDate: date)
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "h:mm a"
-         let theDate = dateFormatter.stringFromDate(date)
-         
-         var minutes = Int(floor(receivedStudent.Trips[indexPath.row].timeElapsed/60))
-         var seconds = Int((Int((receivedStudent.Trips[indexPath.row].timeElapsed)) - minutes * 60))
-         var year = String(components.year)
-         year = year.substringFromIndex((year.startIndex.advancedBy(2)))
-         let dateString = "\(components.month)-\(components.month)-\(year)\t\t\t\(theDate)\t\t\t\(minutes)m \(seconds)s"
-         cell!.textLabel?.text = dateString
-         cell?.textLabel!.font = cell?.textLabel!.font.fontWithSize(19)
-         var fontName = cell?.textLabel!.font.fontName.componentsSeparatedByString("-").first
-         cell?.textLabel!.font  = UIFont(name: "\(fontName!)-Semibold", size: (cell?.textLabel!.font.pointSize)!)
-         
-         
-         
-         cell!.detailTextLabel?.text = "\(receivedStudent.Trips[indexPath.row].departLocation) -> \(receivedStudent.Trips[indexPath.row].arrivalLocation)"
-         cell?.detailTextLabel!.font = cell?.detailTextLabel!.font.fontWithSize(16)
-         fontName = cell?.detailTextLabel!.font.fontName.componentsSeparatedByString("-").first
-         
-         cell?.detailTextLabel!.font  = UIFont(name: "\(fontName!)-Light", size: (cell?.detailTextLabel!.font.pointSize)!)
-         
-         */
         return cell
     }
     

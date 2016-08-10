@@ -14,11 +14,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var roomNameInput: UITextField!
     var pickerData = [String]()
     
+    @IBOutlet weak var imageView: UIImageView!
     var theBrain = HallPassBrain()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let defaults = NSUserDefaults.standardUserDefaults()
         if let name = defaults.stringForKey("myRoom") {
@@ -52,6 +51,19 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         })
     }
     
+    @IBAction func exportData(sender: UIButton) {
+        
+        
+       
+    }
+    
+    @IBAction func signOut(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        defaults.setObject("", forKey: "email")
+        defaults.setObject("", forKey: "password")
+        self.tabBarController!.performSegueWithIdentifier("toLogin", sender: nil)
+    }
     
     func setUpButtons() {
         var picker: UIPickerView

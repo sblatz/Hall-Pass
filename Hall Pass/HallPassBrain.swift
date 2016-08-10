@@ -65,6 +65,7 @@ class HallPassBrain {
         
     }
     
+
     
     
     
@@ -160,11 +161,11 @@ class HallPassBrain {
             gradeLevel = gradeLevel.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
             var realGrade = Int(gradeLevel)!
-            print(realGrade)
             fullName = fullName.stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             fullName = fullName.stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             theStudent.name = fullName
             theStudent.gradeLevel = realGrade
+            print(theStudent.name)
             studentArray.append(theStudent)
             
         }

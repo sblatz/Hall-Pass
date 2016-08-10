@@ -174,8 +174,31 @@ class ManageStudentsVC: UITableViewController {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
             //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
+            var theStudent = Student()
+            var index = 0
+            //find the index of the student since they could be looking at the filtered view........
+            if searchController.active && searchController.searchBar.text != "" {
+                theStudent = filteredStudents[indexPath.row]
+                //get the ACTUAL index of this student now.
+                for i in 0...studentArray.count-1 {
+                    if theStudent.name == studentArray[i].name && theStudent.gradeLevel == studentArray[i].gradeLevel {
+                        print("found the matching student!")
+                        print(theStudent.name)
+                        index = i
+                        print(index)
+                        break
+                    }
+                    
+                }
+            } else {
+                index = indexPath.row
+            }
+
+            //print(studentArray)
             
-            for i in indexPath.row..<studentArray.count-1 {
+            
+            
+            for i in index..<studentArray.count-1 {
                 //move the rest of the items up!
                 studentArray[i] = studentArray[i+1]
             }

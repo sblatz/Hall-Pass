@@ -28,13 +28,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-        
+        var brain = HallPassBrain()
+
         
         mySignal = OneSignal.init(launchOptions: launchOptions, appId: "d9dac52b-78d3-49a4-93d6-42a47c591536", handleNotification: { (result) in
             // This block gets called when the user reacts to a notification received
-            let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            
+            
+            var theMessage = result.0
+            print(result.1[1])
+
+            if theMessage.containsString("join your school") {
+                let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Allow", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                    
+                    print("allowed")
+                    
+                    brain.otherRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                        let mySnapshot = snapshot.value! as! NSDictionary
+                        for i in 0..<mySnapshot.allValues.count {
+                            print(mySnapshot.allValues[i] as! String)
+                            if (mySnapshot.allValues[i] as! String) == "Pending Approval" {
+                                //hooray we found our key 🤗
+                                print("key found!")
+                                var userID = mySnapshot.allKeys[i] as! String
+                                brain.otherRef.child("roomKeys").child(userID).setValue("Approved")
+
+                                break
+                            }
+                        }
+
+                    })
+
+                }))
+                alert.addAction(UIAlertAction(title: "Deny", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                    brain.otherRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                        let mySnapshot = snapshot.value! as! NSDictionary
+                        for i in 0..<mySnapshot.allValues.count {
+                            if (mySnapshot.allValues[i] as! String) == "Pending Approval" {
+                                //hooray we found our key 🤗
+                                print("key found!")
+                                var userID = mySnapshot.allKeys[i] as! String
+                                brain.otherRef.child("roomKeys").child(userID).setValue("Denied")
+                                
+                                break
+                            }
+                        }
+                        
+                    })
+                }))
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+
+            }
+            
         })
         
         mySignal.IdsAvailable({(userId, pushToken) in
@@ -81,11 +127,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
+        print(userInfo)
         /*
         let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-         */
+        */
     }
 
 

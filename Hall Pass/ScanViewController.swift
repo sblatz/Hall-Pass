@@ -12,7 +12,9 @@ import QRCode
 import Firebase
 
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
     
     
     var nextController: ScannedViewController?
@@ -29,6 +31,35 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         createCameraView()
+        
+        
+        if let email = defaults.stringForKey("email") {
+            if let password = defaults.stringForKey("password") {
+                if (!delegate.hasBeenConfigured) {
+                    delegate.hasBeenConfigured = true
+                    FIRApp.configure()
+                    print("configured")
+                }
+                    FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user:FIRUser?, error: NSError?) in
+                        if error == nil {
+                            print(user?.email)
+                        } else {
+                            print("in here...")
+                            self.tabBarController?.performSegueWithIdentifier("toLogin", sender: nil)
+                            print(error?.description)
+                        }
+                    })
+                    
+                
+            } else {
+                self.tabBarController?.performSegueWithIdentifier("toLogin", sender: nil)
+            }
+        } else {
+            self.tabBarController?.performSegueWithIdentifier("toLogin", sender: nil)
+
+        }
+
+        
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
         

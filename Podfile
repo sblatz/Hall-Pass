@@ -8,10 +8,9 @@ target 'Hall Pass' do
   # Pods for Hall Pass
 pod 'Firebase'
 pod 'QRCode'
-pod 'Firebase/Database'
-pod 'Firebase/Auth'
-pod 'Firebase/Messaging'
 pod 'OneSignal'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
   target 'Hall PassTests' do
     inherit! :search_paths

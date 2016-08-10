@@ -124,6 +124,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                             print("key found!")
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             if let name = self.defaults.stringForKey("myRoom") {
+                                print("posted")
                                 appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [mySnapshot.allKeys[i]]])
                             }
                             break

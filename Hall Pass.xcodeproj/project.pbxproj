@@ -23,6 +23,7 @@
 		24AE1C2E1D52DA6B00C6077B /* ManageStudentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */; };
 		24AF16F51D54F0D300B9BE1B /* StudentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */; };
 		24AF16F71D54F0F100B9BE1B /* StudentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */; };
+		24BA4E0E1D595E2C00435026 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BA4E0D1D595E2C00435026 /* LoginVC.swift */; };
 		24CD573F1D52AC6D00B795DE /* HallPassBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */; };
 		24D4A34F1D58E0290039C37F /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4A34E1D58E0290039C37F /* TripCell.swift */; };
 		24D4A3511D591FF80039C37F /* DetailReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4A3501D591FF80039C37F /* DetailReportVC.swift */; };
@@ -88,6 +89,7 @@
 		24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageStudentsVC.swift; sourceTree = "<group>"; };
 		24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNavigationController.swift; sourceTree = "<group>"; };
 		24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetailVC.swift; sourceTree = "<group>"; };
+		24BA4E0D1D595E2C00435026 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HallPassBrain.swift; sourceTree = "<group>"; };
 		24D4A34E1D58E0290039C37F /* TripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		24D4A3501D591FF80039C37F /* DetailReportVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailReportVC.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				241987EC1D5287F700F661B6 /* AppDelegate.swift */,
 				24CD573E1D52AC6D00B795DE /* HallPassBrain.swift */,
 				241987EE1D5287F700F661B6 /* ScanViewController.swift */,
+				241988201D52936200F661B6 /* ScannedViewController.swift */,
 				241988221D52983B00F661B6 /* CustomNavigationController.swift */,
 				24AF16F41D54F0D300B9BE1B /* StudentNavigationController.swift */,
 				24AF16F61D54F0F100B9BE1B /* StudentDetailVC.swift */,
@@ -164,9 +167,9 @@
 				2419881E1D528E9B00F661B6 /* ReportViewController.swift */,
 				24D4A3501D591FF80039C37F /* DetailReportVC.swift */,
 				241987F01D5287F700F661B6 /* Main.storyboard */,
+				24BA4E0D1D595E2C00435026 /* LoginVC.swift */,
 				24D4A34E1D58E0290039C37F /* TripCell.swift */,
 				241988241D529DE000F661B6 /* SettingsViewController.swift */,
-				241988201D52936200F661B6 /* ScannedViewController.swift */,
 				24AE1C2D1D52DA6B00C6077B /* ManageStudentsVC.swift */,
 				245D94F81D5664EC00D2BD51 /* ManageClassesVC.swift */,
 				241987F31D5287F700F661B6 /* Assets.xcassets */,
@@ -505,6 +508,7 @@
 				245D94F91D5664EC00D2BD51 /* ManageClassesVC.swift in Sources */,
 				241988251D529DE000F661B6 /* SettingsViewController.swift in Sources */,
 				24AF16F51D54F0D300B9BE1B /* StudentNavigationController.swift in Sources */,
+				24BA4E0E1D595E2C00435026 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
