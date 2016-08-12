@@ -193,7 +193,7 @@
         <!--Student Details-->
         <scene sceneID="Gzh-y6-W6n">
             <objects>
-                <viewController id="nGP-SW-X2S" customClass="StudentDetailVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="nGP-SW-X2S" customClass="StudentDetailVC" customModule="Hall_Pass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HiK-fQ-b1O"/>
                         <viewControllerLayoutGuide type="bottom" id="q0I-Ka-L5d"/>
@@ -202,12 +202,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="whj-Dr-VGf">
-                                <rect key="frame" x="0.0" y="164" width="620" height="385"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Grade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtp-rZ-wkV">
+                                <rect key="frame" x="276" y="131" width="46.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HAx-ec-PE2">
+                                <rect key="frame" x="252" y="83" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="whj-Dr-VGf">
+                                <rect key="frame" x="0.0" y="166" width="620" height="385"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="125" id="akm-8q-c0K" customClass="TripCell" customModule="Hall_Pass" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="620" height="125"/>
+                                        <rect key="frame" x="0.0" y="28" width="620" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="akm-8q-c0K" id="Zf8-8q-5gE">
                                             <rect key="frame" x="0.0" y="0.0" width="620" height="124.5"/>
@@ -284,17 +295,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Grade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtp-rZ-wkV">
-                                <rect key="frame" x="276" y="131" width="46.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HAx-ec-PE2">
-                                <rect key="frame" x="252" y="83" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -363,8 +363,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-em-uOr">
-                                <rect key="frame" x="249" y="98" width="141" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Room:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-em-uOr">
+                                <rect key="frame" x="249" y="98" width="141" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="aUe-4h-4zE"/>
                                 </constraints>
@@ -388,7 +388,7 @@
                             <constraint firstItem="ybf-08-7ki" firstAttribute="top" secondItem="xZS-Gt-cW1" secondAttribute="bottom" constant="48" id="Eab-Sw-TwA"/>
                             <constraint firstItem="aCB-Bv-XHG" firstAttribute="top" secondItem="Jfo-fD-lkl" secondAttribute="bottom" constant="27" id="c4j-9t-cmY"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="top" secondItem="tiQ-em-uOr" secondAttribute="bottom" constant="31" id="i6I-fM-3M9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Jfo-fD-lkl" secondAttribute="trailing" constant="91" id="lbd-A8-WwN"/>
+                            <constraint firstItem="Jfo-fD-lkl" firstAttribute="width" secondItem="GZP-hM-GdY" secondAttribute="width" constant="-20" id="idh-22-cNY"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="top" secondItem="GZP-hM-GdY" secondAttribute="top" constant="150" id="r8T-5p-gVD"/>
                             <constraint firstItem="aCB-Bv-XHG" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="rdA-0B-qJK"/>
                             <constraint firstItem="ybf-08-7ki" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="t1G-Er-ISR"/>
