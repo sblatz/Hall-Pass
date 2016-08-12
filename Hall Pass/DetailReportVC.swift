@@ -15,6 +15,8 @@ class DetailReportVC: UITableViewController {
     var reportType = ""
     var reportedStudents = [Student]()
     override func viewDidLoad() {
+        tableView.rowHeight = 110
+
         switch(reportType) {
         case "Roaming Students":
             //fill our array with all the students scanned OUT
@@ -22,13 +24,24 @@ class DetailReportVC: UITableViewController {
             theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
                 let theStudent = Student()
                 if (snapshot.value!["isScannedOut"] as! Bool) {
-                theStudent.name = snapshot.value!["name"] as! String
-                theStudent.id = snapshot.value!["id"] as! Int
-                theStudent.flagged = snapshot.value!["flagged"] as! Bool
-                theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
-                theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
-                theStudent.gradeLevel = snapshot.value!["grade"] as! Int
-                self.reportedStudents.append(theStudent)
+                    theStudent.name = snapshot.value!["name"] as! String
+                    theStudent.id = snapshot.value!["id"] as! Int
+                    theStudent.flagged = snapshot.value!["flagged"] as! Bool
+                    theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
+                    theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
+                    theStudent.gradeLevel = snapshot.value!["grade"] as! Int
+                    var trips = snapshot.value!["Trips"] as! NSArray
+                    var recentTrip = trips[theStudent.numOfTrips-1] as! NSDictionary
+                    var theTrip = Trip()
+                    theTrip.arrivalLocation = recentTrip.allValues[0] as! String
+                    theTrip.timeOfArrival = recentTrip.allValues[1] as! Double
+                    theTrip.departLocation = recentTrip.allValues[2] as! String
+                    theTrip.timeOfDeparture = recentTrip.allValues[3] as! Double
+                    theStudent.Trips.append(theTrip)
+
+                    
+                    //copy their most recent trip too.
+                    self.reportedStudents.append(theStudent)
                 }
                 self.tableView.reloadData()
             })
@@ -45,17 +58,47 @@ class DetailReportVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print(reportedStudents.count)
         return reportedStudents.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
-        cell?.textLabel!.text = reportedStudents[indexPath.row].name
+        cell.dateLabel.text = reportedStudents[indexPath.row].name
+
+        var timeElapsed = NSDate().timeIntervalSince1970 - reportedStudents[indexPath.row].Trips[0].timeOfDeparture
+
         
         
-        return cell!
+        var minutes = Int(floor(timeElapsed/60))
+        var seconds = Int((Int((timeElapsed)) - minutes * 60))
+        
+        if timeElapsed > 240 {
+            print("cell \(indexPath.row) is red")
+            cell.timeElapsedLabel.textColor = UIColor.redColor()
+        } else {
+            cell.timeElapsedLabel.textColor = UIColor.blackColor()
+            
+        }
+        
+        cell.timeElapsedLabel.text = "\(minutes)m \(seconds)s"
+        cell.departRoomLabel.text = reportedStudents[indexPath.row].Trips[0].departLocation
+        cell.arriveRoomLabel.text = reportedStudents[indexPath.row].Trips[0].arrivalLocation
+        var date = NSDate.init(timeIntervalSince1970: reportedStudents[indexPath.row].Trips[0].timeOfDeparture)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let theDate = dateFormatter.stringFromDate(date)
+        
+        cell.departTimeLabel.text = theDate
+        cell.arriveTimeLabel.text = ""
+        return cell
+        
+        //cell?.textLabel!.text = reportedStudents[indexPath.row].name
+        
+        
     }
     
 }

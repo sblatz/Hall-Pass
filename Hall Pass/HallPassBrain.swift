@@ -41,22 +41,18 @@ class HallPassBrain {
     var otherRef: FIRDatabaseReference
         
     init() {
+        
         if (!delegate.hasBeenConfigured) {
             delegate.hasBeenConfigured = true
             FIRApp.configure()
             print("configured")
             //let token = FIRInstanceID.instanceID().token()!
             //print(token)
-            FIRAuth.auth()?.signInWithEmail("sdblatz@gmail.com", password: "family13", completion: { (user:FIRUser?, error: NSError?) in
-                if error == nil {
-                    print(user?.email)
-                } else {
-                    print(error?.description)
-                }
-            })
+            
             
             
         }
+ 
         
         dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
         otherRef = FIRDatabase.database().reference().child("schools").child("0")

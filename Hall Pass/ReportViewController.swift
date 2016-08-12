@@ -31,6 +31,7 @@ class ReportViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        
         cell?.textLabel?.text = reports[indexPath.row]
         return cell!
     }

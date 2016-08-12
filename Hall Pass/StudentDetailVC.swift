@@ -9,31 +9,30 @@
 import Foundation
 import UIKit
 
-class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     var receivedStudent = Student()
     var brain = HallPassBrain()
-    
-    @IBOutlet weak var studentNameLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var gradeLabel: UILabel!
     
+    @IBOutlet weak var nameLabel: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         receivedStudent.Trips = receivedStudent.Trips.reverse()
-        studentNameLabel.text = receivedStudent.name
+        nameLabel.text = receivedStudent.name
         gradeLabel.text = "Grade \(receivedStudent.gradeLevel)"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 110
         receivedStudent.Trips.removeAll()
-        
+        nameLabel.delegate = self
         brain.dbRef.child(String(receivedStudent.id)).observeSingleEventOfType(.Value, withBlock: {snapshot in
             self.receivedStudent.flagged = snapshot.value!["flagged"] as! Bool
             if (self.receivedStudent.flagged) {
-                self.studentNameLabel.textColor = UIColor.redColor()
+                self.nameLabel.textColor = UIColor.redColor()
                 
                 let item = self.navigationItem.rightBarButtonItem
                 item?.title = "Unflag"
@@ -67,6 +66,17 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' kpressed. return false to ignore.
+    {
+        brain.dbRef.child(String(receivedStudent.id)).child("name").setValue(nameLabel.text)
+        textField.resignFirstResponder()
+        return true
+    }
+    
+   
+    
+        
+    
     
     
     @IBAction func flagStudent(sender: AnyObject) {
@@ -75,11 +85,11 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         if (receivedStudent.flagged) {
             let item = self.navigationItem.rightBarButtonItem
             item?.title = "Unflag"
-            studentNameLabel.textColor = UIColor.redColor()
+            nameLabel.textColor = UIColor.redColor()
         } else {
             let item = self.navigationItem.rightBarButtonItem
             item?.title = "Flag"
-            studentNameLabel.textColor = UIColor.blackColor()
+            nameLabel.textColor = UIColor.blackColor()
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

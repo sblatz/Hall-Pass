@@ -17,7 +17,7 @@ class CustomNavigationController: UINavigationController {
         let secondViewController = segue.destinationViewController as! ScannedViewController
         
         // set a variable in the second view controller with the String to pass
-        secondViewController.receivedString = sender as! String
+        secondViewController.receivedStudent = sender as! Student
     }
 
     

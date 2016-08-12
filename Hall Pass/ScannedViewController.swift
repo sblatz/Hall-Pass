@@ -19,7 +19,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var leavingLabel: UILabel!
     @IBOutlet weak var destinationText: UILabel!
     
-    
+    var receivedStudent = Student()
     var receivedString = ""
     let qr = QRCode("0")
     var theBrain = HallPassBrain()
@@ -32,7 +32,8 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         //look up the student OBJECT from the database so we can alter its properties rather than having a plain string
         //getStudentFromID(id: receivedString) or something like this
         super.viewDidLoad()
-        id = receivedString
+        receivedString = String(receivedStudent.id)
+        id = String(receivedStudent.id)
         
         theStudent.Trips.append(Trip())
         if let name = defaults.stringForKey("myRoom") {
@@ -175,6 +176,8 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     let alert = UIAlertController(title: "Your hall pass has been approved!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
                         self.navigationController?.popViewControllerAnimated(true)
+                        self.navigationController?.popViewControllerAnimated(true)
+
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
