@@ -79,6 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }))
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
 
+            } else if (theMessage.containsString("has arrived")){
+                //UIApplication.sharedApplication().cancelAllLocalNotifications()
+                print("I'm here 🤗")
+            } else {
+                print("😂")
             }
             
         })

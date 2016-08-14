@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Scan-->
@@ -230,8 +231,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZB-jj-qeQ">
-                                                    <rect key="frame" x="8" y="44" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZB-jj-qeQ">
+                                                    <rect key="frame" x="8" y="44" width="246" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -248,8 +249,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVO-7p-IAY">
-                                                    <rect key="frame" x="500" y="44" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HVO-7p-IAY">
+                                                    <rect key="frame" x="303" y="44" width="239" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -272,7 +273,7 @@
                                                 <constraint firstItem="K3H-41-rnq" firstAttribute="top" secondItem="Zf8-8q-5gE" secondAttribute="topMargin" constant="36" id="7aX-nd-0p2"/>
                                                 <constraint firstItem="SV4-5L-fWG" firstAttribute="leading" secondItem="Zf8-8q-5gE" secondAttribute="leadingMargin" id="8zP-oc-sTX"/>
                                                 <constraint firstItem="rNa-BZ-nHX" firstAttribute="top" secondItem="Zf8-8q-5gE" secondAttribute="topMargin" id="BQt-t5-YEQ"/>
-                                                <constraint firstItem="K3H-41-rnq" firstAttribute="centerX" secondItem="Zf8-8q-5gE" secondAttribute="centerX" constant="-10" id="Dcy-Qf-hCu"/>
+                                                <constraint firstItem="K3H-41-rnq" firstAttribute="centerX" secondItem="Zf8-8q-5gE" secondAttribute="centerX" id="Dcy-Qf-hCu"/>
                                                 <constraint firstItem="ZZB-jj-qeQ" firstAttribute="leading" secondItem="Zf8-8q-5gE" secondAttribute="leadingMargin" id="FPP-7g-Aqm"/>
                                                 <constraint firstItem="0ai-9C-8AO" firstAttribute="top" secondItem="HVO-7p-IAY" secondAttribute="bottom" constant="15" id="cJo-5H-760"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HVO-7p-IAY" secondAttribute="trailing" constant="20" id="cKO-rQ-sqS"/>
@@ -284,6 +285,10 @@
                                                 <constraint firstItem="HVO-7p-IAY" firstAttribute="top" secondItem="POb-eg-tch" secondAttribute="bottom" constant="15" id="z5k-kP-4rE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="HVO-7p-IAY" firstAttribute="width" secondItem="akm-8q-c0K" secondAttribute="width" multiplier="1/2" constant="-40" id="Pc7-Uw-p4J"/>
+                                            <constraint firstItem="ZZB-jj-qeQ" firstAttribute="width" secondItem="akm-8q-c0K" secondAttribute="width" multiplier="1/2" constant="-40" id="rbD-Nx-LIt"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="arriveRoomLabel" destination="HVO-7p-IAY" id="dPg-C5-1qL"/>
                                             <outlet property="arriveTimeLabel" destination="0ai-9C-8AO" id="vat-0P-gJA"/>
@@ -351,13 +356,6 @@
                                     <segue destination="MqH-HW-mCX" kind="show" id="uyk-gg-BVG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybf-08-7ki">
-                                <rect key="frame" x="259" y="353" width="81" height="30"/>
-                                <state key="normal" title="Export Data"/>
-                                <connections>
-                                    <action selector="exportData:" destination="4cD-AM-rta" eventType="touchUpInside" id="KJR-73-BZq"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jfo-fD-lkl">
                                 <rect key="frame" x="150" y="150" width="339" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -372,9 +370,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9Q-L3-uML">
-                                <rect key="frame" x="276" y="406" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9Q-L3-uML">
+                                <rect key="frame" x="270" y="367" width="60" height="30"/>
+                                <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="signOut:" destination="4cD-AM-rta" eventType="touchUpInside" id="ZPa-eU-x6c"/>
                                 </connections>
@@ -382,21 +380,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="L9Q-L3-uML" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="1Dd-YC-JJo"/>
                             <constraint firstItem="tiQ-em-uOr" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="4WY-wG-xIm"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="8f2-0T-G7v"/>
                             <constraint firstItem="xZS-Gt-cW1" firstAttribute="top" secondItem="aCB-Bv-XHG" secondAttribute="bottom" constant="48" id="Ac0-CA-lpp"/>
-                            <constraint firstItem="ybf-08-7ki" firstAttribute="top" secondItem="xZS-Gt-cW1" secondAttribute="bottom" constant="48" id="Eab-Sw-TwA"/>
                             <constraint firstItem="aCB-Bv-XHG" firstAttribute="top" secondItem="Jfo-fD-lkl" secondAttribute="bottom" constant="27" id="c4j-9t-cmY"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="top" secondItem="tiQ-em-uOr" secondAttribute="bottom" constant="31" id="i6I-fM-3M9"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="width" secondItem="GZP-hM-GdY" secondAttribute="width" constant="-20" id="idh-22-cNY"/>
                             <constraint firstItem="Jfo-fD-lkl" firstAttribute="top" secondItem="GZP-hM-GdY" secondAttribute="top" constant="150" id="r8T-5p-gVD"/>
+                            <constraint firstItem="L9Q-L3-uML" firstAttribute="top" secondItem="xZS-Gt-cW1" secondAttribute="bottom" constant="20" id="rRG-tt-UEm"/>
                             <constraint firstItem="aCB-Bv-XHG" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="rdA-0B-qJK"/>
-                            <constraint firstItem="ybf-08-7ki" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="t1G-Er-ISR"/>
                             <constraint firstItem="xZS-Gt-cW1" firstAttribute="centerX" secondItem="GZP-hM-GdY" secondAttribute="centerX" id="zcA-Dv-zGp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="Dch-nG-2NQ"/>
                     <connections>
+                        <outlet property="manageClasses" destination="aCB-Bv-XHG" id="jwf-PY-u7t"/>
+                        <outlet property="manageStudents" destination="xZS-Gt-cW1" id="ISv-QD-HjE"/>
                         <outlet property="roomNameInput" destination="Jfo-fD-lkl" id="eiJ-91-bKR"/>
                     </connections>
                 </viewController>
@@ -594,8 +594,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09N-fd-dbo">
-                                            <rect key="frame" x="8" y="44" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09N-fd-dbo">
+                                            <rect key="frame" x="8" y="44" width="246" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -612,13 +612,13 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBF-tS-4C4">
-                                            <rect key="frame" x="500" y="44" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBF-tS-4C4">
+                                            <rect key="frame" x="302" y="44" width="240" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-Cu-009">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-Cu-009">
                                             <rect key="frame" x="499" y="8" width="43" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -645,9 +645,13 @@
                                         <constraint firstItem="clz-NV-1aU" firstAttribute="leading" secondItem="y75-3N-dqr" secondAttribute="leadingMargin" id="Efr-IC-xst"/>
                                         <constraint firstItem="6Vi-gj-Ljq" firstAttribute="top" secondItem="09N-fd-dbo" secondAttribute="bottom" constant="15" id="Ywy-r1-N9i"/>
                                         <constraint firstItem="09N-fd-dbo" firstAttribute="leading" secondItem="y75-3N-dqr" secondAttribute="leadingMargin" id="bfj-cz-p6F"/>
-                                        <constraint firstItem="TVc-hv-as8" firstAttribute="centerX" secondItem="y75-3N-dqr" secondAttribute="centerX" constant="-10" id="hHE-jF-Hxh"/>
+                                        <constraint firstItem="TVc-hv-as8" firstAttribute="centerX" secondItem="y75-3N-dqr" secondAttribute="centerX" id="hHE-jF-Hxh"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="fBF-tS-4C4" firstAttribute="width" secondItem="pSj-zK-VcS" secondAttribute="width" multiplier="1/2" constant="-40" id="G14-xT-B8R"/>
+                                    <constraint firstItem="09N-fd-dbo" firstAttribute="width" secondItem="pSj-zK-VcS" secondAttribute="width" multiplier="1/2" constant="-40" id="SWq-2r-4Ns"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="arriveRoomLabel" destination="fBF-tS-4C4" id="yUV-ak-I0D"/>
                                     <outlet property="arriveTimeLabel" destination="V38-yg-1tK" id="WA5-SW-jMS"/>

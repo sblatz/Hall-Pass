@@ -16,7 +16,7 @@ class DetailReportVC: UITableViewController {
     var reportedStudents = [Student]()
     override func viewDidLoad() {
         tableView.rowHeight = 110
-
+        
         switch(reportType) {
         case "Roaming Students":
             //fill our array with all the students scanned OUT
@@ -38,11 +38,29 @@ class DetailReportVC: UITableViewController {
                     theTrip.departLocation = recentTrip.allValues[2] as! String
                     theTrip.timeOfDeparture = recentTrip.allValues[3] as! Double
                     theStudent.Trips.append(theTrip)
-
+                    
                     
                     //copy their most recent trip too.
                     self.reportedStudents.append(theStudent)
+                    
+                    
                 }
+                
+                //sort the students by LONGEST out of room...
+                if (self.reportedStudents.count > 1) {
+                    for i in 1..<self.reportedStudents.count {
+                        var timeElapsed = NSDate().timeIntervalSince1970 - self.reportedStudents[i].Trips[0].timeOfDeparture
+                        var timeElapsed2 = NSDate().timeIntervalSince1970 - self.reportedStudents[i-1].Trips[0].timeOfDeparture
+                        
+                        if (timeElapsed > timeElapsed2) {
+                            //switch us.
+                            var tempStudent = self.reportedStudents[i-1]
+                            self.reportedStudents[i-1] = self.reportedStudents[i]
+                            self.reportedStudents[i] = tempStudent
+                        }
+                    }
+                }
+                
                 self.tableView.reloadData()
             })
             
@@ -50,6 +68,11 @@ class DetailReportVC: UITableViewController {
         default:
             break
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        reportedStudents.removeAll()
+        viewDidLoad()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -67,9 +90,9 @@ class DetailReportVC: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
         
         cell.dateLabel.text = reportedStudents[indexPath.row].name
-
+        
         var timeElapsed = NSDate().timeIntervalSince1970 - reportedStudents[indexPath.row].Trips[0].timeOfDeparture
-
+        
         
         
         var minutes = Int(floor(timeElapsed/60))

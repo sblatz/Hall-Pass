@@ -13,18 +13,37 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var roomNameInput: UITextField!
     var pickerData = [String]()
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+    @IBOutlet weak var manageClasses: UIButton!
+    @IBOutlet weak var manageStudents: UIButton!
     
     @IBOutlet weak var imageView: UIImageView!
     var theBrain = HallPassBrain()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        manageClasses.hidden = true
+        manageStudents.hidden = true
         let defaults = NSUserDefaults.standardUserDefaults()
         if let name = defaults.stringForKey("myRoom") {
             roomNameInput.text = name
         }
         
+        theBrain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            self.delegate.mySignal.IdsAvailable({(userId, pushToken) in
+                //print(userId)
+                var userID = "05d65db9-3bee-4d4b-88c6-7e374b638eb8"
+                if (userID == (snapshot.value!["admin"] as! String)) {
+                    self.manageClasses.hidden = false
+                    self.manageStudents.hidden = false
+                }
+            })
+
+            //if i'm the admin, make the manage students and classes buttons visible, otherwise, keep them hidden!
+            
+            
         
+        })
         
         setUpButtons()
     }

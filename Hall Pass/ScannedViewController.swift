@@ -19,6 +19,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var leavingLabel: UILabel!
     @IBOutlet weak var destinationText: UILabel!
     
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var receivedStudent = Student()
     var receivedString = ""
     let qr = QRCode("0")
@@ -27,7 +28,8 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
     var pickerData = [String]()
     let theStudent = Student()
     let defaults = NSUserDefaults.standardUserDefaults()
-    
+    var principalNotified = false
+    var principalID = ""
     override func viewDidLoad() {
         //look up the student OBJECT from the database so we can alter its properties rather than having a plain string
         //getStudentFromID(id: receivedString) or something like this
@@ -41,8 +43,14 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         }
         setUpButtons()
         
+
         //if we don't have a child with this ID, TELL US THAT DON'T CRASH
         
+        theBrain.otherRef.observeSingleEventOfType(.Value, withBlock: {snapshot in
+        
+            print(snapshot.value!["principal"] as! String)
+            self.principalID = snapshot.value!["principal"] as! String
+        })
         
         theBrain.dbRef.child(id).observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.value!["name"] as? String) != nil {
@@ -103,7 +111,8 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         //make sure the destination is a real place!
         //transverse the room keys database, match it to our room we're looking for, then get the KEY not the value!!!
         let theText = destinationLabel.text
-        
+        principalNotified = false
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if theText == "" {
             print("please enter a destination!")
             let alert = UIAlertController(title: "Please enter a valid destination.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
@@ -113,20 +122,14 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
             theBrain.otherRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
                 let mySnapshot = snapshot.value! as! NSDictionary
                 
-                //print(mySnapshot.allKeys[0])
-                
-                
-                
                 //scan out... notify OTHER teacher
                 if (self.theStudent.isScannedOut) {
                     for i in 0..<mySnapshot.allValues.count {
                         if (mySnapshot.allValues[i] as! String) == self.theStudent.Trips[0].departLocation {
                             //hooray we found our key 🤗
-                            print("key found!")
-                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             if let name = self.defaults.stringForKey("myRoom") {
-                                print("posted")
                                 appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [mySnapshot.allKeys[i]]])
+                                appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [self.principalID]])
                             }
                             break
                         }
@@ -136,15 +139,21 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                         if (mySnapshot.allValues[i] as! String) == theText {
                             //hooray we found our key 🤗
                             print("key found!")
-                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            let notification = UILocalNotification()
+                            notification.fireDate = NSDate(timeIntervalSinceNow: 10)
+                            //notification.alertBody = "has not arrived..."
+                            notification.alertBody = "\(self.studentNameLabel.text!) has not arrived at \(self.destinationLabel.text!)."
+                            notification.soundName = UILocalNotificationDefaultSoundName
+                            print("scheduling")
+                            UIApplication.sharedApplication().scheduleLocalNotification(notification)
                             appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to your room."], "include_player_ids": [mySnapshot.allKeys[i]]])
+                            appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to \(self.destinationLabel.text!)"], "include_player_ids": [self.principalID]])
                             break
                         }
                     }
                 }
                 if (self.theStudent.isScannedOut) {
                     //scan us IN!
-                    print("scanning in")
                     if let name = self.defaults.stringForKey("myRoom") {
                         print(self.theStudent.Trips[0].arrivalLocation)
                         if !(self.theStudent.Trips[0].arrivalLocation == "Restroom") {
@@ -177,7 +186,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
                         self.navigationController?.popViewControllerAnimated(true)
                         self.navigationController?.popViewControllerAnimated(true)
-
+                        
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
