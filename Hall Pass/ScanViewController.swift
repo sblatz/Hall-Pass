@@ -11,7 +11,8 @@ import AVFoundation
 import QRCode
 import Firebase
 
-class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+
+class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate {
     let defaults = NSUserDefaults.standardUserDefaults()
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
@@ -31,8 +32,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         createCameraView()
-        
-
+        navigationController?.delegate = self
         if let email = defaults.stringForKey("email") {
             if let password = defaults.stringForKey("password") {
                 if (!delegate.hasBeenConfigured) {
@@ -98,7 +98,94 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
     }
     
+    func navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
     
+    
+    /*
+    
+    func videoOrientationFromCurrentDeviceOrientation() -> AVCaptureVideoOrientation {
+        switch interfaceOrientation {
+        case .Portrait:
+            return AVCaptureVideoOrientation.Portrait
+        case .LandscapeLeft:
+            return AVCaptureVideoOrientation.LandscapeLeft
+        case .LandscapeRight:
+            return AVCaptureVideoOrientation.LandscapeRight
+        case .PortraitUpsideDown:
+            return AVCaptureVideoOrientation.PortraitUpsideDown
+        default:
+            // Can it happen?
+            return AVCaptureVideoOrientation.Portrait
+        }
+    }
+    
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animateAlongsideTransition({ (UIViewControllerTransitionCoordinatorContext) -> Void in
+           
+            //self.videoPreviewLayer?.frame = self.view.layer.bounds
+            self.videoPreviewLayer?.connection.videoOrientation = self.videoOrientationFromCurrentDeviceOrientation()
+
+            }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+                // Finish Rotation
+                //self.videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+
+                self.view.layer.addSublayer(self.videoPreviewLayer!)
+
+        })
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    }
+    */
+    
+    private func updatePreviewLayer(layer: AVCaptureConnection, orientation: AVCaptureVideoOrientation) {
+        
+        layer.videoOrientation = orientation
+        
+        videoPreviewLayer?.frame = self.view.bounds
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let connection =  self.videoPreviewLayer?.connection  {
+            
+            let currentDevice: UIDevice = UIDevice.currentDevice()
+            
+            let orientation: UIDeviceOrientation = currentDevice.orientation
+            
+            let previewLayerConnection : AVCaptureConnection = connection
+            
+            if (previewLayerConnection.supportsVideoOrientation) {
+                
+                switch (orientation) {
+                case .Portrait: updatePreviewLayer(previewLayerConnection, orientation: .Portrait)
+                
+                    break
+                    
+                case .LandscapeRight: updatePreviewLayer(previewLayerConnection, orientation: .LandscapeLeft)
+                
+                    break
+                    
+                case .LandscapeLeft: updatePreviewLayer(previewLayerConnection, orientation: .LandscapeRight)
+                
+                    break
+                    
+                case .PortraitUpsideDown: updatePreviewLayer(previewLayerConnection, orientation: .PortraitUpsideDown)
+                
+                    break
+                    
+                default: updatePreviewLayer(previewLayerConnection, orientation: .Portrait)
+                
+                    break
+                }
+            }
+        }
+    }
     
     func createCameraView() {
         do {
@@ -124,8 +211,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
+            //videoPreviewLayer?.connection.videoOrientation = self.videoOrientationFromCurrentDeviceOrientation()
+            viewDidLayoutSubviews()
             view.layer.addSublayer(videoPreviewLayer!)
-            
             // Start video capture
             captureSession?.startRunning()
             

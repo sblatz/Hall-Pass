@@ -8,14 +8,14 @@
 
 import Foundation
 import UIKit
-
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate {
+import MessageUI
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var roomNameInput: UITextField!
     var pickerData = [String]()
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var settingsOptions = [String]()
-    
+    var studentArray = [Student]()
     @IBOutlet weak var table: UITableView!
     
     var theBrain = HallPassBrain()
@@ -41,8 +41,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         theBrain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             self.delegate.mySignal.IdsAvailable({(userId, pushToken) in
                 //print(userId)
-                var userID = "05d65db9-3bee-4d4b-88c6-7e374b638eb8"
-                if (userID == (snapshot.value!["admin"] as! String)) {
+                //var userID = "05d65db9-3bee-4d4b-88c6-7e374b638eb8"
+                if (userId == (snapshot.value!["admin"] as! String)) {
+                    self.settingsOptions.insert("Export Student IDs", atIndex: 0)
                     self.settingsOptions.insert("Manage Students", atIndex: 0)
                     self.settingsOptions.insert("Manage Classrooms", atIndex: 0)
                 }
@@ -79,12 +80,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             
             
         })
-    }
-    
-    @IBAction func exportData(sender: UIButton) {
-        
-        
-       
     }
     
     
@@ -167,6 +162,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         cell?.textLabel?.text = settingsOptions[indexPath.row]
         if (cell?.textLabel?.text == "Sign Out") {
             //make us red and center us!
+
             cell?.textLabel?.textAlignment = .Center
             cell?.textLabel?.textColor = UIColor.redColor()
         } else {
@@ -174,6 +170,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             cell?.textLabel?.textColor = UIColor.blackColor()
 
         }
+
         return cell!
     }
     
@@ -187,6 +184,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             } else if ourCell?.textLabel!.text == "Manage Students" {
                 performSegueWithIdentifier("toStudents", sender: nil)
 
+            } else if ourCell?.textLabel!.text == "Export Student IDs" {
+                composeMail()
             } else {
                 //sign out!
                 let defaults = NSUserDefaults.standardUserDefaults()
@@ -204,6 +203,48 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
         table.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func composeMail(){
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let name = defaults.stringForKey("email") {
+                mail.setToRecipients([name])
+                
+            }
+            
+            var listOfStudents = ""
+
+            theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+                let theStudent = Student()
+                theStudent.name = snapshot.value!["name"] as! String
+                theStudent.id = snapshot.value!["id"] as! Int
+                listOfStudents = listOfStudents.stringByAppendingString("<p>\(theStudent.id): \(theStudent.name)</p>")
+                mail.setMessageBody("<p><b>Student IDs</b></p><p>\(listOfStudents)</p>", isHTML: true)
+
+            })
+            
+            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1 * Int64(NSEC_PER_SEC))
+            dispatch_after(time, dispatch_get_main_queue()) {
+                //put your code which should be executed with a delay here
+                self.presentViewController(mail, animated: true, completion: nil)
+
+            }
+            
+            
+            
+
+          
+        } else {
+            // show failure alert
+        }
+
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

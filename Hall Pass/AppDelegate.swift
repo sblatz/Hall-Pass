@@ -84,9 +84,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                 
             } else if (theMessage.containsString("has arrived")){
-                //UIApplication.sharedApplication().cancelAllLocalNotifications()
+                let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                UIApplication.sharedApplication().cancelAllLocalNotifications()
                 print("I'm here 🤗")
             } else {
+                let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                 print("😂")
             }
             
@@ -159,26 +165,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func dayChange() {
-        //with a new day we set all our students to scanned IN and we set numOfTrips = 0
+        //with a new day we set all our students to scanned IN and we set numOfTrips = 0, ONLY if we're the admin
+        
         var myBrain = HallPassBrain()
         print("day change")
-        myBrain.otherRef.child("numStudents").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        myBrain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             
-            var studentCount = snapshot.value! as! Int
+            var studentCount = snapshot.value!["numStudents"] as! Int
+            var adminId = snapshot.value!["admin"] as! String
             print(studentCount)
             myBrain.dbRef.observeSingleEventOfType(.Value, withBlock: { mySnapshot in
-                for i in 0..<studentCount {
-                    //if the student exists, do it, otherwise up our studentCount and skip it
-                    if mySnapshot.hasChild(String(i)) {
-                        myBrain.dbRef.child(String(i)).child("tripsToday").setValue(0)
-                        myBrain.dbRef.child(String(i)).child("isScannedOut").setValue(false)
-                    } else {
-                        studentCount += 1
+                self.mySignal.IdsAvailable({(userId, pushToken) in
+                    //print(userId)
+                    if userId == adminId {
+                        for i in 0..<studentCount {
+                            //if the student exists, do it, otherwise up our studentCount and skip it
+                            if mySnapshot.hasChild(String(i)) {
+                                myBrain.dbRef.child(String(i)).child("tripsToday").setValue(0)
+                                myBrain.dbRef.child(String(i)).child("isScannedOut").setValue(false)
+                            } else {
+                                studentCount += 1
+                            }
+                            
+                        }
+                        
                     }
-                  
-                }
+                })
+                
             })
         })
+        
     }
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.

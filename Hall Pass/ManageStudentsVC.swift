@@ -172,6 +172,45 @@ class ManageStudentsVC: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            var theStudent = Student()
+            var index = 0
+            if searchController.active && searchController.searchBar.text != "" {
+                brain.dbRef.child(String(filteredStudents[indexPath.row].id)).removeValue()
+                theStudent = filteredStudents[indexPath.row]
+                //get the ACTUAL index of this student now.
+                for i in 0...studentArray.count-1 {
+                    if theStudent.name == studentArray[i].name && theStudent.gradeLevel == studentArray[i].gradeLevel {
+                        print("found the matching student!")
+                        print(theStudent.name)
+                        index = i
+                        print(index)
+                        break
+                    }
+                    
+                }
+                filteredStudents.removeAtIndex(indexPath.row)
+
+            } else {
+                brain.dbRef.child(String(studentArray[indexPath.row].id)).removeValue()
+                index = indexPath.row
+            }
+            
+            for i in index..<studentArray.count-1 {
+                //move the rest of the items up!
+                studentArray[i] = studentArray[i+1]
+            }
+            studentArray.removeLast()
+            
+            tableView.reloadData()
+        }
+    }
+    
+    
+    
+    //This way to delete students affects previously printed ID numbers, so it has been deprecated.
+    /*
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
             //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
             var theStudent = Student()
@@ -244,6 +283,7 @@ class ManageStudentsVC: UITableViewController {
         }
     }
     
+    */
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredStudents = studentArray.filter { student in

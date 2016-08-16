@@ -122,15 +122,26 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         } else {
             theBrain.otherRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
                 let mySnapshot = snapshot.value! as! NSDictionary
-                
+                var principalId = ""
+                if self.theStudent.flagged {
+                    for i in 0..<mySnapshot.allValues.count {
+                        if (mySnapshot.allValues[i] as! String) == "Principal's Office" {
+                            principalId = mySnapshot.allKeys[i] as! String
+                        }
+                    }
+                }
+
                 //scan out... notify OTHER teacher
                 if (self.theStudent.isScannedOut) {
+                    
                     for i in 0..<mySnapshot.allValues.count {
                         if (mySnapshot.allValues[i] as! String) == self.theStudent.Trips[0].departLocation {
                             //hooray we found our key 🤗
                             if let name = self.defaults.stringForKey("myRoom") {
                                 appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [mySnapshot.allKeys[i]]])
-                                appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [self.principalID]])
+                                if self.theStudent.flagged && self.principalID != "" {
+                                    appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) has arrived at \(name)"], "include_player_ids": [principalId]])
+                                }
                             }
                             break
                         }
@@ -148,7 +159,10 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                             print("scheduling")
                             UIApplication.sharedApplication().scheduleLocalNotification(notification)
                             appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to your room."], "include_player_ids": [mySnapshot.allKeys[i]]])
-                            appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to \(self.destinationLabel.text!)"], "include_player_ids": [self.principalID]])
+                            if self.theStudent.flagged && self.principalID != "" {
+                                 appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to \(self.destinationLabel.text!)"], "include_player_ids": [principalId]])
+                            }
+                            
                             break
                         }
                     }
@@ -188,7 +202,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
                         self.navigationController?.popViewControllerAnimated(true)
                         self.navigationController?.popViewControllerAnimated(true)
-                        
+                        self.navigationController?.popViewControllerAnimated(true)
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
