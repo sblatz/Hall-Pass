@@ -26,6 +26,7 @@ class Student {
     var numOfTrips = 0
     var isScannedOut = false
     var gradeLevel = 0
+    var tripsToday = 0
 }
 
 
@@ -33,7 +34,7 @@ class Student {
 class HallPassBrain {
     var dbRef: FIRDatabaseReference
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
+    var outRef: FIRDatabaseReference
     var theData: String {
         return delegate.importedData
     }
@@ -56,7 +57,7 @@ class HallPassBrain {
         
         dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
         otherRef = FIRDatabase.database().reference().child("schools").child("0")
-        
+        outRef = FIRDatabase.database().reference().child("schools")
         
         
     }

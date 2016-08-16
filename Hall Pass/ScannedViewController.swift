@@ -60,6 +60,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                 self.theStudent.isScannedOut = snapshot.value!["isScannedOut"] as! Bool
                 self.theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
                 self.studentNameLabel.text = self.theStudent.name
+                self.theStudent.tripsToday = snapshot.value!["tripsToday"] as! Int
                 //set the flagged button = studentflagged
                 
                 
@@ -182,6 +183,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     self.theBrain.dbRef.child(self.receivedString).child("Trips").child(String(self.theStudent.numOfTrips)).child("timeElapsed").setValue(0)
                     self.theBrain.dbRef.child(self.receivedString).child("isScannedOut").setValue(true)
                     self.theBrain.dbRef.child(self.receivedString).child("numOfTrips").setValue(self.theStudent.numOfTrips+1)
+                    self.theBrain.dbRef.child(self.receivedString).child("tripsToday").setValue(self.theStudent.tripsToday+1)
                     let alert = UIAlertController(title: "Your hall pass has been approved!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
                         self.navigationController?.popViewControllerAnimated(true)

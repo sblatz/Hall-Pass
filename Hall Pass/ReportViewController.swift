@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 class ReportViewController: UITableViewController {
-    var reports = ["Roaming Students", "Daily Summary"]
+    var reports = ["Roaming students", "Students out more than 3 times", "Students out for longer than 4 minutes", "Flagged students"]
     
     
     override func viewDidLoad() {

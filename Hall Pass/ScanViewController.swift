@@ -32,7 +32,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         super.viewDidLoad()
         createCameraView()
         
-        
+
         if let email = defaults.stringForKey("email") {
             if let password = defaults.stringForKey("password") {
                 if (!delegate.hasBeenConfigured) {

@@ -43,20 +43,30 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         })
         brain.dbRef.child(String(receivedStudent.id)).child("Trips").observeEventType(.ChildAdded, withBlock: { snapshot in
             
-                var newTrip = Trip()
-                print("in here")
+            var newTrip = Trip()
+            print("in here")
+            if snapshot.hasChild("arriveLocation") {
                 newTrip.arrivalLocation = snapshot.value!["arriveLocation"] as! String
+            }
+            
+            if snapshot.hasChild("arriveTime"){
                 newTrip.timeOfArrival = snapshot.value!["arriveTime"] as! Double
+            }
+            if snapshot.hasChild("departLocation"){
                 newTrip.departLocation = snapshot.value!["departLocation"] as! String
+            }
+            if snapshot.hasChild("departTime"){
                 newTrip.timeOfDeparture = snapshot.value!["departTime"] as! Double
+            }
+            if snapshot.hasChild("timeElapsed"){
                 newTrip.timeElapsed = snapshot.value!["timeElapsed"] as! Double
-                
-                
-                
-                self.receivedStudent.Trips.insert(newTrip, atIndex: 0)
-                
-                
-                self.tableView.reloadData()
+            }
+            print("made it here")
+            
+            self.receivedStudent.Trips.insert(newTrip, atIndex: 0)
+            print("got to this")
+            
+            self.tableView.reloadData()
             
         })
         
@@ -73,9 +83,9 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         return true
     }
     
-   
     
-        
+    
+    
     
     
     
@@ -121,7 +131,7 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             cell.timeElapsedLabel.textColor = UIColor.redColor()
         } else {
             cell.timeElapsedLabel.textColor = UIColor.blackColor()
-
+            
         }
         var year = String(components.year)
         year = year.substringFromIndex((year.startIndex.advancedBy(2)))
@@ -145,7 +155,7 @@ class StudentDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         cell.dateLabel.text = "\(components.month)-\(components.day)-\(year)"
         cell.departRoomLabel.text = receivedStudent.Trips[indexPath.row].departLocation
         cell.departTimeLabel.text = theDate
- 
+        
         
         return cell
     }

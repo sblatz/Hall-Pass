@@ -8,17 +8,18 @@
 
 import Foundation
 import UIKit
-
-class DetailReportVC: UITableViewController {
+import MessageUI
+class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate {
     
     var theBrain = HallPassBrain()
     var reportType = ""
     var reportedStudents = [Student]()
     override func viewDidLoad() {
-        tableView.rowHeight = 110
         
         switch(reportType) {
-        case "Roaming Students":
+        case "Roaming students":
+            tableView.rowHeight = 110
+            
             //fill our array with all the students scanned OUT
             self.navigationItem.title = "Roaming Students"
             theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -65,6 +66,44 @@ class DetailReportVC: UITableViewController {
             })
             
             break
+        case "Students out more than 3 times":
+            tableView.rowHeight = 44
+            
+            self.navigationItem.title = "Students out 4+ times"
+            theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+                let theStudent = Student()
+                if snapshot.value!["tripsToday"] as! Int > 3 {
+                    theStudent.name = snapshot.value!["name"] as! String
+                    theStudent.tripsToday = snapshot.value!["tripsToday"] as! Int
+                    self.reportedStudents.append(theStudent)
+                    
+                }
+                if (self.reportedStudents.count > 1) {
+                    print(self.reportedStudents)
+                    for i in 1..<self.reportedStudents.count {
+                        if (self.reportedStudents[i].tripsToday > self.reportedStudents[i-1].tripsToday) {
+                            //switch us.
+                            var tempStudent = self.reportedStudents[i-1]
+                            self.reportedStudents[i-1] = self.reportedStudents[i]
+                            self.reportedStudents[i] = tempStudent
+                        }
+                    }
+                }
+                
+                self.tableView.reloadData()
+                
+                
+            })
+            
+            break
+        case "Students out for longer than 4 minutes":
+            self.navigationItem.title = "Students out for 4+ minutes"
+            
+            break
+        case "Flagged students":
+            self.navigationItem.title = "Flagged Students"
+            
+            break
         default:
             break
         }
@@ -85,43 +124,83 @@ class DetailReportVC: UITableViewController {
         return reportedStudents.count
     }
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
-        
-        cell.dateLabel.text = reportedStudents[indexPath.row].name
-        
-        var timeElapsed = NSDate().timeIntervalSince1970 - reportedStudents[indexPath.row].Trips[0].timeOfDeparture
-        
-        
-        
-        var minutes = Int(floor(timeElapsed/60))
-        var seconds = Int((Int((timeElapsed)) - minutes * 60))
-        
-        if timeElapsed > 240 {
-            print("cell \(indexPath.row) is red")
-            cell.timeElapsedLabel.textColor = UIColor.redColor()
-        } else {
-            cell.timeElapsedLabel.textColor = UIColor.blackColor()
+    @IBAction func shareButton(sender: AnyObject) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let name = defaults.stringForKey("email") {
+                mail.setToRecipients([name])
+                
+            }
+            var listOfStudents = ""
+            for i in 0..<reportedStudents.count {
+                if i == 0 {
+                    listOfStudents = reportedStudents[i].name
+                } else {
+                    listOfStudents = listOfStudents.stringByAppendingString(", \(reportedStudents[i].name)")
+                    
+                }
+            }
+            mail.setMessageBody("<p><b>\(reportType)</b></p><p>\(listOfStudents)</p>", isHTML: true)
             
+            presentViewController(mail, animated: true, completion: nil)
+        } else {
+            // show failure alert
         }
-        
-        cell.timeElapsedLabel.text = "\(minutes)m \(seconds)s"
-        cell.departRoomLabel.text = reportedStudents[indexPath.row].Trips[0].departLocation
-        cell.arriveRoomLabel.text = reportedStudents[indexPath.row].Trips[0].arrivalLocation
-        var date = NSDate.init(timeIntervalSince1970: reportedStudents[indexPath.row].Trips[0].timeOfDeparture)
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        let theDate = dateFormatter.stringFromDate(date)
-        
-        cell.departTimeLabel.text = theDate
-        cell.arriveTimeLabel.text = ""
-        return cell
-        
-        //cell?.textLabel!.text = reportedStudents[indexPath.row].name
-        
-        
     }
     
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if reportType == "Roaming students" {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
+            
+            cell.dateLabel.text = reportedStudents[indexPath.row].name
+            
+            var timeElapsed = NSDate().timeIntervalSince1970 - reportedStudents[indexPath.row].Trips[0].timeOfDeparture
+            
+            
+            
+            var minutes = Int(floor(timeElapsed/60))
+            var seconds = Int((Int((timeElapsed)) - minutes * 60))
+            
+            if timeElapsed > 240 {
+                print("cell \(indexPath.row) is red")
+                cell.timeElapsedLabel.textColor = UIColor.redColor()
+            } else {
+                cell.timeElapsedLabel.textColor = UIColor.blackColor()
+                
+            }
+            
+            cell.timeElapsedLabel.text = "\(minutes)m \(seconds)s"
+            cell.departRoomLabel.text = reportedStudents[indexPath.row].Trips[0].departLocation
+            cell.arriveRoomLabel.text = reportedStudents[indexPath.row].Trips[0].arrivalLocation
+            var date = NSDate.init(timeIntervalSince1970: reportedStudents[indexPath.row].Trips[0].timeOfDeparture)
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            let theDate = dateFormatter.stringFromDate(date)
+            
+            cell.departTimeLabel.text = theDate
+            cell.arriveTimeLabel.text = ""
+            return cell
+            
+            //cell?.textLabel!.text = reportedStudents[indexPath.row].name
+            
+            
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
+            
+            cell.dateLabel.text = reportedStudents[indexPath.row].name
+            cell.timeElapsedLabel.text = "\(reportedStudents[indexPath.row].tripsToday) trips today"
+            cell.arriveTimeLabel.text = ""
+            cell.arriveRoomLabel.text = ""
+            cell.dateLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
+            return cell
+        }
+    }
 }
