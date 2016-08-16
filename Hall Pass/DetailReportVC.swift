@@ -138,12 +138,12 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
                                 //print(diff)
                                 newTrip.timeElapsed = diff
                             }
-                           
-
+                            
+                            
                             
                             if newTrip.timeElapsed > 240 {
                                 theStudent.Trips.append(newTrip)
-
+                                
                             }
                             
                         }
@@ -159,23 +159,34 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
                         }
                         for i in 0..<self.reportedStudents.count {
                             if self.reportedStudents[i].name == theStudent.name {
-                            
+                                
                             } else {
                                 print(theStudent.name)
                                 self.reportedStudents.append(theStudent)
                             }
                         }
-                       
+                        
                         
                     }
                     self.tableView.reloadData()
-
+                    
                 })
             })
             break
         case "Flagged students":
             self.navigationItem.title = "Flagged Students"
-            
+            theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+                var theStudent = Student()
+                theStudent.name = snapshot.value!["name"] as! String
+                theStudent.id = snapshot.value!["id"] as! Int
+                theStudent.flagged = snapshot.value!["flagged"] as! Bool
+                
+                if theStudent.flagged {
+                    self.reportedStudents.append(theStudent)
+                }
+                self.tableView.reloadData()
+
+            })
             break
         default:
             break
@@ -284,7 +295,14 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
             cell.dateLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
             return cell
         } else {
-            
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
+            //cell.dateLabel.text = "ARE YOU THERE?"
+            cell.dateLabel.text = reportedStudents[indexPath.row].name
+            cell.timeElapsedLabel.text = ""
+            cell.arriveTimeLabel.text = ""
+            cell.arriveRoomLabel.text = ""
+            cell.dateLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
+            return cell
         }
         return UITableViewCell()
     }
