@@ -46,12 +46,7 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
 
         //if we don't have a child with this ID, TELL US THAT DON'T CRASH
         
-        theBrain.otherRef.observeSingleEventOfType(.Value, withBlock: {snapshot in
-        
-            print(snapshot.value!["principal"] as! String)
-            self.principalID = snapshot.value!["principal"] as! String
-        })
-        
+                
         theBrain.dbRef.child(id).observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.value!["name"] as? String) != nil {
                 self.theStudent.name = snapshot.value!["name"] as! String

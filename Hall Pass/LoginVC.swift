@@ -126,6 +126,7 @@ class LoginVC: UIViewController {
         print("hello world!")
         var otherRef = FIRDatabase.database().reference().child("schools")
         
+        
         if schoolCodeField.text!.isEmpty {
             print("yep")
             let alert = UIAlertController(title: "Please enter a school code.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
@@ -149,6 +150,7 @@ class LoginVC: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                     
                 } else {
+                   
                     var dbRef = FIRDatabase.database().reference().child("schools").child("\(self.schoolCodeField.text!)")
                     dbRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
                         self.delegate.mySignal.IdsAvailable({(userId, pushToken) in
@@ -160,6 +162,7 @@ class LoginVC: UIViewController {
                                             print("signed in! store this...")
                                             self.defaults.setObject(self.emailField.text!, forKey: "email")
                                             self.defaults.setObject(self.passwordField.text!, forKey: "password")
+                                            self.defaults.setObject(self.schoolCodeField.text!, forKey: "schoolCode")
                                             self.performSegueWithIdentifier("toTabView", sender: nil)
                                             self.navigationItem.setHidesBackButton(true, animated: false)
 

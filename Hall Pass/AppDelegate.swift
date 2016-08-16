@@ -58,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 var userID = mySnapshot.allKeys[i] as! String
                                 brain.otherRef.child("roomKeys").child(userID).setValue("Approved")
                                 
+                                self.mySignal.postNotification(["contents": ["en": "You have been approved! You can now sign in."], "include_player_ids": [mySnapshot.allKeys[i]]])
+
+                               
                                 break
                             }
                         }

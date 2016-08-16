@@ -135,15 +135,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if (isAlive) {
             textField.resignFirstResponder()
             let pickView = textField.inputView as! UIPickerView
-            textField.text = pickerData[pickView.selectedRowInComponent(0)]
-            //send this TO THE CLOUD! assign us to this room 😂
+            if pickerData.count > 0 {
+                textField.text = pickerData[pickView.selectedRowInComponent(0)]
+                //send this TO THE CLOUD! assign us to this room 😂
+                
+                theBrain.delegate.mySignal.IdsAvailable({(userId, pushToken) in
+                    //print(userId)
+                    self.theBrain.otherRef.child("roomKeys").child(userId).setValue(textField.text)
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(textField.text, forKey: "myRoom")
+                })
+            }
             
-            theBrain.delegate.mySignal.IdsAvailable({(userId, pushToken) in
-                //print(userId)
-                self.theBrain.otherRef.child("roomKeys").child(userId).setValue(textField.text)
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(textField.text, forKey: "myRoom")
-            })
         }
         
         

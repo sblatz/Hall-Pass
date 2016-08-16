@@ -32,6 +32,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         createCameraView()
+
+        
         navigationController?.delegate = self
         if let email = defaults.stringForKey("email") {
             if let password = defaults.stringForKey("password") {

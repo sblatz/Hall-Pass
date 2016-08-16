@@ -121,6 +121,7 @@ class ManageStudentsVC: UITableViewController {
                                     self.brain.dbRef.child(String(numStudents)).child("grade").setValue(theStudent.gradeLevel)
                                     self.brain.dbRef.child(String(numStudents)).child("isScannedOut").setValue(false)
                                     self.brain.dbRef.child(String(numStudents)).child("numOfTrips").setValue(0)
+                                    self.brain.dbRef.child(String(numStudents)).child("tripsToday").setValue(0)
                                     self.brain.otherRef.child("numStudents").setValue(numStudents+1)
                                     self.studentArray.append(theStudent)
                                     self.tableView.reloadData()

@@ -14,7 +14,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var schoolCodeButton: UILabel!
     var theBrain = HallPassBrain()
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
+    let defaults = NSUserDefaults.standardUserDefaults()
+
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     var numSchools = 0
@@ -24,6 +25,8 @@ class CreateAccountVC: UIViewController {
         theBrain.outRef.child("numSchools").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             self.numSchools = snapshot.value! as! Int
             self.schoolCodeButton.text = "School Code: \(String(snapshot.value! as! Int))"
+            self.defaults.setObject(snapshot.value! as! Int, forKey: "schoolCode")
+            self.theBrain = HallPassBrain()
         })
         
     }
@@ -45,6 +48,8 @@ class CreateAccountVC: UIViewController {
                 self.theBrain.outRef.child(String(self.numSchools)).child("admin").setValue(userId)
                 self.theBrain.outRef.child("numSchools").setValue(self.numSchools+1)
                 self.theBrain.otherRef.child("roomKeys").child(userId).setValue("Approved")
+                self.theBrain.otherRef.child("numStudents").setValue(0)
+                self.theBrain.otherRef.child("numRooms").setValue(0)
                 let alert = UIAlertController(title: "Your school has been created!", message: "Please write down your school code, as you will need it to log in.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Hooray!", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
                     self.navigationController?.popViewControllerAnimated(true)

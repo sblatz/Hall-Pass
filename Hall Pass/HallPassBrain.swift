@@ -35,12 +35,14 @@ class HallPassBrain {
     var dbRef: FIRDatabaseReference
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var outRef: FIRDatabaseReference
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     var theData: String {
         return delegate.importedData
     }
     
     var otherRef: FIRDatabaseReference
-        
+    
     init() {
         
         if (!delegate.hasBeenConfigured) {
@@ -53,16 +55,23 @@ class HallPassBrain {
             
             
         }
- 
         
-        dbRef = FIRDatabase.database().reference().child("schools").child("0").child("students")
-        otherRef = FIRDatabase.database().reference().child("schools").child("0")
+        if let code = defaults.stringForKey("schoolCode") {
+            dbRef = FIRDatabase.database().reference().child("schools").child(code).child("students")
+            otherRef = FIRDatabase.database().reference().child("schools").child(code)
+        } else {
+            dbRef = FIRDatabase.database().reference().child("schools").child("-1").child("students")
+            otherRef = FIRDatabase.database().reference().child("schools").child("-1")
+        }
+        
+        
+        
         outRef = FIRDatabase.database().reference().child("schools")
         
         
     }
     
-
+    
     
     
     
@@ -73,7 +82,7 @@ class HallPassBrain {
         self.dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             //print("Inside closure...")
             //print(self.numStudents)
-           // self.dbRef.child("\(self.numStudents)").child("name").setValue(name)
+            // self.dbRef.child("\(self.numStudents)").child("name").setValue(name)
             
             
             
