@@ -79,7 +79,6 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
                     
                 }
                 if (self.reportedStudents.count > 1) {
-                    print(self.reportedStudents)
                     for i in 1..<self.reportedStudents.count {
                         if (self.reportedStudents[i].tripsToday > self.reportedStudents[i-1].tripsToday) {
                             //switch us.
@@ -97,8 +96,82 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
             
             break
         case "Students out for longer than 4 minutes":
+            tableView.rowHeight = 44
             self.navigationItem.title = "Students out for 4+ minutes"
-            
+            theBrain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+                let theStudent = Student()
+                theStudent.name = snapshot.value!["name"] as! String
+                theStudent.tripsToday = snapshot.value!["tripsToday"] as! Int
+                theStudent.numOfTrips = snapshot.value!["numOfTrips"] as! Int
+                theStudent.id = snapshot.value!["id"] as! Int
+                //get all the trips from today
+                self.theBrain.dbRef.child(String(theStudent.id)).child("Trips").observeEventType(.ChildAdded, withBlock: { snapshot in
+                    
+                    for i in 0..<theStudent.tripsToday {
+                        
+                        var newTrip = Trip()
+                        if snapshot.hasChild("arriveLocation") {
+                            newTrip.arrivalLocation = snapshot.value!["arriveLocation"] as! String
+                        }
+                        if snapshot.hasChild("arriveTime"){
+                            newTrip.timeOfArrival = snapshot.value!["arriveTime"] as! Double
+                        }
+                        if snapshot.hasChild("departLocation"){
+                            newTrip.departLocation = snapshot.value!["departLocation"] as! String
+                        }
+                        if snapshot.hasChild("departTime"){
+                            newTrip.timeOfDeparture = snapshot.value!["departTime"] as! Double
+                        }
+                        if snapshot.hasChild("timeElapsed"){
+                            newTrip.timeElapsed = snapshot.value!["timeElapsed"] as! Double
+                        }
+                        var myDate = NSDate.init(timeIntervalSince1970: newTrip.timeOfDeparture)
+                        if NSCalendar.currentCalendar().isDateInToday(myDate)
+                        {
+                            
+                            //date crap 😒
+                            
+                            if newTrip.timeElapsed == 0 {
+                                //we have to calculate it ourselves 🙄
+                                var diff = NSDate().timeIntervalSince1970 - newTrip.timeOfDeparture
+                                
+                                //print(diff)
+                                newTrip.timeElapsed = diff
+                            }
+                           
+
+                            
+                            if newTrip.timeElapsed > 240 {
+                                theStudent.Trips.append(newTrip)
+
+                            }
+                            
+                        }
+                    }
+                    
+                    if theStudent.Trips.count > 0 {
+                        
+                        //make sure we're not already on the list.
+                        
+                        if self.reportedStudents.count == 0 {
+                            print(theStudent.name)
+                            self.reportedStudents.append(theStudent)
+                        }
+                        for i in 0..<self.reportedStudents.count {
+                            if self.reportedStudents[i].name == theStudent.name {
+                            
+                            } else {
+                                print(theStudent.name)
+                                self.reportedStudents.append(theStudent)
+                            }
+                        }
+                       
+                        
+                    }
+                    self.tableView.reloadData()
+
+                })
+            })
             break
         case "Flagged students":
             self.navigationItem.title = "Flagged Students"
@@ -192,7 +265,7 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
             //cell?.textLabel!.text = reportedStudents[indexPath.row].name
             
             
-        } else {
+        } else if reportType == "Students out more than 3 times" {
             let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
             
             cell.dateLabel.text = reportedStudents[indexPath.row].name
@@ -201,6 +274,18 @@ class DetailReportVC: UITableViewController, MFMailComposeViewControllerDelegate
             cell.arriveRoomLabel.text = ""
             cell.dateLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
             return cell
+        } else if reportType == "Students out for longer than 4 minutes" {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TripCell
+            //cell.dateLabel.text = "ARE YOU THERE?"
+            cell.dateLabel.text = reportedStudents[indexPath.row].name
+            cell.timeElapsedLabel.text = ""
+            cell.arriveTimeLabel.text = ""
+            cell.arriveRoomLabel.text = ""
+            cell.dateLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
+            return cell
+        } else {
+            
         }
+        return UITableViewCell()
     }
 }
