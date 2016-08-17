@@ -114,6 +114,8 @@ class HallPassBrain {
                 self.dbRef.child("\(numOfStudents)").child("isScannedOut").setValue(false)
                 self.dbRef.child("\(numOfStudents)").child("numOfTrips").setValue(0)
                 self.dbRef.child("\(numOfStudents)").child("grade").setValue(studentArray[i].gradeLevel)
+                self.dbRef.child(String(numOfStudents)).child("numOfTrips").setValue(0)
+                self.dbRef.child(String(numOfStudents)).child("tripsToday").setValue(0)
                 numOfStudents += 1
             }
             

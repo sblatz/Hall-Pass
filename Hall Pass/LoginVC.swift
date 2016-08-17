@@ -81,6 +81,8 @@ class LoginVC: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             
         } else {
+            self.defaults.setObject(schoolCodeField.text!, forKey: "schoolCode")
+            
             print("here I am")
             var dbRef = FIRDatabase.database().reference().child("schools").child("\(schoolCodeField.text!)")
             
@@ -124,7 +126,8 @@ class LoginVC: UIViewController {
             
         }
         print("hello world!")
-        var otherRef = FIRDatabase.database().reference().child("schools")
+        
+        
         
         
         if schoolCodeField.text!.isEmpty {
@@ -143,6 +146,9 @@ class LoginVC: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             
         } else {
+            self.defaults.setObject(schoolCodeField.text!, forKey: "schoolCode")
+            var theBrain = HallPassBrain()
+            var otherRef = FIRDatabase.database().reference().child("schools")
             otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                 if (Int(self.schoolCodeField.text!) >= snapshot.value!["numSchools"] as! Int) {
                     let alert = UIAlertController(title: "Not a valid school code", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -150,41 +156,47 @@ class LoginVC: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                     
                 } else {
-                   
+                    
                     var dbRef = FIRDatabase.database().reference().child("schools").child("\(self.schoolCodeField.text!)")
                     dbRef.child("roomKeys").observeSingleEventOfType(.Value, withBlock: { snapshot in
                         self.delegate.mySignal.IdsAvailable({(userId, pushToken) in
-                            if (snapshot.value!["\(userId)"] as! String) == "Approved" {
-                                FIRAuth.auth()?.signInWithEmail(self.emailField.text!, password: self.passwordField.text!, completion: { (user:FIRUser?, error: NSError?) in
-                                    if error == nil {
-                                        print(user?.email)
-                                        dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
-                                            print("signed in! store this...")
-                                            self.defaults.setObject(self.emailField.text!, forKey: "email")
-                                            self.defaults.setObject(self.passwordField.text!, forKey: "password")
-                                            self.defaults.setObject(self.schoolCodeField.text!, forKey: "schoolCode")
-                                            self.performSegueWithIdentifier("toTabView", sender: nil)
-                                            self.navigationItem.setHidesBackButton(true, animated: false)
-
-                                        })
-                                        
-                                    } else {
-                                        let alert = UIAlertController(title: "Incorrect password", message: "Would you like to reset your password?", preferredStyle: UIAlertControllerStyle.Alert)
-                                        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
-                                            
-                                            print("allowed")
-                                            
-                                            FIRAuth.auth()?.sendPasswordResetWithEmail(self.emailField.text!, completion: nil)
-                                            
-                                        }))
-                                        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
-                                            
-                                        }))
-                                        self.presentViewController(alert, animated: true, completion: nil)
-                                        print(error?.description)
-                                    }
-                                })
+                            if (!snapshot.hasChild("\(userId)")) {
+                                let alert = UIAlertController(title: "You must create an account before signing in.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                                self.presentViewController(alert, animated: true, completion: nil)
                                 
+                            } else {
+                                if (snapshot.value!["\(userId)"] as! String) == "Approved" {
+                                    FIRAuth.auth()?.signInWithEmail(self.emailField.text!, password: self.passwordField.text!, completion: { (user:FIRUser?, error: NSError?) in
+                                        if error == nil {
+                                            print(user?.email)
+                                            dbRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+                                                print("signed in! store this...")
+                                                self.defaults.setObject(self.emailField.text!, forKey: "email")
+                                                self.defaults.setObject(self.passwordField.text!, forKey: "password")
+                                                self.defaults.setObject(self.schoolCodeField.text!, forKey: "schoolCode")
+                                                self.performSegueWithIdentifier("toTabView", sender: nil)
+                                                self.navigationItem.setHidesBackButton(true, animated: false)
+                                                
+                                            })
+                                            
+                                        } else {
+                                            let alert = UIAlertController(title: "Incorrect password", message: "Would you like to reset your password?", preferredStyle: UIAlertControllerStyle.Alert)
+                                            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                                                
+                                                print("allowed")
+                                                
+                                                FIRAuth.auth()?.sendPasswordResetWithEmail(self.emailField.text!, completion: nil)
+                                                
+                                            }))
+                                            alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                                                
+                                            }))
+                                            self.presentViewController(alert, animated: true, completion: nil)
+                                            print(error?.description)
+                                        }
+                                    })
+                                }
                             }
                         })
                         
