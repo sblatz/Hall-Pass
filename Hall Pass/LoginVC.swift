@@ -37,6 +37,9 @@ class LoginVC: UIViewController {
                             print(user?.email)
                             self.performSegueWithIdentifier("toTabView", sender: nil)
                         } else {
+                            FIRAuth.auth()?.signInWithEmail("gmblatz@gmail.com", password: "Teacher2413", completion: { (user:FIRUser?, error: NSError?) in
+
+                                })
                             print(error?.description)
                         }
                     })

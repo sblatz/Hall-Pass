@@ -8,26 +8,35 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
 class CreateAccountVC: UIViewController {
     
     @IBOutlet weak var schoolCodeButton: UILabel!
     var theBrain = HallPassBrain()
     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
-
+    
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     var numSchools = 0
+    
     override func viewDidLoad() {
         schoolCodeButton.text = ""
+        print("wut.")
         
-        theBrain.outRef.child("numSchools").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+        self.theBrain.outRef.child("numSchools").observeEventType(.Value, withBlock: {
+            (snapshot) in
+            print("in here")
+            
             self.numSchools = snapshot.value! as! Int
+            print(self.numSchools)
             self.schoolCodeButton.text = "School Code: \(String(snapshot.value! as! Int))"
             self.defaults.setObject(snapshot.value! as! Int, forKey: "schoolCode")
             self.theBrain = HallPassBrain()
         })
+        
+        
+        
         
     }
     

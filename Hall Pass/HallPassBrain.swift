@@ -56,10 +56,12 @@ class HallPassBrain {
             
         }
         
-        if let code = defaults.stringForKey("schoolCode") {
+        if let code = defaults.stringForKey("schoolCode"){
+            print("found schoolCode")
             dbRef = FIRDatabase.database().reference().child("schools").child(code).child("students")
             otherRef = FIRDatabase.database().reference().child("schools").child(code)
         } else {
+            print("no school code")
             dbRef = FIRDatabase.database().reference().child("schools").child("-1").child("students")
             otherRef = FIRDatabase.database().reference().child("schools").child("-1")
         }
