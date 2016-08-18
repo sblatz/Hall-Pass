@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                UIApplication.sharedApplication().cancelAllLocalNotifications()
+                //UIApplication.sharedApplication().cancelAllLocalNotifications()
                 print("I'm here 🤗")
             } else {
                 let alert = UIAlertController(title: result.0, message: "", preferredStyle: UIAlertControllerStyle.Alert)

@@ -39,7 +39,7 @@ class ManageStudentsVC: UITableViewController {
         brain.dbRef.observeEventType(.ChildAdded, withBlock: { snapshot in
             if (self.addingStudent) {
                 //we haven't changed number of students... don't do anything!
-            } else {
+            } else if (snapshot.hasChild("grade")) {
                 let theStudent = Student()
                 theStudent.name = snapshot.value!["name"] as! String
                 theStudent.id = snapshot.value!["id"] as! Int
@@ -61,6 +61,8 @@ class ManageStudentsVC: UITableViewController {
                 }
                 self.studentArray.append(theStudent)
                 self.tableView.reloadData()
+            } else {
+                print("Student not fully in database...")
             }
         })
         
@@ -190,7 +192,7 @@ class ManageStudentsVC: UITableViewController {
                     
                 }
                 filteredStudents.removeAtIndex(indexPath.row)
-
+                
             } else {
                 brain.dbRef.child(String(studentArray[indexPath.row].id)).removeValue()
                 index = indexPath.row
@@ -210,81 +212,81 @@ class ManageStudentsVC: UITableViewController {
     
     //This way to delete students affects previously printed ID numbers, so it has been deprecated.
     /*
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
-            var theStudent = Student()
-            var index = 0
-            //find the index of the student since they could be looking at the filtered view........
-            if searchController.active && searchController.searchBar.text != "" {
-                theStudent = filteredStudents[indexPath.row]
-                //get the ACTUAL index of this student now.
-                for i in 0...studentArray.count-1 {
-                    if theStudent.name == studentArray[i].name && theStudent.gradeLevel == studentArray[i].gradeLevel {
-                        print("found the matching student!")
-                        print(theStudent.name)
-                        index = i
-                        print(index)
-                        break
-                    }
-                    
-                }
-            } else {
-                index = indexPath.row
-            }
-
-            //print(studentArray)
-            
-            
-            
-            for i in index..<studentArray.count-1 {
-                //move the rest of the items up!
-                studentArray[i] = studentArray[i+1]
-            }
-            studentArray.removeLast()
-            
-            brain.otherRef.child("students").child(String(studentArray.count)).removeValue()
-            
-            //update the database....
-            
-            //TODO: Deep copy the trips!
-            
-            brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
-                var numOfStudents = snapshot.value!["numStudents"] as! Int
-                
-                for i in 0..<self.studentArray.count {
-                    //loop through the array, adding each element into our database.
-                    self.brain.dbRef.child("\(i)").child("name").setValue(self.studentArray[i].name)
-                    self.brain.dbRef.child("\(i)").child("flagged").setValue(self.studentArray[i].flagged)
-                    self.brain.dbRef.child("\(i)").child("id").setValue(i)
-                    self.brain.dbRef.child("\(i)").child("isScannedOut").setValue(self.studentArray[i].isScannedOut)
-                    self.brain.dbRef.child("\(i)").child("numOfTrips").setValue(self.studentArray[i].numOfTrips)
-                    self.brain.dbRef.child("\(i)").child("grade").setValue(self.studentArray[i].gradeLevel)
-                    //loop through their trips....
-                    
-                    for j in 0..<self.studentArray[i].Trips.count {
-                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveLocation").setValue(self.studentArray[i].Trips[j].arrivalLocation)
-                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departLocation").setValue(self.studentArray[i].Trips[j].departLocation)
-                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveTime").setValue(self.studentArray[i].Trips[j].timeOfArrival)
-                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departTime").setValue(self.studentArray[i].Trips[j].timeOfDeparture)
-                        self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("timeElapsed").setValue(self.studentArray[i].Trips[j].timeElapsed)
-                    }
-                }
-                
-                //when we're done looping, now update the database to store the correct number of students.
-                
-                
-                self.brain.otherRef.child("numStudents").setValue(numOfStudents-1)
-            })
-            
-            
-            self.tableView.reloadData()
-            
-        }
-    }
-    
-    */
+     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+     if (editingStyle == UITableViewCellEditingStyle.Delete) {
+     // handle delete (by removing the data from your array and updating the tableview)
+     //brain.otherRef.child("rooms").child(String(indexPath.row)).removeValue()
+     var theStudent = Student()
+     var index = 0
+     //find the index of the student since they could be looking at the filtered view........
+     if searchController.active && searchController.searchBar.text != "" {
+     theStudent = filteredStudents[indexPath.row]
+     //get the ACTUAL index of this student now.
+     for i in 0...studentArray.count-1 {
+     if theStudent.name == studentArray[i].name && theStudent.gradeLevel == studentArray[i].gradeLevel {
+     print("found the matching student!")
+     print(theStudent.name)
+     index = i
+     print(index)
+     break
+     }
+     
+     }
+     } else {
+     index = indexPath.row
+     }
+     
+     //print(studentArray)
+     
+     
+     
+     for i in index..<studentArray.count-1 {
+     //move the rest of the items up!
+     studentArray[i] = studentArray[i+1]
+     }
+     studentArray.removeLast()
+     
+     brain.otherRef.child("students").child(String(studentArray.count)).removeValue()
+     
+     //update the database....
+     
+     //TODO: Deep copy the trips!
+     
+     brain.otherRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+     var numOfStudents = snapshot.value!["numStudents"] as! Int
+     
+     for i in 0..<self.studentArray.count {
+     //loop through the array, adding each element into our database.
+     self.brain.dbRef.child("\(i)").child("name").setValue(self.studentArray[i].name)
+     self.brain.dbRef.child("\(i)").child("flagged").setValue(self.studentArray[i].flagged)
+     self.brain.dbRef.child("\(i)").child("id").setValue(i)
+     self.brain.dbRef.child("\(i)").child("isScannedOut").setValue(self.studentArray[i].isScannedOut)
+     self.brain.dbRef.child("\(i)").child("numOfTrips").setValue(self.studentArray[i].numOfTrips)
+     self.brain.dbRef.child("\(i)").child("grade").setValue(self.studentArray[i].gradeLevel)
+     //loop through their trips....
+     
+     for j in 0..<self.studentArray[i].Trips.count {
+     self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveLocation").setValue(self.studentArray[i].Trips[j].arrivalLocation)
+     self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departLocation").setValue(self.studentArray[i].Trips[j].departLocation)
+     self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("arriveTime").setValue(self.studentArray[i].Trips[j].timeOfArrival)
+     self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("departTime").setValue(self.studentArray[i].Trips[j].timeOfDeparture)
+     self.brain.dbRef.child("\(i)").child("Trips").child(String(j)).child("timeElapsed").setValue(self.studentArray[i].Trips[j].timeElapsed)
+     }
+     }
+     
+     //when we're done looping, now update the database to store the correct number of students.
+     
+     
+     self.brain.otherRef.child("numStudents").setValue(numOfStudents-1)
+     })
+     
+     
+     self.tableView.reloadData()
+     
+     }
+     }
+     
+     */
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredStudents = studentArray.filter { student in

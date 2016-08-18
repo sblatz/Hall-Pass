@@ -146,13 +146,13 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                         if (mySnapshot.allValues[i] as! String) == theText {
                             //hooray we found our key 🤗
                             print("key found!")
-                            let notification = UILocalNotification()
-                            notification.fireDate = NSDate(timeIntervalSinceNow: 10)
-                            //notification.alertBody = "has not arrived..."
-                            notification.alertBody = "\(self.studentNameLabel.text!) has not arrived at \(self.destinationLabel.text!)."
-                            notification.soundName = UILocalNotificationDefaultSoundName
-                            print("scheduling")
-                            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+                            //let notification = UILocalNotification()
+                            //notification.fireDate = NSDate(timeIntervalSinceNow: 10)
+                            //notification.alertBody = "WADDUP"
+                            //notification.alertBody = "\(self.studentNameLabel.text!) has not arrived at \(self.destinationLabel.text!)."
+                            //notification.soundName = UILocalNotificationDefaultSoundName
+                            //print("scheduling")
+                            //UIApplication.sharedApplication().scheduleLocalNotification(notification)
                             appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to your room."], "include_player_ids": [mySnapshot.allKeys[i]]])
                             if self.theStudent.flagged && self.principalID != "" {
                                  appDelegate.mySignal.postNotification(["contents": ["en": "\(self.studentNameLabel.text!) is heading to \(self.destinationLabel.text!)"], "include_player_ids": [principalId]])
@@ -178,7 +178,9 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     self.theBrain.dbRef.child(self.receivedString).child("isScannedOut").setValue(false)
                     let alert = UIAlertController(title: "You have been scanned in.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
-                        self.navigationController?.popViewControllerAnimated(true)
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+
+                        //self.navigationController?.popViewControllerAnimated(true)
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
@@ -195,9 +197,12 @@ class ScannedViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                     self.theBrain.dbRef.child(self.receivedString).child("tripsToday").setValue(self.theStudent.tripsToday+1)
                     let alert = UIAlertController(title: "Your hall pass has been approved!", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        /*
                         self.navigationController?.popViewControllerAnimated(true)
                         self.navigationController?.popViewControllerAnimated(true)
                         self.navigationController?.popViewControllerAnimated(true)
+ */
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
