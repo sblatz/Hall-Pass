@@ -280,7 +280,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                     theBrain.dbRef.child(metadataObj.stringValue).observeSingleEventOfType(.Value, withBlock: { snapshot in
                         if (snapshot.value!["name"] as? String) != nil {
                             if (!self.hasScanned) {
-                                var myStudent = Student()
+                                let myStudent = Student()
                                 myStudent.id = Int(metadataObj.stringValue)!
                                 self.navigationController?.performSegueWithIdentifier("toIDView", sender: myStudent)
                             }

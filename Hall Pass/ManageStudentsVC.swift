@@ -50,12 +50,12 @@ class ManageStudentsVC: UITableViewController {
                 
                 for i in 0..<theStudent.numOfTrips {
                     theStudent.Trips.append(Trip())
-                    var array = snapshot.value!["Trips"] as! NSArray
-                    var element = array[i] as! NSDictionary
+                    let array = snapshot.value!["Trips"] as! NSArray
+                    let element = array[i] as! NSDictionary
                     theStudent.Trips[i].arrivalLocation = element.allValues[0] as! String
                     theStudent.Trips[i].timeOfArrival = element.allValues[1] as! Double
-                    theStudent.Trips[i].departLocation = element.allValues[2] as! String
-                    theStudent.Trips[i].timeOfDeparture = element.allValues[3] as! Double
+                    theStudent.Trips[i].timeOfDeparture = element.allValues[2] as! Double
+                    theStudent.Trips[i].departLocation = element.allValues[3] as! String
                     theStudent.Trips[i].timeElapsed = element.allValues[4] as! Double
                     
                 }
@@ -109,10 +109,10 @@ class ManageStudentsVC: UITableViewController {
                                 //save the data
                                 
                                 self.brain.otherRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                                    var theStudent = Student()
+                                    let theStudent = Student()
                                     theStudent.name = field.text!
                                     theStudent.gradeLevel = Int(otherField.text!)!
-                                    var numStudents = snapshot.value!["numStudents"] as! Int
+                                    let numStudents = snapshot.value!["numStudents"] as! Int
                                     theStudent.id = numStudents
                                     theStudent.flagged = false
                                     theStudent.isScannedOut = false
@@ -306,7 +306,7 @@ class ManageStudentsVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         
         if searchController.active && searchController.searchBar.text != "" {
             cell?.textLabel?.text = filteredStudents[indexPath.row].name
